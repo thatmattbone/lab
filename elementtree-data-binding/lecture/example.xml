@@ -1,0 +1,5 @@
+<myroot>
+  <foo>
+    <bar att1="one" att2="2"/>
+  </foo>
+</myroot>

@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statuses type="array">
+<status>
+  <created_at>Fri Dec 18 18:31:14 +0000 2009</created_at>
+  <id>6804282413</id>
+  <text>my frozen soup will never thaw :(</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Fri Dec 18 07:24:05 +0000 2009</created_at>
+  <id>6789495755</id>
+  <text>oh. my.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Fri Dec 18 00:24:10 +0000 2009</created_at>
+  <id>6779653343</id>
+  <text>@elliotthoffman come to pycon with me!!!</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>6754145098</in_reply_to_status_id>
+  <in_reply_to_user_id>12707992</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>elliotthoffman</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Fri Dec 18 00:23:38 +0000 2009</created_at>
+  <id>6779638638</id>
+  <text>I registered for pycon, took off those days, and got a hotel.  I'm so excited. Really really excited.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Fri Dec 18 00:05:39 +0000 2009</created_at>
+  <id>6779135777</id>
+  <text>@vjimw our office? noisy? INCONCEIVABLE!</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>6774361626</in_reply_to_status_id>
+  <in_reply_to_user_id>16153380</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>vjimw</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Fri Dec 18 00:04:52 +0000 2009</created_at>
+  <id>6779113074</id>
+  <text>@datagov_tweets why is your illinois toxic release CSV data in EXE format?  Are linux users out of luck?  Not very open.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id>42230804</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>datagov_tweets</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Wed Dec 16 13:40:32 +0000 2009</created_at>
+  <id>6730224617</id>
+  <text>There will be no exploding oatmeal this morning.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Wed Dec 16 04:26:43 +0000 2009</created_at>
+  <id>6720077983</id>
+  <text>@priestas why would you use goo.gl when you can use the shortener of patriots: http://gop.am/</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>6719893792</in_reply_to_status_id>
+  <in_reply_to_user_id>8490282</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>priestas</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Tue Dec 15 12:35:04 +0000 2009</created_at>
+  <id>6694598598</id>
+  <text>Bleck, the temperature will fall all day.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Tue Dec 15 02:25:35 +0000 2009</created_at>
+  <id>6682287832</id>
+  <text>@elliotthoffman oddly enough, a coworker turned his snuggie backwards to make a robe-esque thing today.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>6680248356</in_reply_to_status_id>
+  <in_reply_to_user_id>12707992</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>elliotthoffman</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Tue Dec 15 00:18:48 +0000 2009</created_at>
+  <id>6678587863</id>
+  <text>nutmeg + cinnamon + clove + cider = YUMMMM (and the whiskey don't hurt, either)</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Sat Dec 12 19:08:02 +0000 2009</created_at>
+  <id>6606528020</id>
+  <text>@surlybikes stopped by to confiscate KM.  me &amp; @danswick have nerd commuted it 2themax. they will rehabilitate frame w/intense singletrack.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id>74261087</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>surlybikes</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Sat Dec 12 04:47:54 +0000 2009</created_at>
+  <id>6590754560</id>
+  <text>there's an ad on hulu of a lady driving a jeep with a background song repeating &quot;she's so hot&quot; #fuckyouadvertiserswedontneedyourshit</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Sat Dec 12 04:37:19 +0000 2009</created_at>
+  <id>6590522759</id>
+  <text>@DanSwick byte me.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>6590051657</in_reply_to_status_id>
+  <in_reply_to_user_id>14588638</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>DanSwick</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Sat Dec 12 02:01:05 +0000 2009</created_at>
+  <id>6586595548</id>
+  <text>time to work on bikes.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Fri Dec 11 03:04:44 +0000 2009</created_at>
+  <id>6554123198</id>
+  <text>mmmmm new glarus belgian red is a delicious wine/beer thing. yummm!</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Thu Dec 10 13:38:57 +0000 2009</created_at>
+  <id>6531326592</id>
+  <text>@timyager probably not. I was just cranky and up after my bedtime.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>6531186869</in_reply_to_status_id>
+  <in_reply_to_user_id>13057002</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>timyager</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Thu Dec 10 13:27:04 +0000 2009</created_at>
+  <id>6531046760</id>
+  <text>really? two degrees? blargh.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Thu Dec 10 13:24:35 +0000 2009</created_at>
+  <id>6530989596</id>
+  <text>@jough @jeffkenny From now on I'm going to have haskell write my php for me: http://bit.ly/scEnM ha!</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id>403823</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>jough</in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+<status>
+  <created_at>Thu Dec 10 05:16:27 +0000 2009</created_at>
+  <id>6522473076</id>
+  <text>2010: A new decade. PHP free.  I will not write a single line.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>36825185</id>
+    <name>Matt Bone</name>
+    <screen_name>thatmattbone</screen_name>
+    <location>Chicago</location>
+    <description></description>
+    <profile_image_url>http://a1.twimg.com/profile_images/192619176/me_normal.jpg</profile_image_url>
+    <url>http://thatmattbone.com</url>
+    <protected>false</protected>
+    <followers_count>32</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>27</friends_count>
+    <created_at>Fri May 01 00:21:53 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1261078355/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications></notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following></following>
+    <statuses_count>153</statuses_count>
+  </user>
+  <geo/>
+</status>
+</statuses>

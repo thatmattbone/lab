@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs366>
+    <professors>
+        <professor>
+            <name first="hubert" last="farnsworth"/>
+            <height>
+                <measurement value=".33" units="rods"/>
+            </height>
+            <age>
+                <measurement value="171" units="years"/>
+            </age>
+            <bio>
+                
+            </bio>
+        </professor>
+    </professors>
+    <students>
+        <student>
+            <name first="turanga" last="leela"/> 
+        </student>
+        <student >
+            <name first="john" last="zoidberg"/>
+        </student>
+    </students>    
+</cs366>

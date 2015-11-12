@@ -1,0 +1,7 @@
+a.out
+*.o
+*.elc
+*.pyc
+*~
+.idea/workspace.xml
+twitter-bootstrap-2.0.4/bootstrap

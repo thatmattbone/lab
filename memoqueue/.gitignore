@@ -1,0 +1,7 @@
+development.db
+data/*
+*.elc
+*.pyc
+*~
+*.6
+memo_go/memoserver
