@@ -1,0 +1,16 @@
+#<Files index.wsgi>
+#    Options +ExecCGI +FollowSymLinks
+#    SetHandler wsgi-script
+#</Files>
+
+<Files ~ \.(py|wsgi)$>
+       Options +ExecCGI +FollowSymLinks
+       SetHandler wsgi-script
+</Files>
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.wsgi/$1 [QSA,PT,L] 
+
+DirectoryIndex index.wsgi
