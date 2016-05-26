@@ -1,0 +1,40 @@
+
+
+----
+static, compiled, curly brace, looks like C
+
+"Its design is oriented toward concerns of “programming in the large”,
+that is, of creating and maintaining boundaries – both abstract and
+operational – that preserve large-system integrity, availability and
+concurrency."
+----
+
+typestate example, no initialization
+
+----
+
+k & r line sorting example
+
+first class functions and ifaces adding functionality
+
+----
+
+ffi, binding to C
+
+----
+
+concurrency, erlang inspired, etc
+
+----
+
+tool chain things
+
+rustdocs
+
+running tests
+
+----
+
+gopher
+
+----

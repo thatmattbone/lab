@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <!-- Slide meta data, remove/edit as you see fit -->
+        <title>Zope Interfaces -- Matt Bone</title>
+        <meta name="generator" content="Organic" />
+        <meta name="author" content="Matt Bone" />
+        <meta name="email" content="thatmattbone@gmail.com" />
+        <meta name="date" content="2012-04-12" />
+
+        <!-- Slippy core file and dependencies -->
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="jquery.history.js"></script>
+        <script type="text/javascript" src="slippy.js"></script>
+
+        <!-- Slippy structural styles -->
+        <link type="text/css" rel="stylesheet" href="slippy.css"/>
+
+        <!-- Slippy theme -->
+        <link type="text/css" rel="stylesheet" href="slippy-pure.css"/>
+
+        <!-- Syntax highlighting core file  -->
+        <script type="text/javascript" src="highlighter/shCore.js"></script>
+
+        <!-- Syntax highlighting brushes, remove those you don't need -->
+        <script type="text/javascript" src="highlighter/shBrushPlain.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushPython.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushXml.js"></script>
+
+        <!-- Syntax highlighting styles-->
+        <link type="text/css" rel="stylesheet" href="highlighter/shCore.css"/>
+        <link type="text/css" rel="stylesheet" href="highlighter/shThemeEclipse.css"/>
+
+        <!-- Slippy init code -->
+        <script type="text/javascript">
+            $(function() {
+                $(".slide").slippy({
+                    // settings go here
+                    // possible values are:
+                    //  - animLen, duration for default animations (0 = disabled)
+                    //  - animInForward, receives a slide and animates it
+                    //  - animInRewind, receives a slide and animates it
+                    //  - animOutForward, receives a slide and animates it
+                    //  - animOutRewind, receives a slide and animates it
+                    //  - baseWidth, defines the base for img resizing, if you don't want only
+                    //    full-width images, specify this as the pixel width of a slide so that
+                    //    images are scaled properly (default is 620px wide)
+                    //  - ratio, defines the width/height ratio of the slides, defaults to 1.3 (620x476)
+                    //  - margin, the fraction of screen to use as slide margin, defaults to 0.15
+                });
+                SyntaxHighlighter.all();
+            });
+        </script>
+
+        <!-- Custom style for this deck -->
+        <style type="text/css">
+            .slide.nofooter {
+                border: 0;
+                background: 0;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>Zope Interfaces</h1>            
+            <h2><a href="https://github.com/thatmattbone/zope-chipy">https://github.com/thatmattbone/zope-chipy</a></h2>
+
+            <div style="padding-top: 2em; text-align:center">
+              <h2>by Matt Bone</h2>
+              <h2>http://thatmattbone.com</h2>
+              <h2>@thatmattbone</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>$@*#</h1>
+          </div>
+        </div>
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>ZOPE</h1>
+          </div>
+        </div>
+
+        <div class="slide" data-layout="alt">
+          <h1>zope.interface</h1>
+          <ul>
+            <li><a href="http://pypi.python.org/pypi/zope.interface/3.8.0">http://pypi.python.org/pypi/zope.interface/3.8.0</a></li>
+            <li>111kb</li>
+            <li>Python 2.7 and Python 3.2</li>
+          </ul>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>objects are boxes with levers</h1>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>zope.interface lets everyone know what levers your boxes will have</h1>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>define an interface</h1>
+
+          <pre class="brush: python">
+            {{ define_interface['code'] }}
+          </pre>
+
+          <div class="footer" data-name="alt">
+            <pre>{{ define_interface['filename'] }}</pre>
+          </div> 
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>implement an interface</h1>
+
+          <pre class="brush: python">
+            {{ addition_expression_node['code'] }}
+          </pre>
+
+          <div class="footer" data-name="alt">
+            <pre>{{ addition_expression_node['filename'] }}</pre>
+          </div> 
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>provide an interface</h1>
+
+          <pre class="brush: python">
+            todo
+          </pre>
+
+          <div class="footer" data-name="alt">
+            <pre>toodo</pre>
+          </div> 
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>some innards</h1>
+          <pre>
+            __implemented__
+          </pre>
+          <pre>
+            __providedBy__
+          </pre>
+          <pre>
+            __provides__
+          </pre>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>trust but verify</h1>
+
+          <pre class="brush: python">
+            {{ validate_addition_node['code'] }}
+          </pre>
+
+          <div class="footer" data-name="alt">
+            <pre>{{ validate_addition_node['filename'] }}</pre>
+          </div> 
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>invariants</h1>
+
+          <pre class="brush: python">
+            {{ define_interface_with_invariant['code'] }}
+          </pre>
+
+          <div class="footer" data-name="alt">
+            <pre>{{ define_interface_with_invariant['filename'] }}</pre>
+          </div> 
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>define an invariant</h1>
+
+          <pre class="brush: python">
+            {{ define_invariant['code'] }}
+          </pre>
+
+          <div class="footer" data-name="alt">
+            <pre>{{ define_invariant['filename'] }}</pre>
+          </div> 
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>validate an invariant</h1>
+
+          <pre class="brush: python">
+            {{ validate_invariant['code'] }}
+          </pre>
+
+          <div class="footer" data-name="alt">
+            <pre>{{ validate_invariant['filename'] }}</pre>
+          </div> 
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>why is any of this useful?</h1>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>python != java</h1>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>but...</h1>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>keep a large group of contributers on the same page</h1>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>inside our message building system...</h1>
+            <p>&nbsp;</p>
+            <h1>"put your fast stuff here and your slow stuff here"</h1>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <p>
+              <tt>SubscriberProvider</tt> has one method for yielding
+              user records and an attribute describing what interface
+              that user record provides
+            </p>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <p>
+              <tt>MessageBuilder</tt> has an attribute describing what
+              kind of user record it expects and a method for adding
+              layers
+            </p>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <p>
+              <tt>MessageLayer</tt> has an attribute describing what
+              kind of user record it expects and a method that mutates
+              a dictionary
+            </p>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <p>
+              a dictionary mutatated by each <tt>MessageLayer</tt> in
+              a <tt>MessageBuilder</tt> is handed off to a templating
+              engine to be rendered
+            </p>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">
+            <h1>wire things up at runtime</h1>
+          </div>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>interfaces in pyramid</h1>
+          <p>62 interfaces</p>
+          <p>a lot of them are just marker interfaces -- no methods or attributes defined but have a bunch of docs</p>
+          <p>extensive use of verifyClass and verifyObject in the test suite</p>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <h1>other stuff like this</h1>
+          <ul>
+            <li><a href="http://docs.python.org/library/abc.html">abc</a></li>
+            <li><a href="http://code.enthought.com/projects/traits/">traits from enthought</a></li>
+            <li><a href="http://docs.pylonsproject.org/projects/colander/en/latest/">colander</a></li>
+            <li>django/sqlaclhemy models</li>
+          </ul>
+        </div>
+        
+
+        <div class="slide" data-layout="alt">
+          <h1>documentation, commentary, and criticism</h1>
+          <ul>
+            <li><a href="http://docs.zope.org/zope.interface/">zope.interface documentation</a></li>
+            <li><a href="http://wiki.zope.org/zope3/WhatAreInterfaces">What are interfaces? -- Zope Documentation</a></li>
+            <li><a href="http://stackoverflow.com/questions/2521189/purpose-of-zope-interfaces">Purpose of Zope Interfaces? -- stackoverflow</a></li>
+            <li><a href="http://www.python.org/dev/peps/pep-3119/">PEP 3119: Introducing Abstract Base Classes</a></li>
+            <li><a href="http://www.coactivate.org/projects/topp-engineering/blog/2008/10/20/what-bothers-me-about-the-component-architecture/">What Bothers Me About The Component Architecture -- Ian Bicking</a></li>
+          </ul>
+        </div>
+
+
+        <div class="slide" data-layout="alt">
+          <div class="vcenter">           
+            <div style="padding-top: 2em; text-align:center">
+              <h1><a href="https://github.com/thatmattbone/zope-chipy">https://github.com/thatmattbone/zope-chipy</a></h1>
+              <p>&nbsp;</p>
+              <h2>http://thatmattbone.com</h2>
+              <h2>@thatmattbone</h2>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>
