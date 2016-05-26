@@ -1,0 +1,11 @@
+This is my early attempt to create a twitter bot
+for detecting palindromes.  Right now it's just my
+vehicle for playing around with event-oriented programming
+in Python.  Please don't use it for some stupid fucking
+social media nonsense your boss cooked up.
+
+To run things you'll need a twitter account.
+Create a passwords.py file with two globals, for example:
+
+TWITTER_USERNAME = 'SARAHPalinUSA'
+TWITTER_PASSWORD = 'din0saurZrFake'
