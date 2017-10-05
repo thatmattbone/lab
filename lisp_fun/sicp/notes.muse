@@ -1,0 +1,15 @@
+* Chapter 1
+
+Normal Order -- "fully expand and then reduce" (like Haskell?)
+
+Applicative Order -- "evaluate the arguments and then apply"
+
+Skipped most of 1.2
+
+* Chapter 2
+
+* Chapter 3
+
+* Chapter 4
+
+* Chapter 5
