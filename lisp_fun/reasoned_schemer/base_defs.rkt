@@ -12,33 +12,25 @@
 ; fail
 (define u (== 1 2))
 
+;; new goal that behaves like car
+;; for example:
+;;   > (run* (x) (car-o '(a b) x))
+;;   '(a)
 (define (car-o p a)
   (fresh (d)
          (== (cons a d) p)))
-;; example using car-o:
-;;   > (run* (x) (car-o '(a b) x))
-;;   '(a)
 
+;; new goal that behaves like cdr
+;; for example:
+;;   > (run* (x) (cdr-o '(a b) x))
+;;   '((b))
 (define (cdr-o p d)
   (fresh (a)
          (== (cons a d) p)))
 
+;; new goal that behaves like cons
+;; for example:
+;;   > (run* (x) (cons-o 'a '(b c) x))
+;;   '((a b c))
 (define (cons-o a d p)
   (== (cons a d) p))
-
-;;;;;;;;;;;;;;;;;
-;; experiments ;;
-;;;;;;;;;;;;;;;;;
-
-(define (olive-oil*)
-  (run* (x)
-        (conde
-         ((== 'olive x) s)
-         ((== 'oil x) s))))
-
-
-(define (olive-oil n)
-  (run n (x)
-        (conde
-         ((== 'olive x) s)
-         ((== 'oil x) s))))
