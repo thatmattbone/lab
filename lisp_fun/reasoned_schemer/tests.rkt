@@ -1,7 +1,9 @@
 #lang racket
 
 (require minikanren)
+(require rackunit)
 (require "base_defs.rkt")
+
 
 ;;;;;;;;;;;;;;
 ;; examples ;;
@@ -24,3 +26,5 @@
 ;;;;;;;;;;;
 ;; tests ;;
 ;;;;;;;;;;;
+(check-equal? (olive-oil*) '(olive oil))
+(check-equal? (olive-oil 1) '(olive))
