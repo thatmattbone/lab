@@ -2,6 +2,7 @@
 
 (require minikanren)
 
+(provide (all-defined-out))
 ;;;;;;;;;;;;;;;;;
 ;; common defs ;;
 ;;;;;;;;;;;;;;;;;
@@ -27,10 +28,32 @@
 (define (cdr-o p d)
   (fresh (a)
          (== (cons a d) p)))
-
+  
 ;; new goal that behaves like cons
 ;; for example:
 ;;   > (run* (x) (cons-o 'a '(b c) x))
 ;;   '((a b c))
 (define (cons-o a d p)
   (== (cons a d) p))
+
+;; new goal that behaves like null
+;; for example:
+;;   > (run* (x) (null-o x))
+;;   '(())
+(define (null-o x)
+  (== '() x))
+
+;; new goal that behaves like eq
+;; for example:
+;;   > (run* (x) (eq-o x 'abc))
+;;   '(abc)
+(define (eq-o x y)
+  (== x y))
+
+;; new goal that behaves like pair
+;; for example:
+;;   > (run* (x) (pair-o x))
+;;   '((_.0 . _.1))
+(define (pair-o p)
+  (fresh (a d)
+         (cons-o a d p)))
