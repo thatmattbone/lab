@@ -36,24 +36,36 @@
 (define (cons-o a d p)
   (== (cons a d) p))
 
-;; new goal that behaves like null
+;; new goal that behaves like null?
 ;; for example:
 ;;   > (run* (x) (null-o x))
 ;;   '(())
 (define (null-o x)
   (== '() x))
 
-;; new goal that behaves like eq
+;; new goal that behaves like eq?
 ;; for example:
 ;;   > (run* (x) (eq-o x 'abc))
 ;;   '(abc)
 (define (eq-o x y)
   (== x y))
 
-;; new goal that behaves like pair
+;; new goal that behaves like pair?
 ;; for example:
 ;;   > (run* (x) (pair-o x))
 ;;   '((_.0 . _.1))
 (define (pair-o p)
   (fresh (a d)
          (cons-o a d p)))
+
+;; new goal that behaves like list?
+(define (list-o l)
+  (conde
+    ((null-o l))
+    ((pair-o l)
+     (fresh (d)
+            (cdr-o l d)
+            (list-o d)))))
+
+
+   
