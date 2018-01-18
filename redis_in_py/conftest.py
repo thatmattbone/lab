@@ -1,5 +1,6 @@
 import redis
 
+
 def pytest_addoption(parser):
     parser.addoption("--redis-host",
                      default="127.0.0.1",
