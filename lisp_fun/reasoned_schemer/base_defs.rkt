@@ -59,6 +59,9 @@
          (cons-o a d p)))
 
 ;; new goal that behaves like list?
+;; for example:
+;;   > (run 2 (x) (list-o `(a b c . ,x)))
+;;   '(() (_.0))
 (define (list-o l)
   (conde
     ((null-o l))
@@ -68,4 +71,28 @@
             (list-o d)))))
 
 
-   
+;; new goal that behaves like list-of-lists?
+;; for example:
+;;   > (run 5 (x) (list-of-lists-o x))
+;;   '(() (()) ((_.0)) (() ()) ((_.0 _.1)))
+;;
+;;   > (run 5 (x) (list-of-lists-o `((1 2) ,x)))
+;;   '(() (_.0) (_.0 _.1) (_.0 _.1 _.2) (_.0 _.1 _.2 _.3))
+(define (list-of-lists-o l)
+  (conde
+    ((null-o l) s)
+    ((fresh (a)
+            (car-o l a)
+            (list-o a))
+     (fresh (d)
+            (cdr-o l d)
+            (list-of-lists-o d)))))
+
+;; new goal that succeeds with a list length 2 where both items are equal
+;; for example:
+;;   > (run* (x) (twins `(1 ,x)))
+;;   '(1)
+(define (twins s)
+  (fresh (x y)
+         (cons-o x y s)
+         (cons-o x '() y)))
