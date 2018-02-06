@@ -1,9 +1,15 @@
 # redis-in-py
 
+## Running the Unit Tests
+```
+Coming soon...
+
+```
 
 
-## Running tests
+## Running the Integration Tests
+```
+    pytest -s -v --redis-port=1234
 
-    py.test -s -v --redis-port=1234
-
-    py.test -s -v
+    pytest -s -v
+```
