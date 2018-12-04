@@ -987,6 +987,8 @@ input = """
 +125648
 """
 
+input_as_ints = [int(line) for line in input.split('\n') if line]
+
 if __name__ == '__main__':
-    answer = sum([int(line) for line in input.split('\n') if line])
+    answer = sum(input_as_ints)
     print(answer)
