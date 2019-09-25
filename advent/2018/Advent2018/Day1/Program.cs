@@ -17,12 +17,16 @@ namespace Day1
         {
             using (StreamReader sr = new StreamReader(INPUT_PATH))
             {
+                int initialValue = 0;
+
                 string intStr;
+                
                 while ((intStr = sr.ReadLine()) != null)
                 {
                     int valueFromFile = stringToInt(intStr);
-                    Console.WriteLine(valueFromFile);    
+                    initialValue += valueFromFile;
                 }
+                Console.WriteLine(initialValue);
                 /*byte[] b = new byte[1024];
                 UTF8Encoding temp = new UTF8Encoding(true);
                 while (fs.Read(b,0,b.Length) > 0)
