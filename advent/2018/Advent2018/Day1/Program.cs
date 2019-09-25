@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Day1
@@ -33,8 +34,8 @@ namespace Day1
 
             return returnList;
         }
-        
-        static void Main(string[] args)
+
+        static void answerUsingList()
         {
             var answer = 0;
             var myIntList = fileToIntList();
@@ -43,6 +44,29 @@ namespace Day1
                 answer += myInt;
             }
             Console.WriteLine(answer);
+        }
+        
+        static IEnumerable<int> fileToIntStream()
+        {
+            using (StreamReader sr = new StreamReader(INPUT_PATH))
+            {
+                string intStr;
+                while ((intStr = sr.ReadLine()) != null)
+                {
+                    yield return stringToInt(intStr);
+                }
+            }
+        }
+
+        static void answerUsingStream()
+        {
+            Console.WriteLine(fileToIntStream().Sum());
+        }
+        
+        static void Main(string[] args)
+        {
+            answerUsingList();
+            answerUsingStream();
         }
     }
 }
