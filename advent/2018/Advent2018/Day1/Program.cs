@@ -15,17 +15,28 @@ namespace Day1
         
         static void Main(string[] args)
         {
-            int i = 99;
-            var j = -50;
-            
-            using (FileStream fs = File.OpenRead(INPUT_PATH))
+            using (StreamReader sr = new StreamReader(INPUT_PATH))
             {
-                byte[] b = new byte[1024];
+                string intStr;
+                while ((intStr = sr.ReadLine()) != null)
+                {
+                    int valueFromFile = stringToInt(intStr);
+                    Console.WriteLine(valueFromFile);    
+                }
+                /*byte[] b = new byte[1024];
                 UTF8Encoding temp = new UTF8Encoding(true);
                 while (fs.Read(b,0,b.Length) > 0)
                 {
-                    Console.WriteLine(temp.GetString(b));
-                }                
+                    string numString = temp.GetString(b);
+                    if (numString != "")
+                    {
+                        Console.WriteLine(numString);
+                        Console.WriteLine("numString");
+                        int num = stringToInt(numString);
+                        
+                    }
+                }
+                */                
             }
         }
     }
