@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -12,9 +13,11 @@ namespace Day1
         {
             return Int32.Parse(inputString);
         }
-        
-        static void Main(string[] args)
+
+        static List<int> fileToIntList()
         {
+            List<int> returnList = new List<int>();
+            
             using (StreamReader sr = new StreamReader(INPUT_PATH))
             {
                 int initialValue = 0;
@@ -24,24 +27,22 @@ namespace Day1
                 while ((intStr = sr.ReadLine()) != null)
                 {
                     int valueFromFile = stringToInt(intStr);
-                    initialValue += valueFromFile;
+                    returnList.Add(valueFromFile);
                 }
-                Console.WriteLine(initialValue);
-                /*byte[] b = new byte[1024];
-                UTF8Encoding temp = new UTF8Encoding(true);
-                while (fs.Read(b,0,b.Length) > 0)
-                {
-                    string numString = temp.GetString(b);
-                    if (numString != "")
-                    {
-                        Console.WriteLine(numString);
-                        Console.WriteLine("numString");
-                        int num = stringToInt(numString);
-                        
-                    }
-                }
-                */                
             }
+
+            return returnList;
+        }
+        
+        static void Main(string[] args)
+        {
+            var answer = 0;
+            var myIntList = fileToIntList();
+            foreach (var myInt in myIntList)
+            {
+                answer += myInt;
+            }
+            Console.WriteLine(answer);
         }
     }
 }
