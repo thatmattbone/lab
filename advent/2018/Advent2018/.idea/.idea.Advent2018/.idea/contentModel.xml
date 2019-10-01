@@ -20,6 +20,7 @@
         </e>
       </e>
       <e p="Day2" t="IncludeRecursive">
+        <e p=".gitignore" t="Include" />
         <e p="Day2.csproj" t="IncludeRecursive" />
         <e p="Program.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
