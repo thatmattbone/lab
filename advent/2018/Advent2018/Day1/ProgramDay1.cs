@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Utils;
 
 namespace Day1
 {
-    class Program
+    class ProgramDay1
     {
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day1/input";
         
@@ -63,23 +64,13 @@ namespace Day1
             Console.WriteLine(fileToIntStream().Sum());
         }
 
-        static IEnumerable<int> fileToIntStreamForever()
-        {
-            while (true)
-            {
-                foreach (var i in fileToIntStream())
-                {
-                    yield return i;
-                }
-            }
-        }
         
         static int answer2UsingStream()
         {
             HashSet<int> seenFreqs = new HashSet<int>();
 
             int answer = 0;
-            foreach (int i in fileToIntStreamForever())
+            foreach (int i in fileToIntStream().StreamForever())
             {
                 answer += i;
                 if (seenFreqs.Contains(answer))
