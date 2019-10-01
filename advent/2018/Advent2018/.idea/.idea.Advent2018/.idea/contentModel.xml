@@ -24,6 +24,7 @@
         <e p="Day2.csproj" t="IncludeRecursive" />
         <e p="ProgramDay2.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="input" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">
