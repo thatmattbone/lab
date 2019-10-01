@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 
@@ -19,13 +20,25 @@ namespace Day2
                 }
             }
         }
-        
+
+        static Dictionary<char, int> stringToHisto(string input)
+        {
+            var returnDict = new Dictionary<char, int>();
+
+            foreach (var i in input)
+            {
+                var currentVal = returnDict.GetValueOrDefault(i, 0);
+                var newVal = currentVal + 1;
+                returnDict[i] = newVal;
+            }
+            return returnDict;
+        }
         
         static void Main(string[] args)
         {
-            foreach (var i in fileToStringStream())
+            foreach (var inputString in fileToStringStream())
             {
-                Console.WriteLine(i);
+                var histo = stringToHisto(inputString);
             }
         }
     }
