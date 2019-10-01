@@ -35,7 +35,7 @@ namespace Day1
             return returnList;
         }
 
-        static void answerUsingList()
+        static void answer1UsingList()
         {
             var answer = 0;
             var myIntList = fileToIntList();
@@ -58,15 +58,49 @@ namespace Day1
             }
         }
 
-        static void answerUsingStream()
+        static void answer1UsingStream()
         {
             Console.WriteLine(fileToIntStream().Sum());
+        }
+
+        static IEnumerable<int> fileToIntStreamForever()
+        {
+            while (true)
+            {
+                foreach (var i in fileToIntStream())
+                {
+                    yield return i;
+                }
+            }
+        }
+        
+        static int answer2UsingStream()
+        {
+            HashSet<int> seenFreqs = new HashSet<int>();
+
+            int answer = 0;
+            foreach (int i in fileToIntStreamForever())
+            {
+                answer += i;
+                if (seenFreqs.Contains(answer))
+                {
+                    return answer;
+                }
+                else
+                {
+                    seenFreqs.Add(answer);
+                }
+            }
+
+            return -666;
         }
         
         static void Main(string[] args)
         {
-            answerUsingList();
-            answerUsingStream();
+            //answer1UsingList();
+            
+            answer1UsingStream();
+            Console.WriteLine(answer2UsingStream());
         }
     }
 }
