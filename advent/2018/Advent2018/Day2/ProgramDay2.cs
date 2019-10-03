@@ -44,8 +44,25 @@ namespace Day2
         {
             return histo.Values.Any(value => value == 3);
         }
+
+        static List<bool> equalityList(string input1, string input2)
+        {
+            if (input1.Length != input2.Length)
+            {
+                throw new Exception("need to have input1 and input2 be the same length");
+            }
         
-        static void Main(string[] args)
+            List<bool> retList = new List<bool>(input1.Length);
+
+            for (var i = 0; i < input1.Length; i++)
+            {
+                retList.Add(input1[i] == input2[i]);
+            }
+
+            return retList;
+        }
+
+        static int answerPart1()
         {
             int containsExactlyTwo = 0;
             int contaisExactlyThree = 0;
@@ -63,8 +80,25 @@ namespace Day2
                     contaisExactlyThree += 1;
                 }
             }
-            
-            Console.WriteLine(containsExactlyTwo * contaisExactlyThree);
+
+            return containsExactlyTwo * contaisExactlyThree;
         }
+        
+        static void Main(string[] args)
+        {
+            Console.WriteLine(answerPart1());
+
+            string foo = "abc";
+            string bar = "aec";
+
+            var baz = equalityList(foo, bar);
+            Console.WriteLine(baz.Count(x => x == false));
+            foreach (var i in baz)
+            {
+                Console.WriteLine(i);
+            }
+
+        }
+        
     }
 }

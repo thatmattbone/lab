@@ -89,8 +89,8 @@ namespace Day1
         {
             //answer1UsingList();
             
-            answer1UsingStream();
-            Console.WriteLine(answer2UsingStream());
+            answer1UsingStream();  // should be 466
+            Console.WriteLine(answer2UsingStream());  // should be 750
         }
     }
 }
