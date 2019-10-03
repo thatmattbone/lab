@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Day2
 {
@@ -33,13 +34,37 @@ namespace Day2
             }
             return returnDict;
         }
+
+        static bool containsExactlyTwoOfAnyLetter(Dictionary<char, int> histo)
+        {
+            return histo.Values.Any(value => value == 2);
+        }
+
+        static bool containsExactlyThreeOfAnyLetter(Dictionary<char, int> histo)
+        {
+            return histo.Values.Any(value => value == 3);
+        }
         
         static void Main(string[] args)
         {
+            int containsExactlyTwo = 0;
+            int contaisExactlyThree = 0;
+
             foreach (var inputString in fileToStringStream())
             {
                 var histo = stringToHisto(inputString);
+                if (containsExactlyTwoOfAnyLetter(histo))
+                {
+                    containsExactlyTwo += 1;
+                }
+
+                if (containsExactlyThreeOfAnyLetter(histo))
+                {
+                    contaisExactlyThree += 1;
+                }
             }
+            
+            Console.WriteLine(containsExactlyTwo * contaisExactlyThree);
         }
     }
 }
