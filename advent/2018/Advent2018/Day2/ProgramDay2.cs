@@ -2,7 +2,10 @@
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
+using System.Runtime.InteropServices;
+using Microsoft.VisualBasic;
 
 namespace Day2
 {
@@ -45,23 +48,6 @@ namespace Day2
             return histo.Values.Any(value => value == 3);
         }
 
-        static List<bool> equalityList(string input1, string input2)
-        {
-            if (input1.Length != input2.Length)
-            {
-                throw new Exception("need to have input1 and input2 be the same length");
-            }
-        
-            List<bool> retList = new List<bool>(input1.Length);
-
-            for (var i = 0; i < input1.Length; i++)
-            {
-                retList.Add(input1[i] == input2[i]);
-            }
-
-            return retList;
-        }
-
         static int answerPart1()
         {
             int containsExactlyTwo = 0;
@@ -83,21 +69,61 @@ namespace Day2
 
             return containsExactlyTwo * contaisExactlyThree;
         }
+
+        // Tuple<char, char> vs (char, char) ???
+        static List<(char, char)> zipStrings(string input1, string input2)
+        {
+            if (input1.Length != input2.Length)
+            {
+                throw new Exception("need to have input1 and input2 be the same length");
+            }
+
+            return input1.Zip(input2).ToList();
+        }
+
+        static string commonLetters(List<(char i1, char i2)> input)
+        {
+            var foo = from charTuple in input
+                where charTuple.i1 == charTuple.i2
+                select charTuple.i1;
+            var bar = foo.ToArray();
+            return new String(bar);
+        }
+        
+        static bool offByOne(List<(char i1, char i2)> input)
+        {
+            var foo = from charTuple in input
+                where charTuple.i1 != charTuple.i2
+                select true;
+            return foo.Count() == 1;
+        }
+
+        static string answerPart2()
+        {
+            List<string> inputStrings = fileToStringStream().ToList();
+
+            foreach (string inputString in inputStrings)
+            {
+                foreach (string innerInputString in inputStrings)
+                {
+                    if (inputString != innerInputString)
+                    {
+                        var zipped = zipStrings(inputString, innerInputString);
+                        if (offByOne(zipped))
+                        {
+                            Console.WriteLine(commonLetters(zipped));
+                        }
+                    }
+                }
+            }
+
+            return "not the answer.";
+        }
         
         static void Main(string[] args)
         {
             Console.WriteLine(answerPart1());
-
-            string foo = "abc";
-            string bar = "aec";
-
-            var baz = equalityList(foo, bar);
-            Console.WriteLine(baz.Count(x => x == false));
-            foreach (var i in baz)
-            {
-                Console.WriteLine(i);
-            }
-
+            answerPart2();
         }
         
     }
