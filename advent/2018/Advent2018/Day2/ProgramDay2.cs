@@ -9,7 +9,7 @@ using Microsoft.VisualBasic;
 
 namespace Day2
 {
-    class ProgramDay2
+    public class ProgramDay2
     {
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day2/input";
         
@@ -48,7 +48,7 @@ namespace Day2
             return histo.Values.Any(value => value == 3);
         }
 
-        static int answerPart1()
+        public static int answerPart1()
         {
             int containsExactlyTwo = 0;
             int contaisExactlyThree = 0;
@@ -98,7 +98,7 @@ namespace Day2
             return foo.Count() == 1;
         }
 
-        static string answerPart2()
+        public static string answerPart2()
         {
             List<string> inputStrings = fileToStringStream().ToList();
 
@@ -111,7 +111,7 @@ namespace Day2
                         var zipped = zipStrings(inputString, innerInputString);
                         if (offByOne(zipped))
                         {
-                            Console.WriteLine(commonLetters(zipped));
+                            return commonLetters(zipped);
                         }
                     }
                 }
@@ -123,7 +123,7 @@ namespace Day2
         static void Main(string[] args)
         {
             Console.WriteLine(answerPart1());
-            answerPart2();
+            Console.WriteLine(answerPart2());
         }
         
     }

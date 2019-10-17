@@ -6,7 +6,7 @@ using Utils;
 
 namespace Day1
 {
-    class ProgramDay1
+    public class ProgramDay1
     {
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day1/input";
         
@@ -35,7 +35,7 @@ namespace Day1
             return returnList;
         }
 
-        static void answer1UsingList()
+        public static int answer1UsingList()
         {
             var answer = 0;
             var myIntList = fileToIntList();
@@ -43,7 +43,7 @@ namespace Day1
             {
                 answer += myInt;
             }
-            Console.WriteLine(answer);
+            return answer;
         }
         
         static IEnumerable<int> fileToIntStream()
@@ -58,13 +58,13 @@ namespace Day1
             }
         }
 
-        static void answer1UsingStream()
+        public static int answer1UsingStream()
         {
-            Console.WriteLine(fileToIntStream().Sum());
+            return fileToIntStream().Sum();
         }
 
         
-        static int answer2UsingStream()
+        public static int answer2UsingStream()
         {
             HashSet<int> seenFreqs = new HashSet<int>();
 
@@ -87,10 +87,12 @@ namespace Day1
         
         static void Main(string[] args)
         {
-            //answer1UsingList();
+            // answer 1 should be 466
+            Console.WriteLine(answer1UsingList());
+            Console.WriteLine(answer1UsingStream());  
             
-            answer1UsingStream();  // should be 466
-            Console.WriteLine(answer2UsingStream());  // should be 750
+            // answer 2 should be 750
+            Console.WriteLine(answer2UsingStream());  
         }
     }
 }
