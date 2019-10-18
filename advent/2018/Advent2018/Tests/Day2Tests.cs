@@ -19,16 +19,14 @@ namespace Tests
             Assert.Equal("wlkigsqyfecjqqmnxaktdrhbz", ProgramDay2.answerPart2());
         }
 
-        public static IEnumerable<object[]> stringToHistoTestData
+        public static IEnumerable<object[]> stringToHistoTestData()
         {
-            get
+            return new[]
             {
-                return new[]
-                {
-                    new object[] {"aaa", new Dictionary<char, int> {{'a', 3}}},
-                    new object[] {"aab", new Dictionary<char, int> {{'a', 2}, {'b', 1}}}
-                };
-            }
+                new object[] {"", new Dictionary<char, int>()},
+                new object[] {"aaa", new Dictionary<char, int> {{'a', 3}}},
+                new object[] {"aab", new Dictionary<char, int> {{'a', 2}, {'b', 1}}}
+            };
         }
         
         [Theory]
