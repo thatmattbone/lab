@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.IO;
 using System.Collections.Generic;
-using System.IO.Compression;
+using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using Microsoft.VisualBasic;
 
 namespace Day2
 {
@@ -25,7 +21,7 @@ namespace Day2
             }
         }
 
-        static Dictionary<char, int> stringToHisto(string input)
+        public static Dictionary<char, int> stringToHisto(string input)
         {
             var returnDict = new Dictionary<char, int>();
 
