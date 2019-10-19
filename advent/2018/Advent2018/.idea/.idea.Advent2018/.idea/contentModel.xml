@@ -39,6 +39,18 @@
           </e>
         </e>
       </e>
+      <e p="Day3" t="IncludeRecursive">
+        <e p="Day3.csproj" t="IncludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Day3.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Tests" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
         <e p="Day1Tests.cs" t="Include" />
