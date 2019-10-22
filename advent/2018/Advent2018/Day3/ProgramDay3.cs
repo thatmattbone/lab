@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Day3
 {
-    struct FabricPatch
+    public struct FabricPatch
     {
         public int id;
         public int x;
@@ -13,7 +13,7 @@ namespace Day3
         public int height;
     }
     
-    class ProgramDay3
+    public class ProgramDay3
     {
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day3/input";
         
@@ -44,7 +44,7 @@ namespace Day3
             }
         }
 
-        static FabricPatch lineToFabricPatch(string line)
+        public static FabricPatch lineToFabricPatch(string line)
         {
             char[] firstSplitCharacters = {'@', ':'};
             string[] firstSplit = line.Split(firstSplitCharacters);
