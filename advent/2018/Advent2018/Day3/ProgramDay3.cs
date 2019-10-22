@@ -17,6 +17,7 @@ namespace Day3
     public class ProgramDay3
     {
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day3/input";
+        private static int FABRIC_SIZE = 1000;
         
         public static List<int>[,] BuildInitialFabric(int fabricSize)
         {
@@ -70,10 +71,9 @@ namespace Day3
             return patch;
         }
 
-        public static int answerPart1()
+        public static List<int>[,] BuildFabric()
         {
-            int fabricSize = 1000;
-            var fabric = BuildInitialFabric(1000);
+            var fabric = BuildInitialFabric(FABRIC_SIZE);
                         
             foreach (var s in fileToStringStream())
             {
@@ -91,10 +91,17 @@ namespace Day3
                 }
             }
 
+            return fabric;
+        }
+
+        public static int answerPart1()
+        {
+            var fabric = BuildFabric();
+
             int total = 0;
-            for (int i = 0; i < fabricSize; i++)
+            for (int i = 0; i < FABRIC_SIZE; i++)
             {
-                for (int j = 0; j < fabricSize; j++)
+                for (int j = 0; j < FABRIC_SIZE; j++)
                 {
                     if (fabric[i, j].Count >= 2)
                     {
@@ -105,10 +112,43 @@ namespace Day3
 
             return total;
         }
+
+        public static int answerPart2()
+        {
+            var fabric = BuildFabric();
+            
+            foreach (var s in fileToStringStream())
+            {
+                
+                var patch = lineToFabricPatch(s);
+
+                var encounteredMismatch = false;
+                for (int i = 0; i < patch.width; i++)
+                {
+                    for (int j = 0; j < patch.height; j++)
+                    {
+                        int index1 = patch.x + i;
+                        int index2 = patch.y + j;
+                        if (fabric[index1, index2].Count > 1)
+                        {
+                            encounteredMismatch = true;
+                        }
+                    }
+                }
+
+                if (!encounteredMismatch)
+                {
+                    return patch.id;
+                }
+            }
+
+            return -1;
+        }
         
         static void Main(string[] args)
         {
             Console.WriteLine(answerPart1());
+            Console.WriteLine(answerPart2());
         }
     }
 }

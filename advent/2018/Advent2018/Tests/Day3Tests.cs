@@ -12,7 +12,13 @@ namespace Tests
         {
             Assert.Equal(98005, ProgramDay3.answerPart1());
         }
-        
+
+        [Fact]
+        public void TestDay3Part2()
+        {
+            Assert.Equal(331, ProgramDay3.answerPart2());
+        }
+
         [Theory]
         [InlineData("#8 @ 101,902: 13x24", 8, 101, 902, 13, 24)]
         [InlineData("#15 @ 955,88: 11x10", 15, 955, 88, 11, 10)]
