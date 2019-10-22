@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Day3
 {
@@ -69,21 +70,45 @@ namespace Day3
             return patch;
         }
 
-        public static void answerPart1()
+        public static int answerPart1()
         {
+            int fabricSize = 1000;
             var fabric = BuildInitialFabric(1000);
                         
             foreach (var s in fileToStringStream())
             {
+                
                 var patch = lineToFabricPatch(s);
-                Console.WriteLine(patch);
+                
+                for (int i = 0; i < patch.width; i++)
+                {
+                    for (int j = 0; j < patch.height; j++)
+                    {
+                        int index1 = patch.x + i;
+                        int index2 = patch.y + j;
+                        fabric[index1, index2].Add(patch.id);
+                    }
+                }
             }
-            
+
+            int total = 0;
+            for (int i = 0; i < fabricSize; i++)
+            {
+                for (int j = 0; j < fabricSize; j++)
+                {
+                    if (fabric[i, j].Count >= 2)
+                    {
+                        total++;
+                    }
+                }
+            }
+
+            return total;
         }
         
         static void Main(string[] args)
         {
-            answerPart1();
+            Console.WriteLine(answerPart1());
         }
     }
 }

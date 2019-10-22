@@ -8,15 +8,15 @@ namespace Tests
     public class Day3Tests
     {
         [Fact]
-        public void StubTest()
+        public void TestDay3Part1()
         {
-            Assert.Equal(1, 1);
+            Assert.Equal(98005, ProgramDay3.answerPart1());
         }
         
         [Theory]
         [InlineData("#8 @ 101,902: 13x24", 8, 101, 902, 13, 24)]
         [InlineData("#15 @ 955,88: 11x10", 15, 955, 88, 11, 10)]
-        public void TestLineToFabricPach(string line, int id, int x, int y, int width, int height)
+        public void TestLineToFabricPatch(string line, int id, int x, int y, int width, int height)
         {
             var patch = ProgramDay3.lineToFabricPatch(line);
             Assert.Equal(patch.id, id);
