@@ -5,7 +5,7 @@ using Day2;
 
 namespace Tests
 {
-    public class UnitTest2
+    public class Day2Tests
     {
         [Fact]
         public void TestDay2Part1()
