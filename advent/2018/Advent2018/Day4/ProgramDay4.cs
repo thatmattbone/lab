@@ -14,6 +14,7 @@ namespace Day4
     public class ProgramDay4
     {
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/input";
+        private static string SORTED_INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/sorted_input";
 
         static IEnumerable<string> fileToStringStream(string input_path)
         {
@@ -51,12 +52,18 @@ namespace Day4
 
         static void writeGuardLogs(List<GuardLog> guardLogs)
         {
-            
+            using (StreamWriter sw = new StreamWriter(SORTED_INPUT_PATH))
+            {
+                foreach (var guardLog in guardLogs)
+                {
+                    sw.WriteLine(guardLog.orginalLine);
+                }
+            }
         }
         
         static void Main(string[] args)
         {
-            sortInputFile();
+            writeGuardLogs(sortInputFile());
         }
     }
 }
