@@ -47,7 +47,7 @@ namespace Day2
         public static int answerPart1()
         {
             int containsExactlyTwo = 0;
-            int contaisExactlyThree = 0;
+            int containsExactlyThree = 0;
 
             foreach (var inputString in fileToStringStream())
             {
@@ -59,11 +59,11 @@ namespace Day2
 
                 if (containsExactlyThreeOfAnyLetter(histo))
                 {
-                    contaisExactlyThree += 1;
+                    containsExactlyThree += 1;
                 }
             }
 
-            return containsExactlyTwo * contaisExactlyThree;
+            return containsExactlyTwo * containsExactlyThree;
         }
 
         // Tuple<char, char> vs (char, char) ???
