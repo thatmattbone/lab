@@ -42,7 +42,7 @@
       <e p="Day3" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
         <e p="Day3.csproj" t="IncludeRecursive" />
-        <e p="Program.cs" t="Include" />
+        <e p="ProgramDay3.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="input" t="Include" />
         <e p="obj" t="ExcludeRecursive">
