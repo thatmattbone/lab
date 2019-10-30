@@ -5,12 +5,21 @@ using System.Collections.Generic;
 
 namespace Day4
 {
+    public enum GuardAction
+    {
+        BeginsShift,
+        FallsAsleep,
+        WakesUp
+    };
+    
     public struct GuardLog
     {
         public DateTime timestamp;
-        public string action;
+        public GuardAction action;
+        public int guardId;
         public string orginalLine;
     }
+    
     public class ProgramDay4
     {
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/input";
@@ -28,6 +37,11 @@ namespace Day4
             }
         }
 
+        static (GuardAction, int) actionStringToGuardAction(string action)
+        {
+            return (GuardAction.BeginsShift, 99);
+        }
+
         static GuardLog stringToGuardLog(string log)
         {
             string datePart = log.Substring(1, 16);
@@ -35,9 +49,8 @@ namespace Day4
 
             var guardLog = new GuardLog();
             guardLog.timestamp = DateTime.Parse(datePart);
-            guardLog.action = rest;
             guardLog.orginalLine = log;
-
+            (guardLog.action, guardLog.guardId) = actionStringToGuardAction(rest);
             return guardLog;
         }
 
@@ -71,6 +84,8 @@ namespace Day4
             foreach (var log in fileToStringStream(SORTED_INPUT_PATH))
             {
                 var guardLog = stringToGuardLog(log);
+
+                var minute = guardLog.timestamp.Minute;
             }
 
             return -1;
@@ -79,7 +94,6 @@ namespace Day4
         static void Main(string[] args)
         {
             //writeGuardLogs(sortInputFile());
-            
             Console.WriteLine(answerPart1());
         }
     }
