@@ -28,21 +28,26 @@ namespace Day4
             }
         }
 
+        static GuardLog stringToGuardLog(string log)
+        {
+            string datePart = log.Substring(1, 16);
+            string rest = log.Substring(19);
+
+            var guardLog = new GuardLog();
+            guardLog.timestamp = DateTime.Parse(datePart);
+            guardLog.action = rest;
+            guardLog.orginalLine = log;
+
+            return guardLog;
+        }
+
         static List<GuardLog> sortInputFile()
         {
             List<GuardLog> guardLogs = new List<GuardLog>();
             
             foreach (string s in fileToStringStream(INPUT_PATH))
             {
-                string datePart = s.Substring(1, 16);
-                string rest = s.Substring(19);
-
-                var guardLog = new GuardLog();
-                guardLog.timestamp = DateTime.Parse(datePart);
-                guardLog.action = rest;
-                guardLog.orginalLine = s;
-
-                guardLogs.Add(guardLog);
+                guardLogs.Add(stringToGuardLog(s));
             }
 
             guardLogs.Sort((guard1, guard2) => guard1.timestamp.CompareTo(guard2.timestamp));
@@ -60,10 +65,22 @@ namespace Day4
                 }
             }
         }
+
+        public static int answerPart1()
+        {
+            foreach (var log in fileToStringStream(SORTED_INPUT_PATH))
+            {
+                var guardLog = stringToGuardLog(log);
+            }
+
+            return -1;
+        }
         
         static void Main(string[] args)
         {
-            writeGuardLogs(sortInputFile());
+            //writeGuardLogs(sortInputFile());
+            
+            Console.WriteLine(answerPart1());
         }
     }
 }
