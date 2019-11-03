@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Utils;
+using System.Text.RegularExpressions;
+using  System.Linq;
 
 namespace Day4
 {
@@ -26,9 +28,22 @@ namespace Day4
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/input";
         private static string SORTED_INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/sorted_input";
         
+        private static Regex beginShiftRegex = new Regex(@"Guard #(?<guardId>\d+) begins shift", RegexOptions.Compiled);
+        
         static (GuardAction, int) actionStringToGuardAction(string action)
         {
-            return (GuardAction.BeginsShift, 99);
+            if (action == "wakes up")
+            {
+                return (GuardAction.WakesUp, -1);
+            } else if (action == "falls asleep")
+            {
+                return (GuardAction.FallsAsleep, -1);
+            } else
+            {
+                MatchCollection matches = beginShiftRegex.Matches(action);
+                string guardIdString = matches[0].Groups["guardId"].Value;
+                return (GuardAction.BeginsShift, Int32.Parse(guardIdString));
+            }
         }
 
         static GuardLog stringToGuardLog(string log)
@@ -68,13 +83,52 @@ namespace Day4
             }
         }
 
+        public static IEnumerable<GuardLog> populateGuardLogGuardIds(IEnumerable<GuardLog> guardLogs)
+        {
+            int currentGuard = -1;
+            foreach (var guardLog in guardLogs)
+            {
+                var newGuardLog = new GuardLog();
+                newGuardLog.timestamp = guardLog.timestamp;
+                newGuardLog.orginalLine = guardLog.orginalLine;
+                
+                switch (guardLog.action)
+                {
+                    case GuardAction.BeginsShift:
+                        currentGuard = guardLog.guardId;
+                        
+                        newGuardLog.guardId = currentGuard;
+                        newGuardLog.action = GuardAction.BeginsShift;
+                        
+                        break;
+                    
+                    case GuardAction.WakesUp:
+                        newGuardLog.guardId = currentGuard;
+                        newGuardLog.action = GuardAction.WakesUp;
+                        
+                        break;
+                        
+                    case GuardAction.FallsAsleep:
+                        newGuardLog.guardId = currentGuard;
+                        newGuardLog.action = GuardAction.FallsAsleep;
+                    
+                        break;
+                }
+
+                yield return newGuardLog;
+            }
+        }
+
         public static int answerPart1()
         {
-            foreach (var log in Streams.fileToStringStream(SORTED_INPUT_PATH))
-            {
-                var guardLog = stringToGuardLog(log);
+            var guardLogs = Streams.fileToStringStream(SORTED_INPUT_PATH).Select(stringToGuardLog);
 
-                var minute = guardLog.timestamp.Minute;
+            foreach (var guardLog in populateGuardLogGuardIds(guardLogs))
+            {
+                if (guardLog.guardId == -1)
+                {
+                    throw new Exception("fuck");
+                }
             }
 
             return -1;
