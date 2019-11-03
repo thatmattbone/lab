@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Utils;
 
 namespace Day4
 {
@@ -24,19 +25,7 @@ namespace Day4
     {
         private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/input";
         private static string SORTED_INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/sorted_input";
-
-        static IEnumerable<string> fileToStringStream(string input_path)
-        {
-            using (StreamReader sr = new StreamReader(input_path))
-            {
-                string myStr;
-                while ((myStr = sr.ReadLine()) != null)
-                {
-                    yield return myStr;
-                }
-            }
-        }
-
+        
         static (GuardAction, int) actionStringToGuardAction(string action)
         {
             return (GuardAction.BeginsShift, 99);
@@ -58,7 +47,7 @@ namespace Day4
         {
             List<GuardLog> guardLogs = new List<GuardLog>();
             
-            foreach (string s in fileToStringStream(INPUT_PATH))
+            foreach (string s in Streams.fileToStringStream(INPUT_PATH))
             {
                 guardLogs.Add(stringToGuardLog(s));
             }
@@ -81,7 +70,7 @@ namespace Day4
 
         public static int answerPart1()
         {
-            foreach (var log in fileToStringStream(SORTED_INPUT_PATH))
+            foreach (var log in Streams.fileToStringStream(SORTED_INPUT_PATH))
             {
                 var guardLog = stringToGuardLog(log);
 

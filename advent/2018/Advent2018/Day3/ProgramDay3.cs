@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Utils;
 
 namespace Day3
 {
@@ -33,18 +34,7 @@ namespace Day3
 
             return fabric;
         }
-
-        static IEnumerable<string> fileToStringStream()
-        {
-            using (StreamReader sr = new StreamReader(INPUT_PATH))
-            {
-                string myStr;
-                while ((myStr = sr.ReadLine()) != null)
-                {
-                    yield return myStr;
-                }
-            }
-        }
+        
 
         public static FabricPatch lineToFabricPatch(string line)
         {
@@ -75,7 +65,7 @@ namespace Day3
         {
             var fabric = BuildInitialFabric(FABRIC_SIZE);
                         
-            foreach (var s in fileToStringStream())
+            foreach (var s in Streams.fileToStringStream(INPUT_PATH))
             {
                 
                 var patch = lineToFabricPatch(s);
@@ -117,7 +107,7 @@ namespace Day3
         {
             var fabric = BuildFabric();
             
-            foreach (var s in fileToStringStream())
+            foreach (var s in Streams.fileToStringStream(INPUT_PATH))
             {
                 
                 var patch = lineToFabricPatch(s);
