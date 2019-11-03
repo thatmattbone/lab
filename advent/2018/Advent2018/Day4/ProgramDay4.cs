@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Utils;
 using System.Text.RegularExpressions;
-using  System.Linq;
+using System.Linq;
 
 namespace Day4
 {
@@ -21,6 +21,69 @@ namespace Day4
         public GuardAction action;
         public int guardId;
         public string orginalLine;
+    }
+
+    public class GuardShift
+    {
+        public int guardId;
+        public List<GuardLog> actions;
+        public bool[] isAwake;
+
+        public GuardShift()
+        {
+            this.guardId = -1;
+            this.actions = new List<GuardLog>();
+            this.isAwake = new bool[60];
+            for (var i = 0; i < 60; i++)
+            {
+                this.isAwake[i] = true;
+            }
+        }
+
+        public int asleepTotal()
+        {
+            var total = 0;
+            for (var i = 0; i < 60; i++)
+            {
+                if (!isAwake[i])
+                {
+                    total++;
+                }
+            }
+
+            return total;
+        }
+
+        private void setRest(int minute, bool isAwakeVal)
+        {
+            for (var i = minute; i < 60; i++)
+            {
+                this.isAwake[i] = isAwakeVal;
+            }
+        }
+
+        public void populateIsAwake()
+        {
+            foreach (var action in this.actions)
+            {
+                var hour = action.timestamp.Hour;
+                var minute = action.timestamp.Minute;
+
+                if (hour == 23)
+                {
+                    minute = 0;
+                }
+
+                if (action.action == GuardAction.FallsAsleep)
+                {
+                    setRest(minute, false);    
+                }
+                else
+                {
+                    setRest(minute, true);
+                }
+            }
+        }
     }
     
     public class ProgramDay4
@@ -83,39 +146,30 @@ namespace Day4
             }
         }
 
-        public static IEnumerable<GuardLog> populateGuardLogGuardIds(IEnumerable<GuardLog> guardLogs)
+        public static IEnumerable<GuardShift> buildGuardShifts(IEnumerable<GuardLog> guardLogs)
         {
-            int currentGuard = -1;
+            GuardShift currentShift = null;
+
             foreach (var guardLog in guardLogs)
             {
-                var newGuardLog = new GuardLog();
-                newGuardLog.timestamp = guardLog.timestamp;
-                newGuardLog.orginalLine = guardLog.orginalLine;
-                
                 switch (guardLog.action)
                 {
                     case GuardAction.BeginsShift:
-                        currentGuard = guardLog.guardId;
                         
-                        newGuardLog.guardId = currentGuard;
-                        newGuardLog.action = GuardAction.BeginsShift;
-                        
+                        if (currentShift != null)
+                        {
+                            yield return currentShift;    
+                        }
+                        currentShift = new GuardShift();
+                        currentShift.guardId = guardLog.guardId;
+
                         break;
                     
-                    case GuardAction.WakesUp:
-                        newGuardLog.guardId = currentGuard;
-                        newGuardLog.action = GuardAction.WakesUp;
-                        
-                        break;
-                        
                     case GuardAction.FallsAsleep:
-                        newGuardLog.guardId = currentGuard;
-                        newGuardLog.action = GuardAction.FallsAsleep;
-                    
+                    case GuardAction.WakesUp:
+                        currentShift.actions.Add(guardLog);
                         break;
                 }
-
-                yield return newGuardLog;
             }
         }
 
@@ -123,15 +177,51 @@ namespace Day4
         {
             var guardLogs = Streams.fileToStringStream(SORTED_INPUT_PATH).Select(stringToGuardLog);
 
-            foreach (var guardLog in populateGuardLogGuardIds(guardLogs))
+            var guardHash = new Dictionary<int, int>();
+            var guardToShifts = new Dictionary<int, List<GuardShift>>(); 
+            foreach (var guardShift in buildGuardShifts(guardLogs))
             {
-                if (guardLog.guardId == -1)
+                guardShift.populateIsAwake();
+
+                if (!guardHash.ContainsKey(guardShift.guardId))
                 {
-                    throw new Exception("fuck");
+                    guardHash[guardShift.guardId] = 0;
+                    guardToShifts[guardShift.guardId] = new List<GuardShift>();
                 }
+                guardHash[guardShift.guardId] += guardShift.asleepTotal();
+                
+                guardToShifts[guardShift.guardId].Add(guardShift);
             }
 
-            return -1;
+            int guardId = -1;
+            int maxSleep = 0;
+            foreach (var entry in guardHash)
+            {
+                if (entry.Value > maxSleep)
+                {
+                    guardId = entry.Key;
+                    maxSleep = entry.Value;
+                } 
+            }
+
+            int[] mostAsleep = new int[60];
+            for (var i = 0; i < 60; i++)
+            {
+                mostAsleep[i] = 0;
+            }
+
+            foreach (var shift in guardToShifts[guardId])
+            {
+                for (var i = 0; i < 60; i++)
+                {
+                    if (!shift.isAwake[i])
+                    {
+                        mostAsleep[i] += 1;
+                    }
+                }
+            }
+            var foo = mostAsleep.Select((n, i) => (Number: n, Index: i)).Max();
+            return guardId * foo.Index;
         }
         
         static void Main(string[] args)
