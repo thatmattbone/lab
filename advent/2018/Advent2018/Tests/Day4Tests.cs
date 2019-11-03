@@ -8,7 +8,8 @@ namespace Tests
         [Fact]
         public void TestDay4Part1()
         {
-            Assert.Equal(2, 2);
+            
+            Assert.Equal(35184, ProgramDay4.answerPart1());
         }
 
         [Fact]
