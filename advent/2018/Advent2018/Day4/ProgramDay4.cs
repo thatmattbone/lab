@@ -223,11 +223,49 @@ namespace Day4
             var foo = mostAsleep.Select((n, i) => (Number: n, Index: i)).Max();
             return guardId * foo.Index;
         }
+
+        public static int answerPart2()
+        {
+            var guardLogs = Streams.fileToStringStream(SORTED_INPUT_PATH).Select(stringToGuardLog);
+
+            var guardHash = new Dictionary<int, List<int>>();
+            
+            foreach (var guardShift in buildGuardShifts(guardLogs))
+            {
+                guardShift.populateIsAwake();
+
+                if (!guardHash.ContainsKey(guardShift.guardId))
+                {
+                    guardHash[guardShift.guardId] = new List<int>();
+                }
+
+                for (var i = 0; i < 60; i++)
+                {
+                    if (!guardShift.isAwake[i])
+                    {
+                        guardHash[i].Add(guardShift.guardId);    
+                    }
+                }
+            }
+
+            int maxGuardId = -1;
+            int maxSleepMinute = -1;
+
+            foreach (var item in guardHash)
+            {
+                var foo = item.Value.GroupBy(i => i).OrderByDescending(i => i).First();
+                Console.WriteLine(foo);
+            }
+
+            return maxGuardId * maxSleepMinute;
+        }
+
         
         static void Main(string[] args)
         {
             //writeGuardLogs(sortInputFile());
             Console.WriteLine(answerPart1());
+            Console.WriteLine(answerPart2());
         }
     }
 }
