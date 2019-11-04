@@ -33,13 +33,18 @@ namespace Day4
         {
             this.guardId = -1;
             this.actions = new List<GuardLog>();
-            this.isAwake = new bool[60];
+            this.isAwake = new bool[60]; // isAwake[0] is true if guard is awake in minute 0, etc, all the way to minute 59
             for (var i = 0; i < 60; i++)
             {
                 this.isAwake[i] = true;
             }
         }
 
+        /**
+         * Return the total number of seconds this guard has been asleep during this shift.
+         *
+         * Max of 60 possible.
+         */
         public int asleepTotal()
         {
             var total = 0;
@@ -54,6 +59,10 @@ namespace Day4
             return total;
         }
 
+        /**
+         * Given a starting minute and an isAwakeVal, set the rest of the isAwake array (i.e. isAwake[minute] to
+         * isAwake[59] to the isAwakeVal.
+         */
         private void setRest(int minute, bool isAwakeVal)
         {
             for (var i = minute; i < 60; i++)
@@ -62,6 +71,9 @@ namespace Day4
             }
         }
 
+        /**
+         * Using the GuardACtions in this.actions, populate the isAwake array. 
+         */
         public void populateIsAwake()
         {
             foreach (var action in this.actions)
@@ -85,11 +97,40 @@ namespace Day4
             }
         }
     }
+
+    public class ProgramDay4FileSorter
+    {
+        public static List<GuardLog> sortInputFile()
+        {
+            List<GuardLog> guardLogs = new List<GuardLog>();
+            
+            foreach (string s in Streams.fileToStringStream(ProgramDay4.INPUT_PATH))
+            {
+                guardLogs.Add(ProgramDay4.stringToGuardLog(s));
+            }
+
+            guardLogs.Sort((guard1, guard2) => guard1.timestamp.CompareTo(guard2.timestamp));
+            
+            return guardLogs;
+        }
+
+        public static void writeGuardLogs(List<GuardLog> guardLogs)
+        {
+            using (StreamWriter sw = new StreamWriter(ProgramDay4.SORTED_INPUT_PATH))
+            {
+                foreach (var guardLog in guardLogs)
+                {
+                    sw.WriteLine(guardLog.orginalLine);
+                }
+            }
+        }
+        
+    }
     
     public class ProgramDay4
     {
-        private static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/input";
-        private static string SORTED_INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/sorted_input";
+        public static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/input";
+        public static string SORTED_INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day4/sorted_input";
         
         private static Regex beginShiftRegex = new Regex(@"Guard #(?<guardId>\d+) begins shift", RegexOptions.Compiled);
         
@@ -109,7 +150,7 @@ namespace Day4
             }
         }
 
-        static GuardLog stringToGuardLog(string log)
+        public static GuardLog stringToGuardLog(string log)
         {
             string datePart = log.Substring(1, 16);
             string rest = log.Substring(19);
@@ -121,30 +162,6 @@ namespace Day4
             return guardLog;
         }
 
-        static List<GuardLog> sortInputFile()
-        {
-            List<GuardLog> guardLogs = new List<GuardLog>();
-            
-            foreach (string s in Streams.fileToStringStream(INPUT_PATH))
-            {
-                guardLogs.Add(stringToGuardLog(s));
-            }
-
-            guardLogs.Sort((guard1, guard2) => guard1.timestamp.CompareTo(guard2.timestamp));
-            
-            return guardLogs;
-        }
-
-        static void writeGuardLogs(List<GuardLog> guardLogs)
-        {
-            using (StreamWriter sw = new StreamWriter(SORTED_INPUT_PATH))
-            {
-                foreach (var guardLog in guardLogs)
-                {
-                    sw.WriteLine(guardLog.orginalLine);
-                }
-            }
-        }
 
         public static IEnumerable<GuardShift> buildGuardShifts(IEnumerable<GuardLog> guardLogs)
         {
@@ -263,7 +280,8 @@ namespace Day4
         
         static void Main(string[] args)
         {
-            //writeGuardLogs(sortInputFile());
+            //ProgramDay4FileSorter.writeGuardLogs(ProgramDay4FileSorter.sortInputFile());
+            
             Console.WriteLine(answerPart1());
             Console.WriteLine(answerPart2());
         }

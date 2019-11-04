@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 namespace Utils
 {
-    public class LinqFun
+    public static class LinqFun
     {
         public static Dictionary<T, int> GetHistogram<T>(IEnumerable<T> inputDict)
         {
@@ -21,6 +21,11 @@ namespace Utils
             }
 
             return histogram;
+        }
+
+        public static Dictionary<T, int> GetHistogramFromStream<T>(this IEnumerable<T> inputDict)
+        {
+            return GetHistogram(inputDict);
         }
     }
 }
