@@ -175,6 +175,7 @@ namespace Day4
                         
                         if (currentShift != null)
                         {
+                            currentShift.populateIsAwake();
                             yield return currentShift;    
                         }
                         currentShift = new GuardShift();
@@ -195,11 +196,12 @@ namespace Day4
             var guardLogs = Streams.fileToStringStream(SORTED_INPUT_PATH).Select(stringToGuardLog);
 
             var guardHash = new Dictionary<int, int>();
-            var guardToShifts = new Dictionary<int, List<GuardShift>>(); 
-            foreach (var guardShift in buildGuardShifts(guardLogs))
+            var guardToShifts = new Dictionary<int, List<GuardShift>>();
+            
+            var guardShifts = buildGuardShifts(guardLogs);
+            
+            foreach (var guardShift in guardShifts)
             {
-                guardShift.populateIsAwake();
-
                 if (!guardHash.ContainsKey(guardShift.guardId))
                 {
                     guardHash[guardShift.guardId] = 0;
