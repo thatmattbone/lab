@@ -31,9 +31,9 @@ namespace Day4
 
         public GuardShift()
         {
-            this.guardId = -1;
-            this.actions = new List<GuardLog>();
-            this.isAwake = new bool[60]; // isAwake[0] is true if guard is awake in minute 0, etc, all the way to minute 59
+            guardId = -1;
+            actions = new List<GuardLog>();
+            isAwake = new bool[60]; // isAwake[0] is true if guard is awake in minute 0, etc, all the way to minute 59
             for (var i = 0; i < 60; i++)
             {
                 this.isAwake[i] = true;
@@ -193,28 +193,20 @@ namespace Day4
 
         public static int answerPart1()
         {
-            var guardLogs = Streams.fileToStringStream(SORTED_INPUT_PATH).Select(stringToGuardLog);
-
-            var guardHash = new Dictionary<int, int>();
-            var guardToShifts = new Dictionary<int, List<GuardShift>>();
+            var guardShifts = buildGuardShifts(Streams.fileToStringStream(SORTED_INPUT_PATH).Select(stringToGuardLog)).ToList();
+            var guardIdToTotalAsleepTime = guardShifts
+                .GroupBy(guardShift => guardShift.guardId)
+                .ToDictionary(
+                    grouping => grouping.Key,
+                    grouping => grouping.Select(guardShift => guardShift.asleepTotal()).Sum());
             
-            var guardShifts = buildGuardShifts(guardLogs);
-            
-            foreach (var guardShift in guardShifts)
-            {
-                if (!guardHash.ContainsKey(guardShift.guardId))
-                {
-                    guardHash[guardShift.guardId] = 0;
-                    guardToShifts[guardShift.guardId] = new List<GuardShift>();
-                }
-                guardHash[guardShift.guardId] += guardShift.asleepTotal();
-                
-                guardToShifts[guardShift.guardId].Add(guardShift);
-            }
+            var guardIdToShifts = guardShifts
+                .GroupBy(guardShift => guardShift.guardId)
+                .ToDictionary(grouping => grouping.Key, grouping => grouping.ToList());
 
             int guardId = -1;
             int maxSleep = 0;
-            foreach (var entry in guardHash)
+            foreach (var entry in guardIdToTotalAsleepTime)
             {
                 if (entry.Value > maxSleep)
                 {
@@ -229,7 +221,7 @@ namespace Day4
                 mostAsleep[i] = 0;
             }
 
-            foreach (var shift in guardToShifts[guardId])
+            foreach (var shift in guardIdToShifts[guardId])
             {
                 for (var i = 0; i < 60; i++)
                 {
