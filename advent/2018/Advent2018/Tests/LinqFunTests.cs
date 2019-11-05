@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Utils;
 using Xunit;
@@ -97,6 +98,18 @@ namespace Tests
                 myStructHisto,
                 foo
             );
+        }
+
+        [Fact]
+        public void TestLinqMaxSelections()
+        {
+            int[] myIntArray = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            
+            Assert.Equal(11, myIntArray.Max());
+            Assert.Equal(0, myIntArray.Select((n, i) => (Number: n, Index: i)).Max().Index);
+            
+            // .Max() is only looking at the first value of the tuple...hmm....
+            Assert.Equal(9, myIntArray.Select((n, i) => (Index: i, Number: n)).Max().Index);
         }
     }
 }

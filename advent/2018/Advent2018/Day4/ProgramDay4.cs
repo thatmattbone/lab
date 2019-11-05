@@ -223,8 +223,8 @@ namespace Day4
                     }
                 }
             }
-            var foo = mostAsleep.Select((n, i) => (Number: n, Index: i)).Max();
-            return mostAsleepGuardId * foo.Index;
+            var mostAsleepMinute = mostAsleep.Select((n, i) => (Number: n, Index: i)).Max().Index;
+            return mostAsleepGuardId * mostAsleepMinute;
         }
 
         public static int answerPart2()
