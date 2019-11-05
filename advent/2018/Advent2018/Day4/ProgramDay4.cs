@@ -204,24 +204,16 @@ namespace Day4
                 .GroupBy(guardShift => guardShift.guardId)
                 .ToDictionary(grouping => grouping.Key, grouping => grouping.ToList());
 
-            int guardId = -1;
-            int maxSleep = 0;
-            foreach (var entry in guardIdToTotalAsleepTime)
-            {
-                if (entry.Value > maxSleep)
-                {
-                    guardId = entry.Key;
-                    maxSleep = entry.Value;
-                } 
-            }
-
+            int mostAsleepGuardId = guardIdToTotalAsleepTime.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+            List<GuardShift> mostAsleepGuardShifts = guardIdToShifts[mostAsleepGuardId];
+            
             int[] mostAsleep = new int[60];
             for (var i = 0; i < 60; i++)
             {
                 mostAsleep[i] = 0;
             }
 
-            foreach (var shift in guardIdToShifts[guardId])
+            foreach (var shift in mostAsleepGuardShifts)
             {
                 for (var i = 0; i < 60; i++)
                 {
@@ -232,7 +224,7 @@ namespace Day4
                 }
             }
             var foo = mostAsleep.Select((n, i) => (Number: n, Index: i)).Max();
-            return guardId * foo.Index;
+            return mostAsleepGuardId * foo.Index;
         }
 
         public static int answerPart2()
