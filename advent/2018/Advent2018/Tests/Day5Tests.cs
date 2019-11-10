@@ -10,7 +10,7 @@ namespace Tests
         [Fact]
         public void TestDay5Part1()
         {
-            Assert.Equal(ProgramDay5.answerPart1(), "uh oh");
+            Assert.Equal(ProgramDay5.answerPart1(), 9704);
         }
 
         [Fact]
@@ -33,6 +33,14 @@ namespace Tests
         public void TestWillReact(bool willReact, char first, char second)
         {
             Assert.Equal(willReact, ProgramDay5.willReact(first, second));
+        }
+
+        [Theory]
+        [InlineData("dabAaCBAcaDA", "dabAcCaCBAcCcaDA")]
+        [InlineData("stxPsEy", "stxPsEy")]
+        public void TestReactString(string expected, string input)
+        {
+            Assert.Equal(expected, ProgramDay5.reactString(input));
         }
     }
 }
