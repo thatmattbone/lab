@@ -233,7 +233,6 @@ namespace Day4
             var guardShifts = buildGuardShifts(guardLogs);
 
             List<int>[] minutetoGuardShifts = new List<int>[60];
-
             for (int i = 0; i < 60; i++)
             {
                 minutetoGuardShifts[i] = new List<int>();
@@ -251,15 +250,26 @@ namespace Day4
                 }
             }
 
+            int maxSleepCount = -1;
             int maxGuardId = -1;
             int maxSleepMinute = -1;
 
-//            foreach (var item in guardHash)
-//            {
-//                var foo = item.Value.GroupBy(i => i).OrderByDescending(i => i).First();
-//                Console.WriteLine(foo);
-//            }
+            
+            for (int i = 0; i < 60; i++)
+            {
 
+                foreach (var groupedGuardShifts in minutetoGuardShifts[i].GroupBy(x => x))
+                {
+                    if (groupedGuardShifts.Count() > maxSleepCount)
+                    {
+                        maxSleepCount = groupedGuardShifts.Count();
+                        maxSleepMinute = i;
+                        maxGuardId = groupedGuardShifts.Key;
+                    } 
+                }
+            }
+
+            // 18943 is the wrong answer and is too low.
             return maxGuardId * maxSleepMinute;
         }
 

@@ -15,7 +15,7 @@ namespace Tests
         [Fact]
         public void TestDay4Part2()
         {
-            Assert.Equal(1, 1);
+            Assert.Equal(37886, ProgramDay4.answerPart2());
         }
     }
 }
