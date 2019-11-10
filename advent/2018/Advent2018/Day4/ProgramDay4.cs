@@ -230,23 +230,23 @@ namespace Day4
         public static int answerPart2()
         {
             var guardLogs = Streams.fileToStringStream(SORTED_INPUT_PATH).Select(stringToGuardLog);
+            var guardShifts = buildGuardShifts(guardLogs);
 
-            var guardHash = new Dictionary<int, List<int>>();
-            
-            foreach (var guardShift in buildGuardShifts(guardLogs))
+            List<int>[] minutetoGuardShifts = new List<int>[60];
+
+            for (int i = 0; i < 60; i++)
             {
-                guardShift.populateIsAwake();
-
-                if (!guardHash.ContainsKey(guardShift.guardId))
-                {
-                    guardHash[guardShift.guardId] = new List<int>();
-                }
-
-                for (var i = 0; i < 60; i++)
+                minutetoGuardShifts[i] = new List<int>();
+            }
+            
+            
+            foreach (var guardShift in guardShifts)
+            {
+                for (int i = 0; i < 60; i++)
                 {
                     if (!guardShift.isAwake[i])
                     {
-                        guardHash[i].Add(guardShift.guardId);    
+                        minutetoGuardShifts[i].Add(guardShift.guardId);
                     }
                 }
             }
@@ -254,11 +254,11 @@ namespace Day4
             int maxGuardId = -1;
             int maxSleepMinute = -1;
 
-            foreach (var item in guardHash)
-            {
-                var foo = item.Value.GroupBy(i => i).OrderByDescending(i => i).First();
-                Console.WriteLine(foo);
-            }
+//            foreach (var item in guardHash)
+//            {
+//                var foo = item.Value.GroupBy(i => i).OrderByDescending(i => i).First();
+//                Console.WriteLine(foo);
+//            }
 
             return maxGuardId * maxSleepMinute;
         }
