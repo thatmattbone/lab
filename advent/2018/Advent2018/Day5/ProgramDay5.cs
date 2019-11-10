@@ -1,12 +1,42 @@
 ﻿using System;
+using System.Linq;
+using Utils;
 
 namespace Day5
 {
     public class ProgramDay5
     {
-        public static int answerPart1()
+        public static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day5/input";
+
+        public static bool willReact(char first, char second)
         {
-            return -1;
+            if (first == second)
+            {
+                return false;
+            }
+
+            if (Char.ToLower(first) == Char.ToLower(second))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static string getInputString()
+        {
+            return String.Join("", Streams.fileToStringStream(INPUT_PATH).ToArray());
+        }
+        public static string answerPart1()
+        {
+            var inputString = getInputString();
+
+            for (int i = 0; i < inputString.Length; i++)
+            {
+                Console.WriteLine(inputString[i]);
+            } 
+            
+            return "uh oh";
         }
 
         public static int answerPart2()
