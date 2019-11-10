@@ -68,12 +68,25 @@
         </e>
         <e p="sorted_input" t="Include" />
       </e>
+      <e p="Day5" t="IncludeRecursive">
+        <e p="Day5.csproj" t="IncludeRecursive" />
+        <e p="ProgramDay5.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Day5.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Tests" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
         <e p="Day1Tests.cs" t="Include" />
         <e p="Day2Tests.cs" t="Include" />
         <e p="Day3Tests.cs" t="Include" />
         <e p="Day4Tests.cs" t="Include" />
+        <e p="Day5Tests.cs" t="Include" />
         <e p="LinqFunTests.cs" t="Include" />
         <e p="Tests.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
