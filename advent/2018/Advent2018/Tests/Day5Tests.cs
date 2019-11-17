@@ -16,7 +16,7 @@ namespace Tests
         [Fact]
         public void TestDay5Part2()
         {
-            Assert.Equal(ProgramDay5.answerPart2(), -2);
+            Assert.Equal(ProgramDay5.answerPart2(), 6942);
         }
 
         [Theory]
@@ -41,6 +41,16 @@ namespace Tests
         public void TestReactString(string expected, string input)
         {
             Assert.Equal(expected, ProgramDay5.reactString(input));
+        }
+
+        [Theory]
+        [InlineData("fbar", "foobar", 'o')]
+        [InlineData("fbar", "fOobar", 'o')]
+        [InlineData("fbar", "fOObar", 'o')]
+        public void TestRemoveChar(string expected, string input, char removeChar)
+        {
+            Assert.Equal(expected, ProgramDay5.removeChar(input, removeChar));
+            Assert.Equal(expected, ProgramDay5.removeChar(input, char.ToUpper(removeChar)));
         }
     }
 }

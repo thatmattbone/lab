@@ -93,9 +93,42 @@ namespace Day5
             return reactedString.Length;
         }
 
+        public static HashSet<char> setOfChars(string inputString)
+        {
+            var mySet = new HashSet<char>(30);
+            foreach (char c in inputString)
+            {
+                mySet.Add(Char.ToLower(c));
+            }
+
+            return mySet;
+        }
+
+        public static string removeChar(string inputString, char c)
+        {
+            string returnString = inputString.Replace(Char.ToLower(c).ToString(), string.Empty);
+            returnString = returnString.Replace(Char.ToUpper(c).ToString(), string.Empty);
+            return returnString;
+        }
+        
         public static int answerPart2()
         {
-            return -2;
+            string inputString = getInputString();
+
+            string reactedString = fullyReactString(inputString);
+            int reducedLength = reactedString.Length;
+            
+            foreach (char c in setOfChars(reactedString))
+            {
+                string removedString = removeChar(reactedString, c);
+                int removedReducedLength = fullyReactString(removedString).Length;
+                if (removedReducedLength < reducedLength)
+                {
+                    reducedLength = removedReducedLength;
+                }
+            }
+
+            return reducedLength;  // should be 6942
         }
         
         static void Main(string[] args)
