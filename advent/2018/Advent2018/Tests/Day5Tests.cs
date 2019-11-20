@@ -1,6 +1,5 @@
 using Xunit;
 using Day5;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace Tests
 {
