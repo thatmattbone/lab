@@ -20,13 +20,69 @@ namespace Day6
             
             return coords;
         }
+
+        public static (int, int) getMaxes(List<(int, int)> coords)
+        {
+            int maxX = -1;
+            int maxY = -1;
+
+            foreach (var coord in coords)
+            {
+                maxX = coord.Item1 > maxX ? coord.Item1 : maxX;
+                maxY = coord.Item2 > maxY ? coord.Item2 : maxY;
+            }
+
+            return (maxX, maxY);
+        }
+
+        public static (int, int) getMins(List<(int, int)> coords)
+        {
+            int minX = Int32.MaxValue;
+            int minY = Int32.MaxValue;
+
+            foreach (var coord in coords)
+            {
+                minX = coord.Item1 < minX ? coord.Item1 : minX;
+                minY = coord.Item2 < minY ? coord.Item2 : minY;
+            }
+
+            return (minX, minY);
+        }
+
+        public static List<(int, int)> getNormalizedCoords()
+        {
+            var coords = getCoords();
+            var min = getMins(coords);
+
+            var normalizedCoords = new List<(int, int)>(coords.Count);
+
+            foreach (var coord in coords)
+            {
+                var normalizedCoord = (coord.Item1 - min.Item1, coord.Item2 - min.Item2);
+                normalizedCoords.Add(normalizedCoord);
+            }
+
+            return normalizedCoords;
+        }
         
         public static int answerPart1()
         {
-            foreach (var coord in getCoords())
+            var coords = getNormalizedCoords();
+            var max = getMaxes(coords);
+            
+            List<int>[,] board = new List<int>[max.Item1, max.Item2];
+
+            for (var i = 0; i < max.Item1; i++)
             {
-                Console.WriteLine(coord);
+                for (var j = 0; j < max.Item2; j++)
+                {
+                    board[i, j] = new List<int>();
+                }
             }
+            
+            
+            //Console.WriteLine(max);
+            
             return -1;
         }
 
