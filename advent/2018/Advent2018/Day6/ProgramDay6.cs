@@ -4,6 +4,12 @@ using Utils;
 
 namespace Day6
 {
+    public struct BoardEntry
+    { 
+        public string name; 
+        public (int, int) coords;
+    }
+    
     public class ProgramDay6
     {
         public static string INPUT_PATH = "/home/mbone/Developer/lab/advent/2018/Advent2018/Day6/input";
@@ -64,6 +70,14 @@ namespace Day6
 
             return normalizedCoords;
         }
+
+        public static int manhattanDistance((int, int) point1, (int, int) point2)
+        {
+            var d1 = point1.Item1 - point2.Item1;
+            var d2 = point1.Item2 - point2.Item2;
+
+            return Math.Abs(d1) + Math.Abs(d2);
+        }
         
         public static int answerPart1()
         {
@@ -79,10 +93,19 @@ namespace Day6
                     board[i, j] = new List<int>();
                 }
             }
-            
+
+            foreach (var coord in getNormalizedCoords())
+            {
+                for (var i = 0; i < max.Item1; i++)
+                {
+                    for (var j = 0; j < max.Item2; j++)
+                    {
+                        board[i, j].Add(manhattanDistance(coord, (i, j)));
+                    }
+                }
+            }
             
             //Console.WriteLine(max);
-            
             return -1;
         }
 
@@ -95,6 +118,22 @@ namespace Day6
         {
             Console.WriteLine(answerPart1());
             Console.WriteLine(answerPart2());
+
+            var foo = new HashSet<string>();
+            
+            var stringNames = Streams.NamedStrings().GetEnumerator();
+            for (var i = 0; i < 1000; i++)
+            {
+                stringNames.MoveNext();
+                var current = stringNames.Current;
+                
+                if (foo.Contains(current))
+                {
+                    throw new Exception("fuck " + current);
+                }
+                Console.WriteLine(current);
+                foo.Add(current);
+            }
         }
     }
 }

@@ -28,6 +28,25 @@ namespace Utils
                 }
             }
         }
-       
+
+        public static IEnumerable<string> NamedStrings()
+        {
+            string[] letters =
+            {
+                "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
+                "V", "W", "X", "Y", "Z"
+            };
+
+            var nestedStrings = NamedStrings().GetEnumerator();
+            while (true)
+            {
+                foreach (string i in letters)
+                {
+                    yield return i + nestedStrings.Current;
+                }
+
+                nestedStrings.MoveNext();
+            }
+        }
     }
 }
