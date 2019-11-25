@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Utils;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Day6
 {
     public struct BoardEntry
     { 
         public string name; 
-        public (int, int) coords;
+        public (int, int) coord;
+        public int distance;
     }
     
     public class ProgramDay6
@@ -84,27 +87,88 @@ namespace Day6
             var coords = getNormalizedCoords();
             var max = getMaxes(coords);
             
-            List<int>[,] board = new List<int>[max.Item1, max.Item2];
+            // initailize the board
+            List<BoardEntry>[,] board = new List<BoardEntry>[max.Item1, max.Item2];
+            for (var i = 0; i < max.Item1; i++)
+            {
+                for (var j = 0; j < max.Item2; j++)
+                {
+                    board[i, j] = new List<BoardEntry>();
+                }
+            }
+
+            // brute force calculate the distance from everything...
+            var coordNames = Streams.NamedStrings().GetEnumerator();
+            foreach (var coord in getNormalizedCoords())
+            {
+                coordNames.MoveNext();
+                var coordName = coordNames.Current;
+                
+                for (var i = 0; i < max.Item1; i++)
+                {
+                    for (var j = 0; j < max.Item2; j++)
+                    {
+                        var boardEntry = new BoardEntry();
+                        boardEntry.coord = coord;
+                        boardEntry.name = coordName;
+                        boardEntry.distance = manhattanDistance(coord, (i, j));
+                        
+                        board[i, j].Add(boardEntry);
+                    }
+                }
+            }
+
+//            for (var i = 0; i < max.Item1; i++)
+//            {
+//                for (var j = 0; j < max.Item2; j++)
+//                {
+//
+//                }
+//            }
 
             for (var i = 0; i < max.Item1; i++)
             {
                 for (var j = 0; j < max.Item2; j++)
                 {
-                    board[i, j] = new List<int>();
+                    board[i, j].Sort((x, y) => x.distance - y.distance);
                 }
             }
 
-            foreach (var coord in getNormalizedCoords())
+            // ban the names at the edges of the board
+            var banned = new HashSet<string>();
+            for (var i = 0; i < max.Item1; i++)
             {
-                for (var i = 0; i < max.Item1; i++)
+                banned.Add(board[i, 0][0].name);
+                banned.Add(board[i, max.Item2-1][0].name);
+            }
+            for (var j = 0; j < max.Item2; j++)
+            {
+                banned.Add(board[0, j][0].name);
+                banned.Add(board[max.Item1-1, j][0].name);
+            }
+
+            var nameCounter = new Dictionary<string, int>();
+            for (var i = 0; i < max.Item1; i++)
+            {
+                for (var j = 0; j < max.Item2; j++)
                 {
-                    for (var j = 0; j < max.Item2; j++)
+                    var entry = board[i, j];
+                    if (entry[0].name != entry[1].name && !banned.Contains(entry[0].name))
                     {
-                        board[i, j].Add(manhattanDistance(coord, (i, j)));
+                        var name = entry[0].name;
+                        if (nameCounter.ContainsKey(name))
+                        {
+                            
+                            nameCounter[name] += 1;
+                        }
+                        else
+                        {
+                            nameCounter[name] = 1;
+                        }
                     }
                 }
             }
-            
+
             //Console.WriteLine(max);
             return -1;
         }
@@ -118,22 +182,6 @@ namespace Day6
         {
             Console.WriteLine(answerPart1());
             Console.WriteLine(answerPart2());
-
-            var foo = new HashSet<string>();
-            
-            var stringNames = Streams.NamedStrings().GetEnumerator();
-            for (var i = 0; i < 1000; i++)
-            {
-                stringNames.MoveNext();
-                var current = stringNames.Current;
-                
-                if (foo.Contains(current))
-                {
-                    throw new Exception("fuck " + current);
-                }
-                Console.WriteLine(current);
-                foo.Add(current);
-            }
         }
     }
 }
