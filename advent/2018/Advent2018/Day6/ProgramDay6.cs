@@ -169,8 +169,7 @@ namespace Day6
                 }
             }
 
-            //Console.WriteLine(max);
-            return -1;
+            return nameCounter.Values.Max();
         }
 
         public static int answerPart2()
@@ -180,6 +179,8 @@ namespace Day6
         
         static void Main(string[] args)
         {
+            //guessed 4857 which is too high...
+            
             Console.WriteLine(answerPart1());
             Console.WriteLine(answerPart2());
         }
