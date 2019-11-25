@@ -153,7 +153,7 @@ namespace Day6
                 for (var j = 0; j < max.Item2; j++)
                 {
                     var entry = board[i, j];
-                    if (entry[0].name != entry[1].name && !banned.Contains(entry[0].name))
+                    if (entry[0].distance != entry[1].distance && !banned.Contains(entry[0].name))
                     {
                         var name = entry[0].name;
                         if (nameCounter.ContainsKey(name))
