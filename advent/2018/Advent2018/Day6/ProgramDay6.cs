@@ -197,6 +197,8 @@ namespace Day6
                         var boardEntry = new BoardEntry();
                         boardEntry.coord = coord;
                         boardEntry.distance = manhattanDistance(coord, (i, j));
+                        
+                        board[i, j].Add(boardEntry);
                     }
                 }
             }
@@ -214,8 +216,7 @@ namespace Day6
                     }
                 }
             }
-            
-            // guessed 96408, was too high.
+
             return total;
         }
         
