@@ -87,7 +87,7 @@ namespace Day6
             var coords = getNormalizedCoords();
             var max = getMaxes(coords);
             
-            // initailize the board
+            // initialize the board
             List<BoardEntry>[,] board = new List<BoardEntry>[max.Item1, max.Item2];
             for (var i = 0; i < max.Item1; i++)
             {
@@ -99,7 +99,7 @@ namespace Day6
 
             // brute force calculate the distance from everything...
             var coordNames = Streams.NamedStrings().GetEnumerator();
-            foreach (var coord in getNormalizedCoords())
+            foreach (var coord in coords)
             {
                 coordNames.MoveNext();
                 var coordName = coordNames.Current;
@@ -174,14 +174,54 @@ namespace Day6
 
         public static int answerPart2()
         {
-            return -2;
+            var coords = getNormalizedCoords();
+            var max = getMaxes(coords);
+            
+            // initialize the board
+            List<BoardEntry>[,] board = new List<BoardEntry>[max.Item1, max.Item2];
+            for (var i = 0; i < max.Item1; i++)
+            {
+                for (var j = 0; j < max.Item2; j++)
+                {
+                    board[i, j] = new List<BoardEntry>();
+                }
+            }
+
+            // brute force calculate the distance from every other coord...
+            for (var i = 0; i < max.Item1; i++)
+            {
+                for (var j = 0; j < max.Item2; j++)
+                {
+                    foreach (var coord in coords)
+                    {
+                        var boardEntry = new BoardEntry();
+                        boardEntry.coord = coord;
+                        boardEntry.distance = manhattanDistance(coord, (i, j));
+                    }
+                }
+            }
+
+            int total = 0;
+            for (var i = 0; i < max.Item1; i++)
+            {
+                for (var j = 0; j < max.Item2; j++)
+                {
+                    var entry = board[i, j];
+                    var sum = entry.Select(x => x.distance).Sum();
+                    if (sum < 10000)  // hardcoded limit from problem statement...
+                    {
+                        total += 1;
+                    }
+                }
+            }
+            
+            // guessed 96408, was too high.
+            return total;
         }
         
         static void Main(string[] args)
         {
-            //guessed 4857 which is too high...
-            
-            Console.WriteLine(answerPart1());
+            //Console.WriteLine(answerPart1());
             Console.WriteLine(answerPart2());
         }
     }
