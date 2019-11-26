@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Utils;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace Day7
@@ -18,17 +19,24 @@ namespace Day7
     {
         private string Name { get; }
         private SortedList<string, Instruction> dependents { get; }
-        private Instruction DependsOn { get; set; }
+        public Instruction DependsOn { get; private set; }
         
         public Instruction(string name)
         {
             Name = name;
             dependents = new SortedList<string, Instruction>();
+            DependsOn = null;
         }
 
         public void addDependentInstruction(Instruction dependent)
         {
             dependents.Add(dependent.Name, dependent);
+
+//            if (dependent.DependsOn != null)
+//            {
+//                throw new Exception("what");
+//            }
+            dependent.DependsOn = this;
         } 
 
         public override string ToString()
@@ -83,6 +91,14 @@ namespace Day7
                 Instruction dependsOn = nameToInstruction[i.DependsOn];
                 
                 dependsOn.addDependentInstruction(instruction);
+            }
+
+            foreach (var instruction in nameToInstruction.Values)
+            {
+                if (instruction.DependsOn == null)
+                {
+                    Console.WriteLine(instruction);
+                }
             }
             return -1;
         }
