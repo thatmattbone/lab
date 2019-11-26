@@ -72,7 +72,7 @@ namespace Day4
         }
 
         /**
-         * Using the GuardACtions in this.actions, populate the isAwake array. 
+         * Using the GuardActions in this.actions, populate the isAwake array. 
          */
         public void populateIsAwake()
         {
