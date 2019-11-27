@@ -16,12 +16,16 @@ namespace Day7
     public class Instruction
     {
         public string Name { get; }
-        public Dictionary<string, Instruction> WaitingOn { get; }
+        private Dictionary<string, Instruction> WaitingOn { get; }
+        public int SecsRemaining { get;  }
+        public bool IsRunning { get; private set; }
         
         public Instruction(string name)
         {
             Name = name;
             WaitingOn = new Dictionary<string, Instruction>();
+            SecsRemaining = ProgramDay7.secondsForInstructionName(name);
+            IsRunning = false;
         }
 
         public void addInstructionToWaitOn(Instruction waitingOnInstruction)
@@ -51,6 +55,21 @@ namespace Day7
 
             return false;
         }
+        
+        public void startRunning()
+        {
+            IsRunning = true;
+        }
+
+        public bool stillRuning()
+        {
+            if (SecsRemaining == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         public override string ToString()
         {
@@ -78,10 +97,14 @@ namespace Day7
                 
                 yield return instruction;
             }
-        } 
-        
-        
-        public static string answerPart1()
+        }
+
+        public static int secondsForInstructionName(string name)
+        {
+            return ((int) name[0]) - 4;
+        }
+
+        public static Dictionary<string, Instruction> buildInstructionList()
         {
             var nameToInstruction = new Dictionary<string, Instruction>();
             foreach (InstructionRecord i in getInstructions())
@@ -99,7 +122,13 @@ namespace Day7
                 var dependsOn = nameToInstruction[i.DependsOn];
                 nameToInstruction[i.Step].addInstructionToWaitOn(dependsOn);
             }
-            
+
+            return nameToInstruction;
+        }
+        
+        public static string answerPart1()
+        {
+            var nameToInstruction = buildInstructionList();
             var result = "";
 
             var readyToRunCount = (from instruction in nameToInstruction.Values

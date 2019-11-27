@@ -16,6 +16,15 @@ namespace Tests
         public void TestDay7Part2()
         {
             Assert.Equal(ProgramDay7.answerPart2(), -2);
-        }        
+        }
+
+        [Theory]
+        [InlineData("A", 61)]
+        [InlineData("B", 62)]
+        [InlineData("Z", 86)]
+        public void TestSecondsForInstructionName(string name, int seconds)
+        {
+            Assert.Equal(seconds, ProgramDay7.secondsForInstructionName(name));
+        }
     }
 }
