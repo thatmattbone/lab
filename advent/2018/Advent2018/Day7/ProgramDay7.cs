@@ -17,7 +17,7 @@ namespace Day7
     {
         public string Name { get; }
         private Dictionary<string, Instruction> WaitingOn { get; }
-        public int SecsRemaining { get;  }
+        public int SecsRemaining { get; private set; }
         public bool IsRunning { get; private set; }
         
         public Instruction(string name)
@@ -61,7 +61,7 @@ namespace Day7
             IsRunning = true;
         }
 
-        public bool stillRuning()
+        public bool stillRunning()
         {
             if (SecsRemaining == 0)
             {
@@ -69,6 +69,11 @@ namespace Day7
             }
 
             return true;
+        }
+
+        public void timestep()
+        {
+            SecsRemaining -= 1;
         }
 
         public override string ToString()
@@ -161,12 +166,76 @@ namespace Day7
 
         public static int answerPart2()
         {
-            return -2;
+            
+            int totalTime = 0;
+            int numWorkers = 5;
+            var nameToInstruction = buildInstructionList();
+            
+            var readyToRunCount = (from instruction in nameToInstruction.Values
+                where instruction.readyToRun()
+                select instruction).Count();
+
+            while (readyToRunCount > 0)
+            {
+                // return workers that have finished to the pool
+                var finishedWorkers = from item in nameToInstruction
+                    where item.Value.stillRunning()
+                    select item.Key;
+                foreach (var key in finishedWorkers)
+                {
+                    nameToInstruction.Remove(key);
+                    numWorkers += 1;
+                    foreach (var instruction in nameToInstruction.Values)
+                    {
+                        instruction.resolveInstruction(key);
+                    }
+                }
+                if (numWorkers > 5) throw new Exception("number of workers greater than 5, something is hosed");
+                
+                
+                // find new work to start
+                IEnumerable<Instruction> readyToStart = null;
+                if (numWorkers > 0)
+                {
+                     readyToStart = (from instruction in nameToInstruction.Values
+                        where instruction.readyToRun()
+                        orderby instruction.Name
+                        select instruction).Take(numWorkers);
+                    numWorkers = 0;
+                }
+
+                // for all running instruction timestep
+                foreach (var instruction in nameToInstruction.Values)
+                {
+                    if (instruction.IsRunning)
+                    {
+                        instruction.timestep();
+                    }
+                }
+                
+
+                // start the new work
+                if (readyToStart != null)
+                {
+                    foreach (var instruction in readyToStart)
+                    {
+                        instruction.startRunning();
+                    }
+                }
+                
+                totalTime += 1;
+                
+                readyToRunCount = (from instruction in nameToInstruction.Values
+                    where instruction.readyToRun() || instruction.IsRunning
+                    select instruction).Count();
+            }
+
+            return totalTime - 1; // total time gets incremented one more time than we'd like
         }
 
         static void Main(string[] args)
         {
-            Console.WriteLine(answerPart1());
+//            Console.WriteLine(answerPart1());
             Console.WriteLine(answerPart2());
         }
     }
