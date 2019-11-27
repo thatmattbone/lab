@@ -188,20 +188,32 @@ namespace Day7
                     foreach (var instruction in nameToInstruction.Values)
                     {
                         instruction.resolveInstruction(key);
+                        //Console.WriteLine("finished instruction " + instruction + " at time: " + totalTime);
                     }
                 }
                 if (numWorkers > 5) throw new Exception("number of workers greater than 5, something is hosed");
                 
                 
                 // find new work to start
-                IEnumerable<Instruction> readyToStart = null;
+                List<Instruction> readyToStart = null;
                 if (numWorkers > 0)
                 {
                      readyToStart = (from instruction in nameToInstruction.Values
                         where instruction.readyToRun() && !instruction.IsRunning
                         orderby instruction.Name
-                        select instruction).Take(numWorkers);
-                    numWorkers = 0;
+                        select instruction).Take(numWorkers).ToList();
+                    numWorkers -= readyToStart.Count;
+                    if (numWorkers < 0) throw new Exception("number of workers less than 0, something is hosed");
+                }
+                
+                // start the new work
+                if (readyToStart != null)
+                {
+                    foreach (var instruction in readyToStart)
+                    {
+                        //Console.WriteLine("starting " + instruction + " at time: " + totalTime);
+                        instruction.startRunning();
+                    }
                 }
 
                 // for all running instruction timestep
@@ -212,17 +224,7 @@ namespace Day7
                         instruction.timestep();
                     }
                 }
-                
 
-                // start the new work
-                if (readyToStart != null)
-                {
-                    foreach (var instruction in readyToStart)
-                    {
-                        instruction.startRunning();
-                    }
-                }
-                
                 totalTime += 1;
                 
                 readyToRunOrRunningCount = (from instruction in nameToInstruction.Values

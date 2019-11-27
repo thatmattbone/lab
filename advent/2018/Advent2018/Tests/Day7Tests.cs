@@ -15,7 +15,7 @@ namespace Tests
         [Fact]
         public void TestDay7Part2()
         {
-            Assert.Equal(ProgramDay7.answerPart2(), -2);
+            Assert.Equal(ProgramDay7.answerPart2(), 1046);
         }
 
         [Theory]
