@@ -9,7 +9,7 @@ namespace Tests
         [Fact]
         public void TestDay7Part1()
         {
-            Assert.Equal(ProgramDay7.answerPart1(), -1);
+            Assert.Equal(ProgramDay7.answerPart1(), "CGKMUWXFAIHSYDNLJQTREOPZBV");
         }
 
         [Fact]

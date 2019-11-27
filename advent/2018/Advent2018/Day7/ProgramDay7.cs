@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Utils;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
 using System.Text.RegularExpressions;
 
 namespace Day7
@@ -17,27 +15,42 @@ namespace Day7
 
     public class Instruction
     {
-        private string Name { get; }
-        private SortedList<string, Instruction> dependents { get; }
-        public Instruction DependsOn { get; private set; }
+        public string Name { get; }
+        public Dictionary<string, Instruction> WaitingOn { get; }
         
         public Instruction(string name)
         {
             Name = name;
-            dependents = new SortedList<string, Instruction>();
-            DependsOn = null;
+            WaitingOn = new Dictionary<string, Instruction>();
         }
 
-        public void addDependentInstruction(Instruction dependent)
+        public void addInstructionToWaitOn(Instruction waitingOnInstruction)
         {
-            dependents.Add(dependent.Name, dependent);
+            if (WaitingOn.ContainsKey(waitingOnInstruction.Name))
+            {
+                throw new Exception("already have key: " + waitingOnInstruction.Name);
+            }
+            
+            WaitingOn.Add(waitingOnInstruction.Name, waitingOnInstruction);
+        }
 
-//            if (dependent.DependsOn != null)
-//            {
-//                throw new Exception("what");
-//            }
-            dependent.DependsOn = this;
-        } 
+        public void resolveInstruction(string instructionName)
+        {
+            if (WaitingOn.ContainsKey(instructionName))
+            {
+                WaitingOn.Remove(instructionName);
+            }
+        }
+
+        public bool readyToRun()
+        {
+            if (WaitingOn.Count == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         public override string ToString()
         {
@@ -68,7 +81,7 @@ namespace Day7
         } 
         
         
-        public static int answerPart1()
+        public static string answerPart1()
         {
             var nameToInstruction = new Dictionary<string, Instruction>();
             foreach (InstructionRecord i in getInstructions())
@@ -82,25 +95,39 @@ namespace Day7
                 {
                     nameToInstruction.Add(i.DependsOn, new Instruction(i.DependsOn));    
                 }
-                
-            }
 
-            foreach (InstructionRecord i in getInstructions())
-            {
-                Instruction instruction = nameToInstruction[i.Step];
-                Instruction dependsOn = nameToInstruction[i.DependsOn];
-                
-                dependsOn.addDependentInstruction(instruction);
+                var dependsOn = nameToInstruction[i.DependsOn];
+                nameToInstruction[i.Step].addInstructionToWaitOn(dependsOn);
             }
+            
+            var result = "";
 
-            foreach (var instruction in nameToInstruction.Values)
+            var readyToRunCount = (from instruction in nameToInstruction.Values
+                where instruction.readyToRun()
+                select instruction).Count();
+
+            while (readyToRunCount > 0)
             {
-                if (instruction.DependsOn == null)
+                var nextInstruction = (from instruction in nameToInstruction.Values
+                    where instruction.readyToRun()
+                    orderby instruction.Name
+                    select instruction.Name).First();
+
+                nameToInstruction.Remove(nextInstruction);
+
+                foreach (var instruction in nameToInstruction.Values)
                 {
-                    Console.WriteLine(instruction);
+                    instruction.resolveInstruction(nextInstruction);
                 }
+                
+                result += nextInstruction;
+                
+                readyToRunCount = (from instruction in nameToInstruction.Values
+                    where instruction.readyToRun()
+                    select instruction).Count();                
             }
-            return -1;
+
+            return result;
         }
 
         public static int answerPart2()
