@@ -61,7 +61,7 @@ namespace Day7
             IsRunning = true;
         }
 
-        public bool stillRunning()
+        public bool hasTimeRemaining()
         {
             if (SecsRemaining == 0)
             {
@@ -171,15 +171,15 @@ namespace Day7
             int numWorkers = 5;
             var nameToInstruction = buildInstructionList();
             
-            var readyToRunCount = (from instruction in nameToInstruction.Values
-                where instruction.readyToRun()
+            var readyToRunOrRunningCount = (from instruction in nameToInstruction.Values
+                where instruction.readyToRun() || instruction.IsRunning
                 select instruction).Count();
 
-            while (readyToRunCount > 0)
+            while (readyToRunOrRunningCount > 0)
             {
                 // return workers that have finished to the pool
                 var finishedWorkers = from item in nameToInstruction
-                    where item.Value.stillRunning()
+                    where item.Value.IsRunning && !item.Value.hasTimeRemaining()
                     select item.Key;
                 foreach (var key in finishedWorkers)
                 {
@@ -198,7 +198,7 @@ namespace Day7
                 if (numWorkers > 0)
                 {
                      readyToStart = (from instruction in nameToInstruction.Values
-                        where instruction.readyToRun()
+                        where instruction.readyToRun() && !instruction.IsRunning
                         orderby instruction.Name
                         select instruction).Take(numWorkers);
                     numWorkers = 0;
@@ -225,11 +225,12 @@ namespace Day7
                 
                 totalTime += 1;
                 
-                readyToRunCount = (from instruction in nameToInstruction.Values
+                readyToRunOrRunningCount = (from instruction in nameToInstruction.Values
                     where instruction.readyToRun() || instruction.IsRunning
                     select instruction).Count();
             }
 
+            // guessed 1060
             return totalTime - 1; // total time gets incremented one more time than we'd like
         }
 
