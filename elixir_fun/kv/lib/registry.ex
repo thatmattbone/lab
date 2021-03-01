@@ -26,18 +26,44 @@ defmodule KV.Registry do
 
   @impl true
   def init(:ok) do
-    {:ok, %{}}
+    names = %{}
+    refs = %{}
+    {:ok, {names, refs}}
   end
 
   @impl true
-  def handle_call({:lookup, name}, _from, names) do
+  def handle_call({:lookup, name}, _from, state) do
+    {names, _} = state
     {:reply, Map.fetch(names, name), names}
   end
 
   @impl true
-  def handle_cast({:create, name}, names) do
-    {:ok, bucket} = KV.Bucket.start_link([])
-    {:noreply, Map.put(names, name, bucket)}
+  def handle_cast({:create, name}, {names, refs}) do
+    if Map.has_key?(names, name) do
+      {:noreply, {names, refs}}
+    else
+      {:ok, bucket} = KV.Bucket.start_link([])
+
+      ref = Process.monitor(bucket)
+
+      names = Map.put(names, name, bucket)
+      refs = Map.put(refs, ref, name)
+
+      {:noreply, {names, refs}}
+
+    end
+  end
+
+  @impl true
+  def handle_info({:DOWN, ref, :process, _pid, _reason}, {names, refs}) do
+    {name, refs} = Map.pop(refs, ref)
+    names = Map.delete(names, name)
+    {:noreply, {names, refs}}
+  end
+
+  @impl true
+  def handle_info(_msg, state) do
+    {:noreply, state}
   end
 
 end
