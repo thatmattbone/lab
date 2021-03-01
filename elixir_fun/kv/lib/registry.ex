@@ -34,7 +34,7 @@ defmodule KV.Registry do
   @impl true
   def handle_call({:lookup, name}, _from, state) do
     {names, _} = state
-    {:reply, Map.fetch(names, name), names}
+    {:reply, Map.fetch(names, name), state}
   end
 
   @impl true
