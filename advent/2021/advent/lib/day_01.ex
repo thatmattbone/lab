@@ -31,7 +31,7 @@ defmodule Day01 do
 
 
   def sliding_window([one, two, three | tail]) do
-    [one + two + three] ++ sliding_window([two, three] ++ tail)
+    [one + two + three] ++ sliding_window([two, three] ++ tail)  # could make this tail recursive with an accumulator
   end
 
   def part2() do
