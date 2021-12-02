@@ -1,19 +1,19 @@
 defmodule Day01 do
 
 
-  def count([head|tail], prev, increasing_count) when prev == -1 do
-    count(tail, head, increasing_count)
+  def count_of_increasing_items([head|tail], prev, increasing_count) when prev == -1 do
+    count_of_increasing_items(tail, head, increasing_count)
   end
 
-  def count([head|tail], prev, increasing_count) do
+  def count_of_increasing_items([head|tail], prev, increasing_count) do
     if head > prev do
-      count(tail, head, increasing_count + 1)
+      count_of_increasing_items(tail, head, increasing_count + 1)
     else
-      count(tail, head, increasing_count)
+      count_of_increasing_items(tail, head, increasing_count)
     end
   end
 
-  def count([], _prev, increasing_count) do
+  def count_of_increasing_items([], _prev, increasing_count) do
     increasing_count
   end
 
@@ -22,6 +22,23 @@ defmodule Day01 do
       split_body = String.split(body, "\n")
       input_list = for i <- split_body, String.length(i) > 0, do: String.to_integer(i)
 
-      count(input_list, -1, 0)
+      count_of_increasing_items(input_list, -1, 0)
+  end
+
+  def sliding_window([one, two, three]) do
+    [one + two + three]
+  end
+
+
+  def sliding_window([one, two, three | tail]) do
+    [one + two + three] ++ sliding_window([two, three] ++ tail)
+  end
+
+  def part2() do
+      body = File.read!("input/input_01")
+      split_body = String.split(body, "\n")
+      input_list = for i <- split_body, String.length(i) > 0, do: String.to_integer(i)
+
+      count_of_increasing_items(sliding_window(input_list), -1, 0)
   end
 end

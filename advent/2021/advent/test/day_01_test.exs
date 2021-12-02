@@ -5,4 +5,13 @@ defmodule Day01Test do
   test "day 01, part 01" do
     assert Day01.part1() == 1462
   end
+
+  test "sliding window" do
+    assert Day01.sliding_window([1, 2, 3]) == [6]
+    assert Day01.sliding_window([1, 2, 3, 4, 5]) == [6, 9, 12]
+  end
+
+  test "day 01, part02" do
+    assert Day01.part2() == 1
+  end
 end
