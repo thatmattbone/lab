@@ -1,6 +1,4 @@
 defmodule Day01 do
-
-
   def count_of_increasing_items([head|tail], prev, increasing_count) when prev == -1 do
     count_of_increasing_items(tail, head, increasing_count)
   end
@@ -28,7 +26,6 @@ defmodule Day01 do
   def sliding_window([one, two, three]) do
     [one + two + three]
   end
-
 
   def sliding_window([one, two, three | tail]) do
     [one + two + three] ++ sliding_window([two, three] ++ tail)  # could make this tail recursive with an accumulator
