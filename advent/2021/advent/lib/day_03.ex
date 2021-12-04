@@ -49,13 +49,23 @@ defmodule Day03 do
     sum_counts(tail, counts_map)
   end
 
-  def summed_counts_to_list([]), do: []
+  def max_summed_counts_to_list([]), do: []
 
-  def summed_counts_to_list([{_key, value} | tail]) do
+  def max_summed_counts_to_list([{_key, value} | tail]) do
     if Map.get(value, 0) > Map.get(value, 1) do
-        [0] ++ summed_counts_to_list(tail)
+        [0] ++ max_summed_counts_to_list(tail)
       else
-        [1] ++ summed_counts_to_list(tail)
+        [1] ++ max_summed_counts_to_list(tail)
+    end
+  end
+
+  def min_summed_counts_to_list([]), do: []
+
+  def min_summed_counts_to_list([{_key, value} | tail]) do
+    if Map.get(value, 0) > Map.get(value, 1) do
+        [1] ++ min_summed_counts_to_list(tail)
+      else
+        [0] ++ min_summed_counts_to_list(tail)
     end
   end
 
@@ -71,9 +81,14 @@ defmodule Day03 do
 
     sort_func = fn {key, _value} -> key end
     sorted_counts_map_values = Enum.sort_by(Map.to_list(counts_map), &(sort_func.(&1)))
-    IO.inspect(summed_counts_to_list(sorted_counts_map_values))
 
-    1
+    final_gamma_rate_list = max_summed_counts_to_list(sorted_counts_map_values)
+    final_epsilon_rate_list = min_summed_counts_to_list(sorted_counts_map_values)
+
+    gamma_rate = String.to_integer(Enum.join(final_gamma_rate_list), 2)
+    epsilon_rate = String.to_integer(Enum.join(final_epsilon_rate_list), 2)
+
+    gamma_rate * epsilon_rate
   end
 
   def part2() do
