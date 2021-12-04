@@ -1,5 +1,10 @@
 defmodule Day03 do
 
+  def read_input() do
+    body = File.read!("input/input_03")
+    for i <- String.split(body, "\n"), String.length(i) > 0, do: i
+  end
+
   def get_initial_map() do
     %{
       0 => %{0 => 0, 1 => 0},
@@ -70,14 +75,11 @@ defmodule Day03 do
   end
 
   def part1() do
-    body = File.read!("input/input_03")
-    split_body = for i <- String.split(body, "\n"), String.length(i) > 0, do: i
+    input_list = read_input()
 
-    by_index_counts = for i <- split_body, do: input_str_to_index_counts(i)
+    by_index_counts = for i <- input_list, do: input_str_to_index_counts(i)
 
-    counts_map = get_initial_map()
-
-    counts_map = sum_counts(by_index_counts, counts_map)
+    counts_map = sum_counts(by_index_counts, get_initial_map())
 
     sort_func = fn {key, _value} -> key end
     sorted_counts_map_values = Enum.sort_by(Map.to_list(counts_map), &(sort_func.(&1)))
@@ -91,66 +93,75 @@ defmodule Day03 do
     gamma_rate * epsilon_rate
   end
 
-  def filter_for_list([], _pos, bin_lists), do: bin_lists
+  def filter_for_list_most_common(bin_lists, pos) do  # oxygen rating, value is 1 if equally common
+    bin_lists_with_counts = for list_of_ints <- bin_lists do
+      for {bit, i} <- Enum.with_index(list_of_ints) do
+        {i, bit}
+      end
+    end
+    counts_map = sum_counts(bin_lists_with_counts, get_initial_map())
 
-  #def filter_for_list([_head | _tail], _pos, [second_head]) do
-  #  [second_head]
-  #end
+    %{0 => zero_count, 1 => one_count} = Map.get(counts_map, pos)
 
-  def filter_for_list([head | tail], pos, bin_lists) do
-    IO.puts("fuck #{pos} #{head}")
-    IO.inspect(bin_lists)
+    value = if zero_count > one_count do
+      0
+    else
+      1
+    end
 
-    filtered = for i <- bin_lists, Enum.at(i, pos) == head, do: i
-
-    IO.inspect(filtered)
-    IO.puts("========================")
+    filtered = for i <- bin_lists, Enum.at(i, pos) == value, do: i
 
     if length(filtered) == 1 do
       filtered
     else
-      filter_for_list(tail, pos + 1, filtered)
+      filter_for_list_most_common(filtered, pos + 1)
+    end
+  end
+
+  def filter_for_list_least_common(bin_lists, pos) do  # co2 rating, value is 0 if equally common
+    bin_lists_with_counts = for list_of_ints <- bin_lists do
+      for {bit, i} <- Enum.with_index(list_of_ints) do
+        {i, bit}
+      end
+    end
+    counts_map = sum_counts(bin_lists_with_counts, get_initial_map())
+
+    %{0 => zero_count, 1 => one_count} = Map.get(counts_map, pos)
+
+    value = if one_count < zero_count do
+      1
+    else
+      0
+    end
+
+    filtered = for i <- bin_lists, Enum.at(i, pos) == value, do: i
+
+    if length(filtered) == 1 do
+      filtered
+    else
+      filter_for_list_least_common(filtered, pos + 1)
     end
   end
 
   def part2() do
-    body = File.read!("input/input_03")
-    split_body = for i <- String.split(body, "\n"), String.length(i) > 0, do: i
+    input_list = read_input()
 
-    by_index_counts = for i <- split_body, do: input_str_to_index_counts(i)
-
-    counts_map = get_initial_map()
-
-    counts_map = sum_counts(by_index_counts, counts_map)
-
-    sort_func = fn {key, _value} -> key end
-    sorted_counts_map_values = Enum.sort_by(Map.to_list(counts_map), &(sort_func.(&1)))
-
-    final_gamma_rate_list = max_summed_counts_to_list(sorted_counts_map_values)
-    final_epsilon_rate_list = min_summed_counts_to_list(sorted_counts_map_values)
-
-    #IO.inspect(final_gamma_rate_list)
-    #IO.inspect(final_epsilon_rate_list)
-
-    list_of_bin_lists = for input_str <- split_body do
+    bin_lists = for input_str <- input_list do
       for i <- to_charlist(input_str) do
         int_to_bin(i)
       end
     end
 
-    #IO.inspect(list_of_bin_lists)
+    oxygen_list = filter_for_list_most_common(bin_lists, 0)
+    co2_list = filter_for_list_least_common(bin_lists, 0)
 
-    #first = filter_for_list(final_gamma_rate_list, 0, list_of_bin_lists)
-    second = filter_for_list(final_epsilon_rate_list, 0, list_of_bin_lists)
+    IO.inspect(oxygen_list)
+    IO.inspect(co2_list)
 
-    #IO.inspect(first)
-    IO.inspect(second)
+    oxygen = String.to_integer(Enum.join(Enum.at(oxygen_list, 0)), 2)
+    co2 = String.to_integer(Enum.join(Enum.at(co2_list, 0)), 2)
 
-    #gamma = String.to_integer(Enum.join(Enum.at(first, 0)), 2)
-    epsilon = String.to_integer(Enum.join(Enum.at(second, 0)), 2)
-
-    epsilon
-    #gamma * epsilon
+    oxygen * co2
   end
 
 end
