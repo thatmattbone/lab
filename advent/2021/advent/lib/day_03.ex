@@ -49,29 +49,29 @@ defmodule Day03 do
     sum_counts(tail, counts_map)
   end
 
+  def summed_counts_to_list([]), do: []
+
+  def summed_counts_to_list([{_key, value} | tail]) do
+    if Map.get(value, 0) > Map.get(value, 1) do
+        [0] ++ summed_counts_to_list(tail)
+      else
+        [1] ++ summed_counts_to_list(tail)
+    end
+  end
+
   def part1() do
     body = File.read!("input/input_03")
     split_body = for i <- String.split(body, "\n"), String.length(i) > 0, do: i
+
     by_index_counts = for i <- split_body, do: input_str_to_index_counts(i)
-
-    #IO.inspect(by_index_counts)
-    #IO.inspect(input_str_to_index_counts(hd(split_body)))
-    #
-    # Enum.with_index(entry)
-    # foo = for entry <- split_body,
-    #           {bit, i} <- Enum.with_index(Kernel.to_charlist(entry)), reduce %{} do
-    #   acc -> map.update(acc, i, 1, {i, Kernel.to_string(bit)}
-    # end
-
-    # # require IEx; IEx.pry
-
-    # IO.inspect(foo)
 
     counts_map = get_initial_map()
 
     counts_map = sum_counts(by_index_counts, counts_map)
 
-    IO.inspect(counts_map)
+    sort_func = fn {key, _value} -> key end
+    sorted_counts_map_values = Enum.sort_by(Map.to_list(counts_map), &(sort_func.(&1)))
+    IO.inspect(summed_counts_to_list(sorted_counts_map_values))
 
     1
   end
