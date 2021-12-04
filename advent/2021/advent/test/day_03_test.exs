@@ -11,8 +11,8 @@ defmodule Day03Test do
     assert Day03.int_to_bin(hd(to_charlist("1"))) == 1
   end
 
-  test "input_str_to_list" do
-    assert Day03.input_str_to_list("000110000001") == [
+  test "input_str_to_index_counts" do
+    assert Day03.input_str_to_index_counts("000110000001") == [
       {0, 0},
       {1, 0},
       {2, 0},
