@@ -155,9 +155,6 @@ defmodule Day03 do
     oxygen_list = filter_for_list_most_common(bin_lists, 0)
     co2_list = filter_for_list_least_common(bin_lists, 0)
 
-    IO.inspect(oxygen_list)
-    IO.inspect(co2_list)
-
     oxygen = String.to_integer(Enum.join(Enum.at(oxygen_list, 0)), 2)
     co2 = String.to_integer(Enum.join(Enum.at(co2_list, 0)), 2)
 
