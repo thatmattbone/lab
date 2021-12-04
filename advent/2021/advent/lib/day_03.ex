@@ -92,6 +92,32 @@ defmodule Day03 do
   end
 
   def part2() do
+    body = File.read!("input/input_03")
+    split_body = for i <- String.split(body, "\n"), String.length(i) > 0, do: i
+
+    by_index_counts = for i <- split_body, do: input_str_to_index_counts(i)
+
+    counts_map = get_initial_map()
+
+    counts_map = sum_counts(by_index_counts, counts_map)
+
+    sort_func = fn {key, _value} -> key end
+    sorted_counts_map_values = Enum.sort_by(Map.to_list(counts_map), &(sort_func.(&1)))
+
+    final_gamma_rate_list = max_summed_counts_to_list(sorted_counts_map_values)
+    final_epsilon_rate_list = min_summed_counts_to_list(sorted_counts_map_values)
+
+    IO.inspect(final_gamma_rate_list)
+    IO.inspect(final_epsilon_rate_list)
+
+    list_of_bin_lists = for input_str <- split_body do
+      for i <- to_charlist(input_str) do
+        int_to_bin(i)
+      end
+    end
+
+    IO.inspect(list_of_bin_lists)
+
     2
   end
 
