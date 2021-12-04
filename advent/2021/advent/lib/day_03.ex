@@ -91,6 +91,28 @@ defmodule Day03 do
     gamma_rate * epsilon_rate
   end
 
+  def filter_for_list([], _pos, bin_lists), do: bin_lists
+
+  #def filter_for_list([_head | _tail], _pos, [second_head]) do
+  #  [second_head]
+  #end
+
+  def filter_for_list([head | tail], pos, bin_lists) do
+    IO.puts("fuck #{pos} #{head}")
+    IO.inspect(bin_lists)
+
+    filtered = for i <- bin_lists, Enum.at(i, pos) == head, do: i
+
+    IO.inspect(filtered)
+    IO.puts("========================")
+
+    if length(filtered) == 1 do
+      filtered
+    else
+      filter_for_list(tail, pos + 1, filtered)
+    end
+  end
+
   def part2() do
     body = File.read!("input/input_03")
     split_body = for i <- String.split(body, "\n"), String.length(i) > 0, do: i
@@ -107,8 +129,8 @@ defmodule Day03 do
     final_gamma_rate_list = max_summed_counts_to_list(sorted_counts_map_values)
     final_epsilon_rate_list = min_summed_counts_to_list(sorted_counts_map_values)
 
-    IO.inspect(final_gamma_rate_list)
-    IO.inspect(final_epsilon_rate_list)
+    #IO.inspect(final_gamma_rate_list)
+    #IO.inspect(final_epsilon_rate_list)
 
     list_of_bin_lists = for input_str <- split_body do
       for i <- to_charlist(input_str) do
@@ -116,9 +138,19 @@ defmodule Day03 do
       end
     end
 
-    IO.inspect(list_of_bin_lists)
+    #IO.inspect(list_of_bin_lists)
 
-    2
+    #first = filter_for_list(final_gamma_rate_list, 0, list_of_bin_lists)
+    second = filter_for_list(final_epsilon_rate_list, 0, list_of_bin_lists)
+
+    #IO.inspect(first)
+    IO.inspect(second)
+
+    #gamma = String.to_integer(Enum.join(Enum.at(first, 0)), 2)
+    epsilon = String.to_integer(Enum.join(Enum.at(second, 0)), 2)
+
+    epsilon
+    #gamma * epsilon
   end
 
 end
