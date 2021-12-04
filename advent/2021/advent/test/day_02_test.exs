@@ -3,7 +3,7 @@ defmodule Day02Test do
   doctest Day02
 
   test "day 02, part 1" do
-    assert Day02.part1() == 1
+    assert Day02.part1() == 2039912
   end
 
   test "day 02, part 2" do

@@ -28,7 +28,8 @@ defmodule Day02 do
       {instruction, String.to_integer(magnitude)}
     end
 
-    find_position(instructions_and_magnitudes, {0, 0})
+    {depth, magnitude} = find_position(instructions_and_magnitudes, {0, 0})
+    depth * magnitude
   end
 
   def part2() do
