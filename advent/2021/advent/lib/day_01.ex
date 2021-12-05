@@ -33,8 +33,8 @@ defmodule Day01 do
 
   def part2() do
       body = File.read!("input/input_01")
-      split_body = String.split(body, "\n")
-      input_list = for i <- split_body, String.length(i) > 0, do: String.to_integer(i)
+      split_body = String.split(body, "\n", trim: true)
+      input_list = for i <- split_body, do: String.to_integer(i)
 
       count_of_increasing_items(sliding_window(input_list), -1, 0)
   end
