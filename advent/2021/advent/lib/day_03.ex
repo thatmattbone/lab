@@ -2,7 +2,7 @@ defmodule Day03 do
 
   def read_input() do
     body = File.read!("input/input_03")
-    for i <- String.split(body, "\n"), String.length(i) > 0, do: i
+    String.split(body, "\n", trim: true)
   end
 
   def get_initial_map() do

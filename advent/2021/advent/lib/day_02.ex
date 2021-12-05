@@ -22,8 +22,8 @@ defmodule Day02 do
 
   def part1() do
     body = File.read!("input/input_02")
-    split_body = String.split(body, "\n")
-    instructions_and_magnitudes = for i <- split_body, String.length(i) > 0 do
+    split_body = String.split(body, "\n", trim: true)
+    instructions_and_magnitudes = for i <- split_body do
       [instruction, magnitude] = String.split(i, " ")
       {instruction, String.to_integer(magnitude)}
     end
@@ -54,12 +54,13 @@ defmodule Day02 do
 
   def part2() do
     body = File.read!("input/input_02")
-    split_body = String.split(body, "\n")
-    instructions_and_magnitudes = for i <- split_body, String.length(i) > 0 do
+    split_body = String.split(body, "\n", trim: true)
+    instructions_and_magnitudes = for i <- split_body do
       [instruction, magnitude] = String.split(i, " ")
       {instruction, String.to_integer(magnitude)}
     end
 
     {depth, magnitude, _} = find_position_with_aim(instructions_and_magnitudes, {0, 0, 0})
-    depth * magnitude  end
+    depth * magnitude
+   end
 end
