@@ -36,7 +36,7 @@ defmodule Day04Board do
   def mark_space(%Day04Board{numbers: numbers} = board, number) do
     case numbers do
       %{^number => {row, column}} ->
-        put_in(board, [Access.key(:grid), Access.elem(row), Access.elem(column)], number)
+        put_in(board, [Access.key(:grid), Access.elem(row), Access.elem(column)], true)
 
       %{} ->
         board

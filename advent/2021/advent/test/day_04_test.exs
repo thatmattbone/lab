@@ -4,13 +4,7 @@ defmodule Day04Test do
   doctest Day04Board
 
   test "create new board from grid" do
-    %Day04Board{numbers: numbers} = Day04Board.new([
-      [0,  1,  2,  3,  4],
-      [5,  6,  7,  8,  9],
-      [10, 11, 12, 13, 14],
-      [15, 16, 17, 18, 19],
-      [20, 21, 22, 23, 24]
-    ])
+    %Day04Board{numbers: numbers} = Day04Board.new(Enum.chunk_every(0..24, 5))
 
     assert numbers == %{
       0 => {0, 0},
@@ -39,6 +33,39 @@ defmodule Day04Test do
       23 => {4, 3},
       24 => {4, 4}
     }
+  end
+
+  test "mark board" do
+    board = Day04Board.new(Enum.chunk_every(0..24, 5))
+    %Day04Board{grid: grid} = Day04Board.mark_space(board, 0)
+
+    assert elem(grid, 0) |> elem(0) == true
+    assert elem(grid, 0) |> elem(1) ==  false
+
+    %Day04Board{grid: grid} = Day04Board.mark_space(board, 22)
+    assert elem(grid, 4) |> elem(2) == true
+  end
+
+  test "is column winner" do
+    board = Day04Board.new(Enum.chunk_every(0..24, 5))
+      |> Day04Board.mark_space(0)
+      |> Day04Board.mark_space(5)
+      |> Day04Board.mark_space(10)
+      |> Day04Board.mark_space(15)
+      |> Day04Board.mark_space(20)
+
+    assert Day04Board.is_winner?(board) == true
+  end
+
+  test "is row winner" do
+    board = Day04Board.new(Enum.chunk_every(0..24, 5))
+      |> Day04Board.mark_space(0)
+      |> Day04Board.mark_space(1)
+      |> Day04Board.mark_space(2)
+      |> Day04Board.mark_space(3)
+      |> Day04Board.mark_space(4)
+
+    assert Day04Board.is_winner?(board) == true
   end
 
   test "day 04, part 1" do
