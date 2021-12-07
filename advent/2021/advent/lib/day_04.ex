@@ -19,8 +19,8 @@ defmodule Day04 do
       Day04Board.new(grid)
     end
 
-    [first_board | _] = boards
-    IO.inspect(first_board)
+    #[first_board | _] = boards
+    #IO.inspect(first_board)
 
     1
   end

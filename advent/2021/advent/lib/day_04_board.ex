@@ -7,11 +7,12 @@ defmodule Day04Board do
   defstruct [:numbers, grid: empty_grid]
 
   def new(grid) do
-    for {line, row} <- Enum.with_index(grid),
+    numbers = for {line, row} <- Enum.with_index(grid),
         {value, column} <- Enum.with_index(line),
         into: %{} do
           {value, {row, column}}
         end
+    %Day04Board{numbers: numbers}
   end
 
   defp is_col_winner?(grid) do
