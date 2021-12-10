@@ -10,7 +10,19 @@ defmodule Day05 do
            {String.to_integer(x2_str), String.to_integer(y2_str)}
          }
         end)
-    IO.inspect(lines)
+
+    lines = Enum.filter(lines, fn {{x1, y1}, {x2, y2}} ->
+      x1 == x2 or y1 == y2
+    end)
+
+    xs = Enum.flat_map(lines, fn {{x1, _y1}, {x2, _y2}} -> [x1, x2] end)
+    max_x = Enum.max(xs)
+
+    ys = Enum.flat_map(lines, fn {{_x1, y1}, {_x2, y2}} -> [y1, y2] end)
+    max_y = Enum.max(ys)
+
+    IO.inspect(max_x)
+    IO.inspect(max_y)
 
     1
   end
