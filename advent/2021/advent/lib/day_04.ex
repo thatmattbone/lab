@@ -51,23 +51,22 @@ defmodule Day04 do
       Day04Board.new(grid)
     end
 
-    {last_winner = %Day04Board{}} =
-      Enum.reduce_while(calls, {boards, _ = nil}, fn number_called, {boards, last_winner} ->
+    {number_called, last_winner = %Day04Board{}} =
+      Enum.reduce_while(calls, boards, fn number_called, boards ->
         boards = Enum.map(boards, &Day04Board.mark_space(&1, number_called))
 
-        winners = Enum.filter(boards, &Day04Board.is_winner?/1)
         losers = Enum.filter(boards, fn board -> not Day04Board.is_winner?(board) end)
 
-        case winners do
-          [] -> case losers do
-              [] -> {:halt, last_winner}
-              _ -> {:cont, {losers, last_winner}}
-            end
-          [head] -> {:cont, {Enum.filter(boards, fn board -> not Day04Board.is_winner?(board) end), head}}
-          [_|tail] -> {:cont, {Enum.filter(boards, fn board -> not Day04Board.is_winner?(board) end), List.last(tail)}}
+        case losers do
+          [] ->
+            [board] = boards
+            {:halt, {number_called, board}}
+
+          losers ->
+            {:cont, losers}
         end
       end)
 
-      last_winner
+      number_called * Day04Board.unmarked_sum(last_winner)
   end
 end
