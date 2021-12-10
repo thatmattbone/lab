@@ -26,8 +26,23 @@ defmodule Day05 do
     for i <- x1..x2, do: {i, y1}
   end
 
-  def part1() do
-    lines = File.read!("input/input_05")
+  def get_spaces_to_mark_with_diagonals({{x1, y1}, {x2, y2}}) when x1 == x2 do
+    for i <- y1..y2, do: {x1, i}
+  end
+
+  def get_spaces_to_mark_with_diagonals({{x1, y1}, {x2, y2}}) when y1 == y2 do
+    for i <- x1..x2, do: {i, y1}
+  end
+
+  def get_spaces_to_mark_with_diagonals({{x1, y1}, {x2, y2}}) do
+    xs = for i <- x1..x2, do: i
+    ys = for j <- y1..y2, do: j
+
+    Enum.zip(xs, ys)
+  end
+
+  def parse_lines() do
+    File.read!("input/input_05")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line -> String.split(line, " -> ") end)
       |> Enum.map(fn [first, second] -> {String.split(first, ","), String.split(second, ",")} end)
@@ -37,10 +52,13 @@ defmodule Day05 do
            {String.to_integer(x2_str), String.to_integer(y2_str)}
          }
         end)
+  end
 
-    lines = Enum.filter(lines, fn {{x1, y1}, {x2, y2}} ->
-      x1 == x2 or y1 == y2
-    end)
+  def part1() do
+    lines = parse_lines()
+      |> Enum.filter(fn {{x1, y1}, {x2, y2}} ->
+          x1 == x2 or y1 == y2
+        end)
 
     grid = Enum.reduce(lines, %{}, fn line, acc ->
       Enum.reduce(Day05.get_spaces_to_mark(line), acc, fn space, acc ->
@@ -54,15 +72,30 @@ defmodule Day05 do
       end)
     end)
 
-    grid = grid
+    grid
       |> Map.to_list()
       |> Enum.filter(fn {{_x, _y}, count} -> count > 1 end)
       |> length()
-
-    grid
   end
 
   def part2() do
-    2
+    lines = parse_lines()
+
+    grid = Enum.reduce(lines, %{}, fn line, acc ->
+      Enum.reduce(Day05.get_spaces_to_mark_with_diagonals(line), acc, fn space, acc ->
+        {_, new_map} = Map.get_and_update(acc, space, fn currval ->
+          case currval do
+            nil -> {currval, 1}
+            _ -> {currval, currval + 1}
+          end
+        end)
+        new_map
+      end)
+    end)
+
+    grid
+      |> Map.to_list()
+      |> Enum.filter(fn {{_x, _y}, count} -> count > 1 end)
+      |> length()
   end
 end
