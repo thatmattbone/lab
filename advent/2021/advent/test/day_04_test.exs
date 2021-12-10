@@ -73,6 +73,6 @@ defmodule Day04Test do
   end
 
   test "day 04, part 2" do
-    assert Day04.part2() == 2
+    assert Day04.part2() == 23042
   end
 end
