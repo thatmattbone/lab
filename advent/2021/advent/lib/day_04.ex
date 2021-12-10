@@ -19,10 +19,18 @@ defmodule Day04 do
       Day04Board.new(grid)
     end
 
-    #[first_board | _] = boards
-    #IO.inspect(first_board)
+    {number, board = %Day04Board{}} =
+      Enum.reduce_while(calls, boards, fn number_called, boards ->
+        boards = Enum.map(boards, &Day04Board.mark_space(&1, number_called))
 
-    1
+        if board = Enum.find(boards, &Day04Board.is_winner?/1) do
+          {:halt, {number_called, board}}
+        else
+          {:cont, boards}
+        end
+      end)
+
+    number * Day04Board.unmarked_sum(board)
   end
 
   def part2() do

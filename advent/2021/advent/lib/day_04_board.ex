@@ -43,4 +43,13 @@ defmodule Day04Board do
     end
   end
 
+  def unmarked_sum(%Day04Board{numbers: numbers, grid: grid}) do
+    Enum.sum(
+      for {number, {row, column}} <- numbers,
+          grid |> elem(row) |> elem(column) == false do
+            number
+          end
+    )
+  end
+
 end
