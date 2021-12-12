@@ -21,8 +21,6 @@ defmodule Day06 do
   end
 
   def evolve_list_slow(initial_state, num_days) do
-    IO.puts(num_days)
-
     evolved = initial_state
       |> Enum.map(&Day06.evolve_one_day/1)
 
@@ -36,27 +34,26 @@ defmodule Day06 do
     length(Day06.evolve_list_slow(initial_state, num_days))
   end
 
-  def evolve_list_fast(initial_state, num_days) do
-    lookup = %{
-      1 => evolve_list_slow([1], num_days) |> length(),
-      2 => evolve_list_slow([2], num_days) |> length(),
-      3 => evolve_list_slow([3], num_days) |> length(),
-      4 => evolve_list_slow([4], num_days) |> length(),
-      5 => evolve_list_slow([5], num_days) |> length(),
-      6 => evolve_list_slow([6], num_days) |> length(),
-    }
-    IO.puts("built lookup table")
-
-    initial_state
-      |> Enum.map(fn x -> Map.get(lookup, x) end)
-      |> Enum.sum()
+  def part1() do
+    #Day06.sum_list_slow(parse_lines(), 80)
+    Day06.sum_list_fast(parse_lines(), 80)
   end
 
-  def part1() do
-    Day06.evolve_list_fast(parse_lines(), 80)
+  def freq_sum({fish0, fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8}) do
+    {fish1, fish2, fish3, fish4, fish5, fish6, fish7 + fish0, fish8, fish0}
+  end
+
+  def sum_list_fast(initial_list, num_days) do
+    freqs = initial_list
+      |> Enum.frequencies()
+    initial = Enum.map(0..8, fn i -> freqs[i] || 0 end) |> List.to_tuple()
+
+    1..num_days
+      |> Enum.reduce(initial, fn _, x -> freq_sum(x) end)
+      |> Tuple.sum()
   end
 
   def part2() do
-    Day06.evolve_list_fast(parse_lines(), 256)
+    sum_list_fast(parse_lines(), 256)
   end
 end
