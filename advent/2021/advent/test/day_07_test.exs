@@ -7,7 +7,7 @@ defmodule Day07Test do
   end
 
   test "day07, part 2" do
-    assert Day07.part2() == 2
+    assert Day07.part2() == 94813675
   end
 
 end
