@@ -13,6 +13,6 @@ defmodule Day06Test do
   end
 
   test "day 06, part 2" do
-    assert Day06.part2() == 2
+    assert Day06.part2() == 1767323539209
   end
 end
