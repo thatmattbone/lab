@@ -14,9 +14,6 @@ defmodule Day07 do
     min_position = Enum.min(lines)
     max_position = Enum.max(lines)
 
-    IO.inspect(min_position)
-    IO.inspect(max_position)
-
     distances = Enum.map(min_position..max_position, fn x ->
       distance = Enum.sum(Enum.map(lines, fn y ->
         abs(x - y)
