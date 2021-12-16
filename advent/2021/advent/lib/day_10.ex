@@ -18,6 +18,8 @@ defmodule Day10 do
     ">" => "<",
   }
 
+  @cost %{")" => 3, "]" => 57, "}" => 1197, ">" => 25137}
+
   def line_info([hd | tail], stack) when length(stack) == 0 do
     if MapSet.member?(@opening_tags, hd) do
         line_info(tail, [hd | stack])
@@ -59,9 +61,10 @@ defmodule Day10 do
     File.read!("input/input_10")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line -> String.split(line, "", trim: true) end)
-      #|> Enum.map(fn line -> Day10.line_info(line) end)
-
-    1
+      |> Enum.map(fn line -> Day10.line_info(line) end)
+      |> Enum.filter(&match?({:corrupt, _}, &1))
+      |> Enum.map(fn {:corrupt, item} -> @cost[item] end)
+      |> Enum.sum()
   end
 
   def part2() do
