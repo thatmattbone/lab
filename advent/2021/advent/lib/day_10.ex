@@ -26,6 +26,22 @@ defmodule Day10 do
     end
   end
 
+  def line_info([hd | tail], stack) do
+    cond do
+      MapSet.member?(@opening_tags, hd) ->
+        line_info(tail, [hd | stack])
+
+      MapSet.member?(@closing_tags, hd) and hd(stack) == @tag_map[hd] ->
+        line_info(tail, tl(stack))
+
+      MapSet.member?(@closing_tags, hd) ->
+        {:corrupt, hd}
+
+      true ->
+        {:error, {[hd | tail], stack}}
+    end
+  end
+
   def line_info([], stack) when length(stack) == 0 do
     {:complete, 0}
   end
