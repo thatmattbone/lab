@@ -43,7 +43,7 @@ defmodule Day09 do
     Enum.sum(mins)
   end
 
-  def find_basin_size(grid, {i, j}) do
+  def find_basin_map(grid, {i, j}) do
     value = Day09.get_grid_val(grid, i, j)
 
     values_list = [
@@ -57,10 +57,12 @@ defmodule Day09 do
       grid_value > value and grid_value != 9 and grid_value != 10
     end)
 
-    1 + Enum.reduce(values_list, 0, fn {_value, {i, j}}, acc ->
-        acc + Day09.find_basin_size(grid, {i, j})
-    end)
+    basin_map = %{{i, j} => value}
 
+    Map.merge(basin_map,
+              Enum.reduce(values_list, %{}, fn {_value, {i, j}}, acc ->
+                Map.merge(acc, Day09.find_basin_map(grid, {i, j}))
+              end))
   end
 
   def part2() do
@@ -80,8 +82,9 @@ defmodule Day09 do
 
     basins = mins
       |> Enum.map(fn {i, j} ->
-        find_basin_size(grid, {i, j})
+        find_basin_map(grid, {i, j})
       end)
+      |> Enum.map(fn basin_map -> map_size(basin_map) end)
       |> Enum.sort()
       |> Enum.reverse()
       |> Enum.take(3)
