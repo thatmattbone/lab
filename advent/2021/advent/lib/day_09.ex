@@ -26,7 +26,6 @@ defmodule Day09 do
   end
 
   def part1() do
-
     grid = File.read!("input/input_09")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line ->
@@ -44,8 +43,53 @@ defmodule Day09 do
     Enum.sum(mins)
   end
 
+  def find_basin_size(grid, {i, j}) do
+    value = Day09.get_grid_val(grid, i, j)
+
+    values_list = [
+      {get_grid_val(grid, i - 1, j), {i - 1, j}},
+      {get_grid_val(grid, i + 1, j), {i + 1, j}},
+      {get_grid_val(grid, i, j - 1), {i, j - 1}},
+      {get_grid_val(grid, i, j + 1), {i, j + 1}}
+    ]
+
+    values_list = Enum.filter(values_list, fn {grid_value, {_i, _j}} ->
+      grid_value > value and grid_value != 9 and grid_value != 10
+    end)
+
+    1 + Enum.reduce(values_list, 0, fn {_value, {i, j}}, acc ->
+        acc + Day09.find_basin_size(grid, {i, j})
+    end)
+
+  end
+
   def part2() do
-    2
+    grid = File.read!("input/input_09")
+      |> String.split("\n", trim: true)
+      |> Enum.map(fn line ->
+          Enum.map(String.split(line, "", trim: true), fn char -> String.to_integer(char) end)
+            |> List.to_tuple()
+        end)
+      |> List.to_tuple()
+
+    mins = for i <- 0..99,
+               j <- 0..99,
+              Day09.is_local_min?(grid, i, j) do
+                {i, j}
+              end
+
+    basins = mins
+      |> Enum.map(fn {i, j} ->
+        find_basin_size(grid, {i, j})
+      end)
+      |> Enum.sort()
+      |> Enum.reverse()
+      |> Enum.take(3)
+
+
+    [one, two, three] = basins
+
+    one * two * three
   end
 
 end
