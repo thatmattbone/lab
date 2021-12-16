@@ -23,7 +23,7 @@ defmodule Day11 do
   end
 
   def bump_neighbors(grid_map, {x, y}) do
-    neighbor_vals = {
+    neighbor_vals = [
       {x - 1, y - 1},
       {x - 1, y},
       {x - 1, y + 1},
@@ -34,7 +34,13 @@ defmodule Day11 do
       {x + 1, y - 1},
       {x + 1, y},
       {x + 1, y + 1},
-    }
+    ]
+
+    neighbor_vals = Enum.filter(neighbor_vals, fn {x, y} -> grid_map[{x, y}] != nil end)
+
+    for {x, y} <- neighbor_vals, into: grid_map do
+      {{x, y}, grid_map[{x, y}] + 1}
+    end
   end
 
   def evolve_one_step(grid_map) do
