@@ -63,7 +63,7 @@ defmodule Day10 do
     File.read!("input/input_10")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line -> String.split(line, "", trim: true) end)
-      |> Enum.map(fn line -> Day10.line_info(line) end)
+      |> Enum.map(fn line -> line_info(line) end)
       |> Enum.filter(&match?({:corrupt, _}, &1))
       |> Enum.map(fn {:corrupt, item} -> @cost[item] end)
       |> Enum.sum()
@@ -73,7 +73,7 @@ defmodule Day10 do
     File.read!("input/input_10")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line -> String.split(line, "", trim: true) end)
-      |> Enum.map(fn line -> Day10.line_info(line) end)
+      |> Enum.map(fn line -> line_info(line) end)
       |> Enum.filter(&match?({:incomplete, _}, &1))
       |> Enum.map(fn {:incomplete, stack} ->
           Enum.map(stack, fn opening -> @tag_map[opening] end)
