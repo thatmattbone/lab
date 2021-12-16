@@ -20,6 +20,8 @@ defmodule Day10 do
 
   @cost %{")" => 3, "]" => 57, "}" => 1197, ">" => 25137}
 
+  @cost2 %{")" => 1, "]" => 2, "}" => 3, ">" => 4}
+
   def line_info([hd | tail], stack) when length(stack) == 0 do
     if MapSet.member?(@opening_tags, hd) do
         line_info(tail, [hd | stack])
@@ -49,7 +51,7 @@ defmodule Day10 do
   end
 
   def line_info([], stack) do
-    {:incomplete, length(stack)}
+    {:incomplete, stack}
   end
 
   def line_info(line) do
@@ -68,6 +70,20 @@ defmodule Day10 do
   end
 
   def part2() do
-    2
+    File.read!("input/input_10")
+      |> String.split("\n", trim: true)
+      |> Enum.map(fn line -> String.split(line, "", trim: true) end)
+      |> Enum.map(fn line -> Day10.line_info(line) end)
+      |> Enum.filter(&match?({:incomplete, _}, &1))
+      |> Enum.map(fn {:incomplete, stack} ->
+          Enum.map(stack, fn opening -> @tag_map[opening] end)
+        end)
+      |> Enum.map(fn tags ->
+          Enum.reduce(tags, 0, fn elem, acc ->
+            acc * 5 + @cost2[elem]
+          end)
+        end)
+      |> Enum.sort()
+      |> Enum.at(23)
   end
 end

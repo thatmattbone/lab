@@ -9,15 +9,15 @@ defmodule Day10Test do
 
   test "incomplete stack" do
     {:incomplete, val} = Day10.line_info(["[", "{", "<"], [])
-    assert val == 3
+    assert val == ["<", "{", "["]
   end
 
   test "day 10, part 1" do
-    assert Day10.part1() == 1
+    assert Day10.part1() == 413733
   end
 
 
   test "day 10, part 2" do
-    assert Day10.part2() == 2
+    assert Day10.part2() == 3354640192
   end
 end
