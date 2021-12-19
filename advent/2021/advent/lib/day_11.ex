@@ -36,24 +36,48 @@ defmodule Day11 do
       {x + 1, y + 1},
     ]
 
-    neighbor_vals = Enum.filter(neighbor_vals, fn {x, y} -> grid_map[{x, y}] != nil end)
+    neighbor_vals = Enum.filter(neighbor_vals, fn {x, y} -> grid_map[{x, y}] != nil and grid_map[{x,y}] != 0 end)
 
     for {x, y} <- neighbor_vals, into: grid_map do
       {{x, y}, grid_map[{x, y}] + 1}
     end
   end
 
+  def flash_octopii(grid_map, current_num_flashes) do
+    num_octopuses_to_flash = Enum.filter(Map.to_list(grid_map), fn {_, val} -> val >= 9 end)
+
+    if length(num_octopuses_to_flash) > 0 do
+        {spot_to_flash, _val} = hd(num_octopuses_to_flash)
+        grid_map = bump_neighbors(grid_map, spot_to_flash)
+        grid_map = Map.put(grid_map, spot_to_flash, 0)
+        flash_octopii(grid_map, current_num_flashes + 1)
+      else
+        {grid_map, current_num_flashes}
+    end
+
+  end
+
   def evolve_one_step(grid_map) do
     grid_map = bump_grid_map(grid_map)
 
-    IO.inspect(grid_map)
+    flash_octopii(grid_map, 0)
+  end
+
+  def evolve(_grid_map, num_steps, current_num_flashes) when num_steps == 0 do
+    current_num_flashes
+  end
+
+  def evolve(grid_map, num_steps, current_num_flashes) do
+    {grid_map, num_flashes} = evolve_one_step(grid_map)
+    evolve(grid_map, num_steps - 1, current_num_flashes + num_flashes)
   end
 
   def part1() do
     #IO.inspect(parse_input_to_grid_map(), limit: :infinity)
-    1
+    evolve(parse_input_to_grid_map(), 100, 0)
   end
 
+  @spec part2 :: 2
   def part2() do
     2
   end
