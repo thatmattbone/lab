@@ -59,10 +59,10 @@ defmodule Day11Test do
   end
 
   test "day 11, part 1" do
-    assert Day11.part1() == 1
+    assert Day11.part1() == 1743
   end
 
   test "day 11, part 2" do
-    assert Day11.part2() == 2
+    assert Day11.part2() == 364
   end
 end

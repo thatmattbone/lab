@@ -90,9 +90,27 @@ defmodule Day11 do
     evolve(grid_map, 100, 0)
   end
 
+  def evolve_until(grid_map, desired_map, count) when grid_map == desired_map do
+    count
+  end
+
+  def evolve_until(grid_map, desired_map, count) do
+    {grid_map, _num_flashes} = evolve_one_step(grid_map)
+
+    evolve_until(grid_map, desired_map, count + 1)
+  end
+
   @spec part2 :: 2
   def part2() do
-    2
+    zero_grid = for x <- 0..9,
+                    y <- 0..9, into: %{} do
+                      {{x, y}, 0}
+                    end
+
+    #print_grid(zero_grid)
+    grid_map = parse_input_to_grid_map()
+
+    evolve_until(grid_map, zero_grid, 0)
   end
 
 end
