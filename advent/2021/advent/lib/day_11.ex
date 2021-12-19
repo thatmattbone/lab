@@ -1,6 +1,6 @@
 defmodule Day11 do
   def parse_input_to_grid_map() do
-    grid = File.read!("input/input_11_test")
+    grid = File.read!("input/input_11")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line ->
           Enum.map(String.split(line, "", trim: true), fn char -> String.to_integer(char) end)
@@ -72,7 +72,7 @@ defmodule Day11 do
 
   def evolve(grid_map, num_steps, current_num_flashes) do
     {grid_map, num_flashes} = evolve_one_step(grid_map)
-    print_grid(grid_map)
+
     evolve(grid_map, num_steps - 1, current_num_flashes + num_flashes)
   end
 
@@ -85,8 +85,8 @@ defmodule Day11 do
   def part1() do
     #IO.inspect(parse_input_to_grid_map(), limit: :infinity)
     grid_map = parse_input_to_grid_map()
-    IO.puts("")
-    print_grid(grid_map)
+    #IO.puts("")
+    #print_grid(grid_map)
     evolve(grid_map, 100, 0)
   end
 
