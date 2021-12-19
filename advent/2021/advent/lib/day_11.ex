@@ -1,13 +1,12 @@
 defmodule Day11 do
   def parse_input_to_grid_map() do
-    grid = File.read!("input/input_11")
+    grid = File.read!("input/input_11_test")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line ->
           Enum.map(String.split(line, "", trim: true), fn char -> String.to_integer(char) end)
             |> List.to_tuple()
         end)
       |> List.to_tuple()
-      |> IO.inspect()
 
     grid_map = for x <- 0..9,
                    y <- 0..9,
@@ -36,7 +35,7 @@ defmodule Day11 do
       {x + 1, y + 1},
     ]
 
-    neighbor_vals = Enum.filter(neighbor_vals, fn {x, y} -> grid_map[{x, y}] != nil and grid_map[{x,y}] != 0 end)
+    neighbor_vals = Enum.filter(neighbor_vals, fn {x, y} -> grid_map[{x, y}] != nil and grid_map[{x, y}] != 0 end)
 
     for {x, y} <- neighbor_vals, into: grid_map do
       {{x, y}, grid_map[{x, y}] + 1}
@@ -44,7 +43,9 @@ defmodule Day11 do
   end
 
   def flash_octopii(grid_map, current_num_flashes) do
-    num_octopuses_to_flash = Enum.filter(Map.to_list(grid_map), fn {_, val} -> val >= 9 end)
+    num_octopuses_to_flash = Enum.filter(Map.to_list(grid_map), fn {_, val} -> val > 9 end)
+
+    #IO.inspect(num_octopuses_to_flash)
 
     if length(num_octopuses_to_flash) > 0 do
         {spot_to_flash, _val} = hd(num_octopuses_to_flash)
@@ -60,6 +61,8 @@ defmodule Day11 do
   def evolve_one_step(grid_map) do
     grid_map = bump_grid_map(grid_map)
 
+    #print_grid(grid_map)
+
     flash_octopii(grid_map, 0)
   end
 
@@ -69,12 +72,22 @@ defmodule Day11 do
 
   def evolve(grid_map, num_steps, current_num_flashes) do
     {grid_map, num_flashes} = evolve_one_step(grid_map)
+    print_grid(grid_map)
     evolve(grid_map, num_steps - 1, current_num_flashes + num_flashes)
+  end
+
+  def print_grid(grid_map) do
+    for y <- 0..10 do
+      IO.puts("#{grid_map[{0, y}]}#{grid_map[{1, y}]}#{grid_map[{2, y}]}#{grid_map[{3, y}]}#{grid_map[{4, y}]}#{grid_map[{5, y}]}#{grid_map[{6, y}]}#{grid_map[{7, y}]}#{grid_map[{8, y}]}#{grid_map[{9, y}]}")
+    end
   end
 
   def part1() do
     #IO.inspect(parse_input_to_grid_map(), limit: :infinity)
-    evolve(parse_input_to_grid_map(), 100, 0)
+    grid_map = parse_input_to_grid_map()
+    IO.puts("")
+    print_grid(grid_map)
+    evolve(grid_map, 100, 0)
   end
 
   @spec part2 :: 2
