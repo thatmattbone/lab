@@ -10,7 +10,7 @@ defmodule Day12 do
       |> Map.new()
   end
 
-  def is_big_cave(cave_name) do
+  def is_big_cave?(cave_name) do
     String.upcase(cave_name) == cave_name
   end
 
