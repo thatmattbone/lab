@@ -9,6 +9,12 @@ defmodule Day12Test do
     assert Day12.is_big_cave?("b") == false
   end
 
+  test "test next paths" do
+    next_paths = Day12.next_paths([{"ab", "de"}, {"ab", "fg"}, {"hi", "jk"}], "ab")
+
+    assert next_paths == ["de", "fg"]
+  end
+
   test "day 12, part 1" do
     assert Day12.part1() == 1
   end

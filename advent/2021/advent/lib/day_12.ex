@@ -7,11 +7,20 @@ defmodule Day12 do
           [start_elem, end_elem] = String.split(line, "-")
           {start_elem, end_elem}
         end)
-      |> Map.new()
   end
 
   def is_big_cave?(cave_name) do
     String.upcase(cave_name) == cave_name
+  end
+
+  def next_paths(paths, curr_elem) do
+    paths
+     |> Enum.filter(fn {src, _dest} ->
+          src == curr_elem
+        end)
+     |> Enum.map(fn {_src, dest} ->
+        dest
+     end)
   end
 
   def part1() do
