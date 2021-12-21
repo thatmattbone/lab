@@ -36,8 +36,16 @@ defmodule Day12 do
   def find_paths(paths, curr_elem, curr_path) do
     next_paths = get_next_paths(paths, curr_elem) |> filter_next_paths(curr_path)
 
-    if length(next_paths) == 0 do
+    IO.inspect(next_paths)
 
+    if length(next_paths) == 0 do
+      [curr_path]
+    else
+      Enum.map(next_paths, fn next_elem ->
+        new_curr_path = [curr_path] ++ [next_elem]
+
+        find_paths(paths, next_elem, new_curr_path)
+      end)
     end
   end
 
