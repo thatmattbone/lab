@@ -9,6 +9,11 @@ defmodule Day12 do
         end)
       |> Map.new()
   end
+
+  def is_big_cave(cave_name) do
+    String.upcase(cave_name) == cave_name
+  end
+
   def part1() do
     input_map = parse_input_to_map()
     IO.inspect(input_map)
