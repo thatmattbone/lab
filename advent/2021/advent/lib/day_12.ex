@@ -3,9 +3,9 @@ defmodule Day12 do
   def parse_input do
     File.read!("input/input_12")
       |> String.split("\n", trim: true)
-      |> Enum.map(fn line ->
+      |> Enum.flat_map(fn line ->
           [start_elem, end_elem] = String.split(line, "-")
-          {start_elem, end_elem}
+          [{start_elem, end_elem}, {end_elem, start_elem}]
         end)
   end
 
@@ -36,13 +36,15 @@ defmodule Day12 do
   def find_paths(paths, curr_elem, curr_path) do
     next_paths = get_next_paths(paths, curr_elem) |> filter_next_paths(curr_path)
 
-    IO.inspect(next_paths)
+    #IO.inspect(curr_elem)
+    #IO.inspect(next_paths)
+    #2require IEx; IEx.pry()
 
     if length(next_paths) == 0 do
       [curr_path]
     else
       Enum.map(next_paths, fn next_elem ->
-        new_curr_path = [curr_path] ++ [next_elem]
+        new_curr_path = [curr_elem | curr_path] ++ [next_elem]
 
         find_paths(paths, next_elem, new_curr_path)
       end)
