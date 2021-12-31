@@ -9,7 +9,7 @@ defmodule Day12 do
       |> String.split("\n", trim: true)
       |> Enum.flat_map(fn line ->
           [start_elem, end_elem] = String.split(line, "-")
-          [{start_elem, end_elem}, {end_elem, start_elem}]
+          [{start_elem, end_elem}]
         end)
   end
 
@@ -21,38 +21,49 @@ defmodule Day12 do
   @spec get_next_paths(cave_description(), String.t()) :: path_list()
   def get_next_paths(paths, curr_elem) do
     paths
-     |> Enum.filter(fn {src, _dest} ->
-          src == curr_elem
+     |> Enum.filter(fn {src, dest} ->
+          src == curr_elem or (dest == curr_elem and src != curr_elem)
         end)
-     |> Enum.map(fn {_src, dest} ->
-          dest
+     |> Enum.map(fn {src, dest} ->
+          if src == curr_elem do
+            dest
+          else
+            src
+          end
         end)
   end
 
+  def filter_next_paths(next_paths, []) do
+    next_paths
+  end
+
   @spec filter_next_paths(path_list(), path_list()) :: path_list()
-  def filter_next_paths(next_paths, curr_path) do
-    Enum.filter(next_paths, fn elem ->
-      if Enum.member?(curr_path, elem) do
-          is_big_cave?(elem)
-        else
-          true
-      end
-    end)
+  def filter_next_paths(next_paths, [curr_elem | curr_path]) do
+    next_paths
+      |> Enum.filter(fn elem -> elem != curr_elem end)
+      |> Enum.filter(fn elem ->
+          if Enum.member?(curr_path, elem) do
+            is_big_cave?(elem)
+          else
+            true
+        end
+      end)
   end
 
   @spec find_paths(cave_description(), path_list()) :: [path_list()]
   def find_paths(paths, [curr_elem | curr_path]) do
     next_paths = get_next_paths(paths, curr_elem) |> filter_next_paths([curr_elem | curr_path])
 
-    IO.inspect(curr_elem)
-    IO.inspect(next_paths)
-    require IEx; IEx.pry()
+    #IO.inspect(curr_elem)
+    #IO.inspect(curr_path)
+    #IO.inspect(next_paths)
+    #require IEx; IEx.pry()
 
     if length(next_paths) == 0 do
       [curr_path]
     else
       Enum.map(next_paths, fn next_elem ->
-        new_curr_path = [next_elem | curr_path]
+        new_curr_path = [next_elem, curr_elem | curr_path]
 
         find_paths(paths, new_curr_path)
       end)
