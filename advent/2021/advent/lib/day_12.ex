@@ -56,12 +56,10 @@ defmodule Day12 do
 
   @spec find_paths(cave_description(), path_list()) :: [path_list()]
   def find_paths(paths, [curr_elem | curr_path]) do
-    next_paths = get_next_paths(paths, curr_elem) |> filter_next_paths([curr_elem | curr_path])
 
-    #IO.inspect(curr_elem)
-    #IO.inspect(curr_path)
-    #IO.inspect(next_paths)
-    #require IEx; IEx.pry()
+    next_paths = paths
+      |> get_next_paths(curr_elem)
+      |> filter_next_paths([curr_elem | curr_path])
 
     if length(next_paths) == 0 do
       [[curr_elem | curr_path]]
@@ -80,13 +78,58 @@ defmodule Day12 do
 
     find_paths(input_list, ["start"])
       |> Enum.filter(fn path -> hd(path) == "end" end)
-      #|> IO.inspect(limit: :infinity)
       |> length()
+  end
+
+  @spec filter_next_paths_part2(path_list(), path_list()) :: path_list()
+  def filter_next_paths_part2(next_paths, [curr_elem | curr_path]) do
+    next_paths
+      |> Enum.filter(fn elem -> elem != curr_elem end)
+      |> Enum.filter(fn elem ->
+          we_have_seen = Enum.count(curr_path, fn x -> x == elem end)
+
+          if we_have_seen < 2 do
+            true
+          else
+            is_big_cave?(elem)
+          end
+        end)
+  end
+
+  def find_paths_part2(_paths, [curr_elem | curr_path]) when curr_elem == "end" do
+    [[curr_elem | curr_path]]
+  end
+
+  def find_paths_part2(_paths, [curr_elem, next_elem | curr_path]) when curr_elem == "start" do
+    [[next_elem | curr_path]]
+  end
+
+  @spec find_paths_part2(cave_description(), path_list()) :: [path_list()]
+  def find_paths_part2(paths, [curr_elem | curr_path]) do
+    next_paths = paths
+      |> get_next_paths(curr_elem)
+      |> filter_next_paths_part2([curr_elem | curr_path])
+
+    if length(next_paths) == 0 do
+      [[curr_elem | curr_path]]
+    else
+      Enum.reduce(next_paths, [], fn next_elem, acc ->
+        new_curr_path = [next_elem, curr_elem | curr_path]
+
+        IO.inspect(new_curr_path)
+
+        find_paths_part2(paths, new_curr_path) ++ acc
+      end)
+    end
   end
 
   @spec part2 :: integer()
   def part2() do
-    2
-  end
+    input_list = parse_input()
 
+    find_paths_part2(input_list, ["start"])
+      |> Enum.filter(fn path -> hd(path) == "end" end)
+      |> IO.inspect(limit: :infinity)
+      |> length()
+    end
 end
