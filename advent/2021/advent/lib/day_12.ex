@@ -5,7 +5,7 @@ defmodule Day12 do
 
   @spec parse_input :: cave_description()
   def parse_input do
-    File.read!("input/input_12")
+    File.read!("input/input_12_test")
       |> String.split("\n", trim: true)
       |> Enum.flat_map(fn line ->
           [start_elem, end_elem] = String.split(line, "-")
@@ -50,6 +50,10 @@ defmodule Day12 do
       end)
   end
 
+  def find_paths(_paths, [curr_elem | curr_path]) when curr_elem == "end" do
+    [[curr_elem | curr_path]]
+  end
+
   @spec find_paths(cave_description(), path_list()) :: [path_list()]
   def find_paths(paths, [curr_elem | curr_path]) do
     next_paths = get_next_paths(paths, curr_elem) |> filter_next_paths([curr_elem | curr_path])
@@ -60,12 +64,12 @@ defmodule Day12 do
     #require IEx; IEx.pry()
 
     if length(next_paths) == 0 do
-      [curr_path]
+      [[curr_elem | curr_path]]
     else
-      Enum.map(next_paths, fn next_elem ->
+      Enum.reduce(next_paths, [], fn next_elem, acc ->
         new_curr_path = [next_elem, curr_elem | curr_path]
 
-        find_paths(paths, new_curr_path)
+        find_paths(paths, new_curr_path) ++ acc
       end)
     end
   end
@@ -75,7 +79,7 @@ defmodule Day12 do
     input_list = parse_input()
 
     find_paths(input_list, ["start"])
-      |> IO.inspect()
+      |> IO.inspect(limit: :infinity)
     1
   end
 
