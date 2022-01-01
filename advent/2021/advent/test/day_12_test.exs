@@ -20,7 +20,7 @@ defmodule Day12Test do
   end
 
   test "day 12, part 1" do
-    assert Day12.part1() == 1
+    assert Day12.part1() == 4495
   end
 
   test "day 12, part 2" do
