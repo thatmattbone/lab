@@ -5,7 +5,7 @@ defmodule Day12 do
 
   @spec parse_input :: cave_description()
   def parse_input do
-    File.read!("input/input_12")
+    File.read!("input/input_12_test")
       |> String.split("\n", trim: true)
       |> Enum.flat_map(fn line ->
           [start_elem, end_elem] = String.split(line, "-")
@@ -102,12 +102,14 @@ defmodule Day12 do
     next_paths
       |> Enum.filter(fn elem -> elem != curr_elem end)
       |> Enum.filter(fn elem ->
-          we_have_seen = Enum.count(curr_path, fn x -> x == elem end)
-
-          if we_have_seen < 2 do
-            true
+          if Enum.member?(curr_path, elem) do
+            if is_big_cave?(elem) do
+              true
+            else
+              not has_a_dupe?(curr_path)
+            end
           else
-            is_big_cave?(elem)
+            true
           end
         end)
   end
@@ -116,9 +118,9 @@ defmodule Day12 do
     [[curr_elem | curr_path]]
   end
 
-  def find_paths_part2(_paths, [curr_elem, next_elem | curr_path]) when curr_elem == "start" do
-    [[next_elem | curr_path]]
-  end
+  #def find_paths_part2(_paths, [curr_elem, next_elem | curr_path]) when curr_elem == "start" do
+  #  [[next_elem | curr_path]]
+  #end
 
   @spec find_paths_part2(cave_description(), path_list()) :: [path_list()]
   def find_paths_part2(paths, [curr_elem | curr_path]) do
@@ -132,7 +134,7 @@ defmodule Day12 do
       Enum.reduce(next_paths, [], fn next_elem, acc ->
         new_curr_path = [next_elem, curr_elem | curr_path]
 
-        IO.inspect(new_curr_path)
+        #IO.inspect(new_curr_path)
 
         find_paths_part2(paths, new_curr_path) ++ acc
       end)
@@ -143,10 +145,15 @@ defmodule Day12 do
   def part2() do
     input_list = parse_input()
 
-    #find_paths_part2(input_list, ["start"])
-    #  |> Enum.filter(fn path -> hd(path) == "end" end)
-    #  |> IO.inspect(limit: :infinity)
-    #  |> length()
+    find_paths_part2(input_list, ["start"])
+      |> Enum.filter(fn path -> hd(path) == "end" end)
+      |> Enum.map(fn x ->
+          Enum.reverse(x) |> Enum.join(",")
+        end)
+      |> Enum.reverse()
+      |> Enum.join("\n")
+      |> IO.puts()
+
     2
     end
 end
