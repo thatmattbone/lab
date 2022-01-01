@@ -81,6 +81,22 @@ defmodule Day12 do
       |> length()
   end
 
+  def has_a_dupe?([], _already_seen) do
+    false
+  end
+
+  def has_a_dupe?([head | tail], already_seen) do
+    if MapSet.member?(already_seen, head) do
+      true
+    else
+      has_a_dupe?(tail, MapSet.put(already_seen, head))
+    end
+  end
+
+  def has_a_dupe?(path_list) do
+    has_a_dupe?(path_list, MapSet.new())
+  end
+
   @spec filter_next_paths_part2(path_list(), path_list()) :: path_list()
   def filter_next_paths_part2(next_paths, [curr_elem | curr_path]) do
     next_paths
@@ -127,9 +143,10 @@ defmodule Day12 do
   def part2() do
     input_list = parse_input()
 
-    find_paths_part2(input_list, ["start"])
-      |> Enum.filter(fn path -> hd(path) == "end" end)
-      |> IO.inspect(limit: :infinity)
-      |> length()
+    #find_paths_part2(input_list, ["start"])
+    #  |> Enum.filter(fn path -> hd(path) == "end" end)
+    #  |> IO.inspect(limit: :infinity)
+    #  |> length()
+    2
     end
 end
