@@ -5,7 +5,7 @@ defmodule Day12 do
 
   @spec parse_input :: cave_description()
   def parse_input do
-    File.read!("input/input_12_test")
+    File.read!("input/input_12")
       |> String.split("\n", trim: true)
       |> Enum.flat_map(fn line ->
           [start_elem, end_elem] = String.split(line, "-")
@@ -79,8 +79,9 @@ defmodule Day12 do
     input_list = parse_input()
 
     find_paths(input_list, ["start"])
-      |> IO.inspect(limit: :infinity)
-    1
+      |> Enum.filter(fn path -> hd(path) == "end" end)
+      #|> IO.inspect(limit: :infinity)
+      |> length()
   end
 
   @spec part2 :: integer()
