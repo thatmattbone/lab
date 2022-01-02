@@ -17,12 +17,19 @@ defmodule Day12Test do
 
   test "filter_next_paths" do
     assert Day12.filter_next_paths(["ab", "DE", "fg"], ["ab", "DE"]) == ["DE", "fg"]
+    assert Day12.filter_next_paths(["ab", "DE", "fg", "hj"], ["ab", "DE", "fg"]) == ["DE", "hj"]
   end
+
+  test "filter_next_paths_part2" do
+    assert Day12.filter_next_paths_part2(["ab", "DE", "fg"],  ["bc", "ab", "DE"]) == ["ab", "DE", "fg"]
+  end
+
 
   test "has_a_dupe?" do
     assert Day12.has_a_dupe?([]) == false
     assert Day12.has_a_dupe?([1, 2, 3]) == false
     assert Day12.has_a_dupe?([1, 2, 2, 3]) == true
+    assert Day12.has_a_dupe?([1, 2, 3, 1]) == true
   end
 
   test "day 12, part 1" do
