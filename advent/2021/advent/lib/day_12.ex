@@ -5,7 +5,7 @@ defmodule Day12 do
 
   @spec parse_input :: cave_description()
   def parse_input do
-    File.read!("input/input_12_test")
+    File.read!("input/input_12")
       |> String.split("\n", trim: true)
       |> Enum.flat_map(fn line ->
           [start_elem, end_elem] = String.split(line, "-")
@@ -118,9 +118,9 @@ defmodule Day12 do
     [[curr_elem | curr_path]]
   end
 
-  #def find_paths_part2(_paths, [curr_elem, next_elem | curr_path]) when curr_elem == "start" do
-  #  [[next_elem | curr_path]]
-  #end
+  def find_paths_part2(_paths, [curr_elem, next_elem | curr_path]) when curr_elem == "start" do
+    [[next_elem | curr_path]]
+  end
 
   @spec find_paths_part2(cave_description(), path_list()) :: [path_list()]
   def find_paths_part2(paths, [curr_elem | curr_path]) do
@@ -145,14 +145,9 @@ defmodule Day12 do
   def part2() do
     input_list = parse_input()
 
-    find_paths_part2(input_list, ["start"])
-      |> Enum.filter(fn path -> hd(path) == "end" end)
-      |> Enum.map(fn x ->
-          Enum.reverse(x) |> Enum.join(",")
-        end)
-      |> Enum.reverse()
-      |> Enum.join("\n")
-      |> IO.puts()
+    #find_paths_part2(input_list, ["start"])
+    #  |> Enum.filter(fn path -> hd(path) == "end" end)
+    #  |> length()
 
     2
     end
