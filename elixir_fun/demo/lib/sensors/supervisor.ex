@@ -12,6 +12,6 @@ defmodule Demo.Sensors.Supervisor do
     [
       Demo.Sensors.Temperature
     ]
-    |> Supervisor.init( strategy: :one_for_one )
+    |> Supervisor.init(strategy: :one_for_one)
   end
 end

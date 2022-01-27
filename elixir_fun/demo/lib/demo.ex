@@ -7,6 +7,9 @@ defmodule Demo do
     # load the viewport configuration from config
     main_viewport_config = Application.get_env(:demo, :viewport)
 
+    fuck = Application.get_env(:demo, :fuck)
+    IO.puts(fuck)
+
     # start the application with the viewport
     children = [
       {Scenic, [main_viewport_config]},
