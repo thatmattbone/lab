@@ -41,4 +41,8 @@ defmodule  Downloader do
 
     nil
   end
+
+  def fetch_all_years() do
+    for year <- 2000..2020, do: fetch_file_for_year(year)
+  end
 end
