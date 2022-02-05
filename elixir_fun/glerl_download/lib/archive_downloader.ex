@@ -1,23 +1,7 @@
-defmodule  Downloader do
+defmodule ArchiveDownloader do
 
   @min_year 2000
   @max_year 2022
-
-  @spec get_data_dir() :: String.t()
-  def get_data_dir() do
-    "data"
-  end
-
-  @spec create_data_dir() :: String.t()
-  def create_data_dir() do
-    data_dir = get_data_dir()
-
-    if not File.exists?(get_data_dir()) do
-      File.mkdir!(data_dir)
-    end
-
-    data_dir
-  end
 
   @spec filename_for_year(integer()) :: String.t()
   def filename_for_year(year) when year >= @min_year and year < @max_year do
@@ -33,7 +17,7 @@ defmodule  Downloader do
 
   @spec file_path_for_year(integer()) :: String.t()
   def file_path_for_year(year) when year >= @min_year and year < @max_year do
-    create_data_dir() <> "/" <> filename_for_year(year)
+    DataDir.create_data_dir() <> "/" <> filename_for_year(year)
   end
 
   @spec fetch_file_for_year(integer()) :: nil
