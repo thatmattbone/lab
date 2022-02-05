@@ -37,4 +37,13 @@ defmodule ArchiveDownloader do
 
     nil
   end
+
+  @spec read_file_for_year(integer()) :: String.t()
+  def read_file_for_year(year) when year >= @min_year and year < @max_year do
+    if not File.exists?(file_path_for_year(year)) do
+      fetch_file_for_year(year)
+    end
+
+    File.read!(file_path_for_year(year))
+  end
 end
