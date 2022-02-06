@@ -16,9 +16,8 @@ defmodule DataParser do
     String.to_integer(utc_str)  # TODO do more with this
   end
 
-  def line_to_typed_line([id, year, doy, utc, temp_c, speed, gusts, direction]) do
+  def line_to_typed_line([_id, year, doy, utc, temp_c, speed, gusts, direction]) do
     [
-      String.to_integer(id),
       String.to_integer(year),
       String.to_integer(doy),
       parse_utc(utc),
@@ -29,9 +28,22 @@ defmodule DataParser do
     ]
   end
 
+  def typed_list_to_datapoint([year, doy, utc, temp_c, speed, gusts, direction]) do
+    %Datapoint{
+      year: year,
+      doy: doy,
+      utc: utc,
+      temp_c: temp_c,
+      speed: speed,
+      gusts: gusts,
+      direction: direction
+    }
+  end
+
   def parse(input_str) do
     input_str_to_lines(input_str)
       #|> IO.inspect(limit: :infinity)
       |> Enum.map(&line_to_typed_line/1)
+      |> Enum.map(&typed_list_to_datapoint/1)
   end
 end
