@@ -24,11 +24,25 @@ defmodule DataParser do
       String.to_float(temp_c),
       String.to_float(speed),
       String.to_float(gusts),
-      String.to_integer(direction)
+      String.to_integer(direction),
+      nil
     ]
   end
 
-  def typed_list_to_datapoint([year, doy, utc, temp_c, speed, gusts, direction]) do
+  def line_to_typed_line([_id, year, doy, utc, temp_c, speed, gusts, direction, humidity]) do
+    [
+      String.to_integer(year),
+      String.to_integer(doy),
+      parse_utc(utc),
+      String.to_float(temp_c),
+      String.to_float(speed),
+      String.to_float(gusts),
+      String.to_integer(direction),
+      String.to_float(humidity)
+    ]
+  end
+
+  def typed_list_to_datapoint([year, doy, utc, temp_c, speed, gusts, direction, humidity]) do
     %Datapoint{
       year: year,
       doy: doy,
@@ -36,7 +50,8 @@ defmodule DataParser do
       temp_c: temp_c,
       speed: speed,
       gusts: gusts,
-      direction: direction
+      direction: direction,
+      humidty: humidity
     }
   end
 
