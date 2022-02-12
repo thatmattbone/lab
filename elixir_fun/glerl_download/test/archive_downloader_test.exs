@@ -10,7 +10,8 @@ defmodule DownloaderTest do
   end
 
   test "url for year" do
-    assert ArchiveDownloader.url_for_year(2019) == "https://www.glerl.noaa.gov/metdata/chi/archive/chi2019.04t.txt"
+    assert ArchiveDownloader.url_for_year(2019) ==
+             "https://www.glerl.noaa.gov/metdata/chi/archive/chi2019.04t.txt"
   end
 
   test "file path for year" do

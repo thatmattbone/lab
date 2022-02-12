@@ -1,19 +1,19 @@
 defmodule DataParser do
-
   def input_str_to_lines(input_str) do
     [_head1, _head2 | lines] = String.trim(input_str) |> String.split("\n")
 
     lines
-      |> Enum.map(fn line ->
-        String.trim(line)
-          |> String.split(" ")
-          |> Enum.filter(fn item -> String.length(item) > 0 end)
-      end)
-      |> Enum.filter(fn [item1 | _rest] -> item1 == "4" end)
+    |> Enum.map(fn line ->
+      String.trim(line)
+      |> String.split(" ")
+      |> Enum.filter(fn item -> String.length(item) > 0 end)
+    end)
+    |> Enum.filter(fn [item1 | _rest] -> item1 == "4" end)
   end
 
   def parse_utc(utc_str) do
-    String.to_integer(utc_str)  # TODO do more with this
+    # TODO do more with this
+    String.to_integer(utc_str)
   end
 
   def line_to_typed_line([_id, year, doy, utc, temp_c, speed, gusts, direction]) do
@@ -57,8 +57,8 @@ defmodule DataParser do
 
   def parse(input_str) do
     input_str_to_lines(input_str)
-      #|> IO.inspect(limit: :infinity)
-      |> Enum.map(&line_to_typed_line/1)
-      |> Enum.map(&typed_list_to_datapoint/1)
+    # |> IO.inspect(limit: :infinity)
+    |> Enum.map(&line_to_typed_line/1)
+    |> Enum.map(&typed_list_to_datapoint/1)
   end
 end

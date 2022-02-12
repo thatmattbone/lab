@@ -1,5 +1,4 @@
 defmodule ArchiveDownloader do
-
   @min_year 2000
   @max_year 2022
 
