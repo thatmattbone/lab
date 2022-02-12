@@ -42,6 +42,6 @@ defmodule KV.RegistryTest do
 
     Agent.stop(bucket, :shutdown)
 
-    catch_exit KV.Bucket.put(bucket, "milk", 3)
+    catch_exit(KV.Bucket.put(bucket, "milk", 3))
   end
 end

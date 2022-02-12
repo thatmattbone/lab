@@ -48,6 +48,7 @@ defmodule KV.Registry do
     case lookup(names, name) do
       {:ok, pid} ->
         {:reply, pid, {names, refs}}
+
       :error ->
         {:ok, pid} = DynamicSupervisor.start_child(KV.BucketSupervisor, KV.Bucket)
         ref = Process.monitor(pid)
@@ -68,5 +69,4 @@ defmodule KV.Registry do
   def handle_info(_msg, state) do
     {:noreply, state}
   end
-
 end
