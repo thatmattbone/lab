@@ -3,9 +3,6 @@ defmodule Glerl.Application do
 
   @impl true
   def start(_type, _args) do
-    #KV.Supervisor.start_link(name: KV.Supervisor)
-    IO.puts("in the app.start")
-
-    {:ok, self()}
+    Glerl.Supervisor.start_link(foo: :bar)
   end
 end
