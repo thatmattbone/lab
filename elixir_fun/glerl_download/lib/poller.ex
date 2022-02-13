@@ -10,6 +10,7 @@ defmodule GlerlPoller do
 
   def init(init_arg) do
     IO.puts("GlerlPoller.init/1")
+    IO.puts(init_arg)
 
     schedule_work()
 
