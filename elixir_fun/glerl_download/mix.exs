@@ -15,7 +15,7 @@ defmodule GlerlDownload.MixProject do
   def application do
     [
       extra_applications: [:logger, :inets, :ssl],
-      mod: {GlerlPoller, []}
+      mod: {Glerl.Application, []}
     ]
   end
 
