@@ -18,7 +18,7 @@ defmodule GlerlPoller do
   end
 
   def handle_info(:poll, state) do
-    IO.puts("...doing my polling work...")
+    # IO.puts("...doing my polling work...")
 
     schedule_work()
 
