@@ -4,7 +4,7 @@ defmodule GlerlPoller do
   def start_link(opts) do
     IO.puts("GlerlPoller.start_link/1")
     IO.inspect(opts)
-    #server = Keyword.fetch!(opts, :name)
+    # server = Keyword.fetch!(opts, :name)
     GenServer.start_link(__MODULE__, __MODULE__, opts)
   end
 
