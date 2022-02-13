@@ -1,16 +1,16 @@
 defmodule GlerlPoller do
   use GenServer
 
-  def start_link(opts) do
+  def start_link(state) do
     IO.puts("GlerlPoller.start_link/1")
-    IO.inspect(opts)
+    IO.inspect(state)
     # server = Keyword.fetch!(opts, :name)
-    GenServer.start_link(__MODULE__, __MODULE__, opts)
+    GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
 
   def init(init_arg) do
     IO.puts("GlerlPoller.init/1")
-    IO.puts(init_arg)
+    IO.inspect(init_arg)
 
     schedule_work()
 

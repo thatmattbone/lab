@@ -3,6 +3,7 @@ defmodule Glerl.Application do
 
   @impl true
   def start(_type, _args) do
-    Glerl.Supervisor.start_link(foo: :bar)
+    #Glerl.Supervisor.start_link(foo: :bar)
+    Glerl.Supervisor.start_link(%{})
   end
 end
