@@ -109,6 +109,10 @@ defmodule Demo.Scene.Sensor do
     # center the temperature on the viewport
     graph = Graph.modify(graph, :temperature, &text(&1, temperature <> @degrees))
 
+
+    IO.puts("genserver.handle_info")
+    IO.puts(kelvin)
+
     scene =
       scene
       |> assign(graph: graph)

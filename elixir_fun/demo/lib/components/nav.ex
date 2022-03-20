@@ -61,7 +61,8 @@ defmodule Demo.Component.Nav do
            {"Strokes", Demo.Scene.Strokes},
            {"Components", Demo.Scene.Components},
            {"Transforms", Demo.Scene.Transforms},
-           {"Sprites", Demo.Scene.Sprites}
+           {"Sprites", Demo.Scene.Sprites},
+           {"Testing", Demo.Scene.Testing}
           ], current_scene},
         id: :nav,
         translate: {90, 10}
