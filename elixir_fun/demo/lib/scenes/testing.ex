@@ -5,6 +5,13 @@ defmodule Demo.Scene.Testing do
 
   import Scenic.Primitives
 
+  alias Demo.Component.Nav
+  alias Demo.Component.Notes
+
+  @notes """
+  ...these are some notes...
+  """
+
   @impl Scenic.Scene
   def init(scene, _param_, _opts) do
     {width, height} = scene.viewport.size
@@ -15,6 +22,9 @@ defmodule Demo.Scene.Testing do
     graph = Graph.build(font: :roboto, font_size: 24)
       |> text("Hello World", text_align: :center, translate: {300, 300})
       |> circle(100, stroke: {2, :green}, translate: {300, 300})
+
+      |> Nav.add_to_graph(__MODULE__)
+      |> Notes.add_to_graph(@notes)
 
     scene =
       scene
