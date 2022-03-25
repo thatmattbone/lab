@@ -21,7 +21,7 @@ defmodule Demo.Scene.Testing do
 
     graph = Graph.build(font: :roboto, font_size: 24)
       |> text("Hello World", text_align: :center, translate: {300, 300})
-      |> circle(100, stroke: {2, :green}, translate: {300, 300})
+      |> circle(100, stroke: {2, :green}, translate: {100, 100})
 
       |> Nav.add_to_graph(__MODULE__)
       |> Notes.add_to_graph(@notes)
