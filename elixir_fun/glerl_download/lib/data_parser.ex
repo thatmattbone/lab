@@ -1,4 +1,6 @@
 defmodule DataParser do
+
+  @spec input_str_to_lines(String.t()) :: list(String.t())
   def input_str_to_lines(input_str) do
     [_head1, _head2 | lines] = String.trim(input_str) |> String.split("\n")
 
@@ -55,6 +57,7 @@ defmodule DataParser do
     }
   end
 
+  @spec parse(String.t()) :: list(%Datapoint{})
   def parse(input_str) do
     input_str_to_lines(input_str)
     # |> IO.inspect(limit: :infinity)
