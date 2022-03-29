@@ -5,7 +5,6 @@ defmodule Ring do
     :length
   ]
 
-
   def new(size) do
     %Ring{
       data_map: (for i <- 0..(size - 1), into: %{}, do: {i, nil}),
@@ -16,13 +15,11 @@ defmodule Ring do
 
 
   def push(ring = %Ring{}, obj) do
-    IO.inspect(ring.current_position)
-    IO.inspect(ring.length)
-    IO.inspect(ring.data_map)
-
-    IO.inspect(obj)
-    
-    ring
+    %Ring{
+      data_map: Map.put(ring.data_map, ring.current_position, obj),
+      current_position: rem(ring.current_position + 1, ring.length),
+      length: ring.length
+    }
   end
 
 end
