@@ -7,6 +7,6 @@ defmodule Datapoint do
     :speed,
     :gusts,
     :direction,
-    :humidty
+    :humidity
   ]
 end

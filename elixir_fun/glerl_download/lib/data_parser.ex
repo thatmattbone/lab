@@ -53,7 +53,7 @@ defmodule DataParser do
       speed: speed,
       gusts: gusts,
       direction: direction,
-      humidty: humidity
+      humidity: humidity
     }
   end
 
