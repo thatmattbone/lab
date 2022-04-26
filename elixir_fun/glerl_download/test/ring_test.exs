@@ -40,6 +40,28 @@ defmodule RingTest do
     }
   end
 
+  test "ring peek" do
+    ring = Ring.new(5)
+    ring = ring
+      |> Ring.push("one")
+
+    assert Ring.peek(ring) == "one"
+
+    ring = ring
+      |> Ring.push("two")
+      |> Ring.push("three")
+      |> Ring.push("four")
+
+    assert Ring.peek(ring) == "four"
+
+    ring = ring
+      |> Ring.push("five")
+      |> Ring.push("six")
+      |> Ring.push("seven")
+
+    assert Ring.peek(ring) == "seven"
+  end
+
   test "to list" do
     ring = Ring.new(3)
       |> Ring.push("a")

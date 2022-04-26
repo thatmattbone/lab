@@ -22,6 +22,14 @@ defmodule Ring do
     }
   end
 
+  def peek(ring = %Ring{}) when ring.current_position == 0 do
+    ring.data_map[ring.length - 1]
+  end
+
+  def peek(ring = %Ring{}) do
+    ring.data_map[ring.current_position - 1]
+  end
+
   defp fix_index(index, size) when index < size do
     index
   end
