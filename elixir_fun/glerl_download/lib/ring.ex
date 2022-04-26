@@ -22,7 +22,7 @@ defmodule Ring do
     }
   end
 
-  defp fix_index(index, size) when index < size do  # TODO make this private? why didn't that work?
+  defp fix_index(index, size) when index < size do
     index
   end
 
