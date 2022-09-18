@@ -1,7 +1,5 @@
 # GlerlDownload
 
-**TODO: Add description**
-
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -19,3 +17,17 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/glerl_download>.
 
+## Run commands
+
+Start the app and drop into the shell:
+```iex -S mix```
+
+Run our custom mix command to download the glerl archive:
+```mix glerl```
+
+## TODO
+
+  - cleanup the module names and organization
+  - more tests
+  - make sure the supervisor tree setup makes sense and make sure the tree itself makes sense
+  - 
