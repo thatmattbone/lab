@@ -32,7 +32,7 @@ defmodule ArchiveDownloader do
 
   @spec fetch_all_years() :: nil
   def fetch_all_years() do
-    for year <- 2000..2020, do: fetch_file_for_year(year)
+    for year <- @min_year..@max_year, do: fetch_file_for_year(year)
 
     nil
   end
