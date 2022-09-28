@@ -23,9 +23,12 @@ defmodule LiveDownloader do
     "https://www.glerl.noaa.gov/metdata/chi/#{yesterday_year_str}/#{yesterday_str}.04t.txt"
   end
 
+  @spec fetch_todays_file() :: list(%Datapoint{})
   def fetch_todays_file() do
     {:ok, {_status, _headers, response_content}} = :httpc.request(get_todays_file_url())
 
-    IO.puts(response_content)
+    response_content
+      |> List.to_string()
+      |> DataParser.parse()
   end
 end

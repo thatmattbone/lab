@@ -14,9 +14,7 @@ defmodule GlerlPoller do
     IO.puts("GlerlPoller.init/1")
     IO.inspect(init_arg)
 
-    Process.send(self(), :poll, [])
-
-    # schedule_work()
+    send(self(), :poll)
 
     {:ok, init_arg}
   end
@@ -24,7 +22,8 @@ defmodule GlerlPoller do
   def handle_info(:poll, state) do
     IO.puts("...doing my polling work...")
 
-    LiveDownloader.fetch_todays_file()
+    todays_data = LiveDownloader.fetch_todays_file()
+    IO.inspect(todays_data)
 
     schedule_work()
     {:noreply, state}
