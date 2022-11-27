@@ -23,4 +23,33 @@ defmodule MyLists do
   def square_list([first | rest]) do
     [first**2 | square_list(rest)]
   end
+
+  def map([], func) do
+    []
+  end
+
+  def map([first | rest], func) do
+    [func.(first) | map(rest, func)]
+  end
+
+  def sum_pairs([]) do
+    []
+  end
+
+  def sum_pairs([a, b | rest]) do
+    [a + b | sum_pairs(rest)]
+  end
+
+
+  def even_len([a | []]) do
+    false
+  end
+
+  def even_len([a, b | []]) do
+    true
+  end
+
+  def even_len([a, b | rest]) do
+    even_len(rest)
+  end
 end
