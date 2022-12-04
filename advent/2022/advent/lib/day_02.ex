@@ -72,4 +72,34 @@ defmodule Day02 do
       score_game(result, their_move_decoded, my_move_decoded)
     end) |> Enum.sum()
   end
+
+  # X means you need to lose, Y means you need to end the round in a draw, and Z means you need to win.
+  def need_to(x) when x == "X", do: :lose
+  def need_to(x) when x == "Y", do: :draw
+  def need_to(x) when x == "Z", do: :win
+
+  def calc_move(result, their_move) when result == :draw, do: their_move
+  def calc_move(result, their_move) when result == :win and their_move == :rock, do: :paper
+  def calc_move(result, their_move) when result == :win and their_move == :paper, do: :scissors
+  def calc_move(result, their_move) when result == :win and their_move == :scissors, do: :rock
+  def calc_move(result, their_move) when result == :lose and their_move == :rock, do: :scissors
+  def calc_move(result, their_move) when result == :lose and their_move == :paper, do: :rock
+  def calc_move(result, their_move) when result == :lose and their_move == :scissors, do: :paper
+
+
+  def part2_example() do
+    their_move = decode("A")
+    intended_result = need_to("Y")
+    one = score_game(intended_result, their_move, calc_move(intended_result, their_move))
+
+    their_move = decode("B")
+    intended_result = need_to("X")
+    two = score_game(intended_result, their_move, calc_move(intended_result, their_move))
+
+    their_move = decode("C")
+    intended_result = need_to("Z")
+    three = score_game(intended_result, their_move, calc_move(intended_result, their_move))
+
+    one + two + three
+  end
 end
