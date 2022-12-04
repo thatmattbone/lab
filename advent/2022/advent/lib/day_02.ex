@@ -20,13 +20,13 @@ defmodule Day02 do
   def game_result(x, y) when x == :scissors and y == :scissors, do: :draw
 
   def game_result(x, y) when x == :rock and y == :paper, do: :win
-  def game_result(x, y) when x == :rock and y == :scissor, do: :lose
+  def game_result(x, y) when x == :rock and y == :scissors, do: :lose
 
   def game_result(x, y) when x == :paper and y == :rock, do: :lose
-  def game_result(x, y) when x == :paper and y == :scissor, do: :win
+  def game_result(x, y) when x == :paper and y == :scissors, do: :win
 
-  def game_result(x, y) when x == :scissor and y == :rock, do: :win
-  def game_result(x, y) when x == :scissor and y == :paper, do: :lose
+  def game_result(x, y) when x == :scissors and y == :rock, do: :win
+  def game_result(x, y) when x == :scissors and y == :paper, do: :lose
 
 
   # 0 if you lost, 3 if the round was a draw, and 6 if you won
@@ -56,5 +56,20 @@ defmodule Day02 do
     three = score_game(game_result(their_move, my_move), their_move, my_move)
 
     one + two + three
+  end
+
+  def part1() do
+    games = File.read!("input/input_02")
+      |> String.split("\n", trim: true)
+      |> Enum.map(&String.split(&1, " "))
+
+    Enum.map(games, fn [their_move, my_move] ->
+      their_move_decoded = decode(their_move)
+      my_move_decoded = decode(my_move)
+
+      result = game_result(their_move_decoded, my_move_decoded)
+
+      score_game(result, their_move_decoded, my_move_decoded)
+    end) |> Enum.sum()
   end
 end
