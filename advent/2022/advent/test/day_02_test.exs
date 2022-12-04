@@ -10,7 +10,7 @@ defmodule Day02Test do
   end
 
   test "day 02, part 2, example" do
-    assert Day02.part1_example() == 12
+    assert Day02.part2_example() == 12
   end
 
   test "day 02, part 2" do
