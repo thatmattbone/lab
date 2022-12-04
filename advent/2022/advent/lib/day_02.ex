@@ -102,4 +102,20 @@ defmodule Day02 do
 
     one + two + three
   end
+
+  def part2() do
+    games = File.read!("input/input_02")
+      |> String.split("\n", trim: true)
+      |> Enum.map(&String.split(&1, " "))
+
+    Enum.map(games, fn [their_move, expected_result] ->
+      their_move_decoded = decode(their_move)
+      intended_result = need_to(expected_result)
+
+      my_move = calc_move(intended_result, their_move_decoded)
+
+      score_game(intended_result, their_move_decoded, my_move)
+    end) |> Enum.sum()
+  end
+
 end
