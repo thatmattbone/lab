@@ -23,6 +23,10 @@ defmodule Day03 do
       |> Enum.reduce(%{}, fn i, count_map -> add_to_count_map(count_map, i) end)
   end
 
+  def find_intersection(map1, map2) do
+    for {key, value} <- map1, Map.has_key?(map2, key), into: [], do: key
+  end
+
   def find_dupes_from_map(count_map) do
     dupes = Enum.filter(count_map, fn {_key, value} -> length(value) > 1 end)
     for {key, value} <- dupes, do: key
@@ -31,11 +35,15 @@ defmodule Day03 do
   def part1() do
     priority_map = build_priority_map()
 
-    File.read!("input/input_03")
+    split_lines = File.read!("input/input_03")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line ->
         half_len = String.length(line) / 2 |> trunc()
         [String.slice(line, 0, half_len), String.slice(line, half_len, half_len * 2)]
       end)
+
+      dupes = for [first, second] <- split_lines, into: [], do: find_intersection(str_to_count_map(first), str_to_count_map(second))
+
+      dupes |> List.flatten() |> Enum.map(fn x -> priority(priority_map, x) end) |> Enum.sum()
   end
 end
