@@ -30,6 +30,13 @@ defmodule Day05 do
       |> Map.put(to, new_stack)
   end
 
+  def move(stack, from, to, count) when count == 0 do
+    stack
+  end
+
+  def move(stack, from, to, count) do
+    move(move(stack, from, to), from, to, count - 1)
+  end
 
   def read_instructions() do
     File.read!("input/input_05")

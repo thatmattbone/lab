@@ -23,6 +23,21 @@ defmodule Day05Test do
     }
   end
 
+  test "multiple moves" do
+    start_map = %{
+      1 => ["A", "B"],
+      2 => ["C"],
+      3 => ["D", "E"],
+    }
+
+    next_map = Day05.move(start_map, 1, 3, 2)
+    assert next_map == %{
+      1 => [],
+      2 => ["C"],
+      3 => ["B", "A", "D", "E"],
+    }
+  end
+
   test "day 05, part 1" do
 
   end
