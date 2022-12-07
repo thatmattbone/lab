@@ -45,7 +45,18 @@ defmodule Day05 do
   end
 
   def part1() do
+    instructions = read_instructions()
+      |> Enum.map(fn line ->
+        [_, count, _, from, _, to] = String.split(line, " ", trim: true)
+        {String.to_integer(count), String.to_integer(from), String.to_integer(to)}
+      end)
 
+    final_stack = Enum.reduce(instructions, starting_stack(), fn {count, from, to}, stack -> move(stack, from, to, count) end)
+
+    Enum.map(1..9, fn x ->
+      [head | rest] = Map.get(final_stack, x)
+      head
+    end) |> Enum.join("")
   end
 
 end

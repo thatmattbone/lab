@@ -39,7 +39,7 @@ defmodule Day05Test do
   end
 
   test "day 05, part 1" do
-
+    assert Day05.part1() == "FWNSHLDNZ"
   end
 
 end
