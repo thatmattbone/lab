@@ -8,6 +8,12 @@ defmodule Day06Test do
     Day06.find_start(String.split("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", "", trim: true), 4) == 11
   end
 
+  test "find_start_14()" do
+    Day06.find_start_14(String.split("mjqjpqmgbljsphdztnvjfqwrcgsmlb", "", trim: true), 14) == 19
+    Day06.find_start_14(String.split("bvwbjplbgvbhsrlpgdmjqwftvncz", "", trim: true), 14) == 23
+    Day06.find_start_14(String.split("nppdvjthqldpwncqszvftbrmjlhg", "", trim: true), 14) == 23
+    Day06.find_start_14(String.split("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", "", trim: true), 14) == 26
+  end
 
   test "day 06, part1" do
     Day06.part1() == 1566

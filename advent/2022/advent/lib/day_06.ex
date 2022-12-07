@@ -10,6 +10,17 @@ defmodule Day06 do
     end
   end
 
+  def find_start_14(input, count) do
+    uniq = MapSet.new(Enum.take(input, 14)) |> MapSet.size()
+
+    if uniq == 14 do
+      count
+    else
+      [first | rest] = input
+      find_start_14(rest, count + 1)
+    end
+  end
+
   def part1() do
     File.read!("input/input_06")
       |> String.split("", trim: true)
@@ -17,6 +28,8 @@ defmodule Day06 do
   end
 
   def part2() do
-
+    File.read!("input/input_06")
+      |> String.split("", trim: true)
+      |> find_start_14(14)
   end
 end
