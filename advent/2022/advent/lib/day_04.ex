@@ -24,7 +24,10 @@ defmodule Day04 do
   end
 
   def calc_overlap({{e1_start, e1_end}, {e2_start, e2_end}}) do
-    1
+    e1_set = MapSet.new(Range.new(e1_start, e1_end))
+    e2_set = MapSet.new(Range.new(e2_start, e2_end))
+
+    MapSet.intersection(e1_set, e2_set) |> MapSet.size()
   end
 
   def part1() do
@@ -44,7 +47,8 @@ defmodule Day04 do
 
     input
       |> Enum.map(&calc_overlap/1)
-      |> Enum.sum()
+      |> Enum.filter(fn x -> x > 0 end)
+      |> Enum.count()
   end
 
 end
