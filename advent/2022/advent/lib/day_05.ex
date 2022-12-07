@@ -21,9 +21,15 @@ defmodule Day05 do
     }
   end
 
-  def move(stack, count, from, to) do
+  def move(stack, from, to) do
+    [top | rest] = Map.get(stack, from)
+    new_stack = [top | Map.get(stack, to)]
 
+    stack
+      |> Map.put(from, rest)
+      |> Map.put(to, new_stack)
   end
+
 
   def read_instructions() do
     File.read!("input/input_05")
