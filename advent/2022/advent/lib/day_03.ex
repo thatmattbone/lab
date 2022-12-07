@@ -4,8 +4,14 @@ defmodule Day03 do
   # Lowercase item types a through z have priorities 1 through 26.
   # Uppercase item types A through Z have priorities 27 through 52.
 
-  def priority(input_str) do
+  def build_priority_map() do
+    lower = for i <- 1..26, do: {to_string([i + 96]), i}
+    upper = for i <- 27..52, do: {to_string([i + 38]), i}
+    Map.new(lower ++ upper)
+  end
 
+  def priority(priority_map, input_str) do
+    Map.get(priority_map, input_str)
   end
 
   def add_to_count_map(count_map, str) do
@@ -17,7 +23,14 @@ defmodule Day03 do
       |> Enum.reduce(%{}, fn i, count_map -> add_to_count_map(count_map, i) end)
   end
 
+  def find_dupes_from_map(count_map) do
+    dupes = Enum.filter(count_map, fn {_key, value} -> length(value) > 1 end)
+    for {key, value} <- dupes, do: key
+  end
+
   def part1() do
+    priority_map = build_priority_map()
+
     File.read!("input/input_03")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line ->
