@@ -32,11 +32,20 @@ defmodule Day07 do
   end
 
   def build_dir_struct([{:cd, dir_name} | instructions], cwd, root) when dir_name == ".." do
+    #IO.inspect("UP A DIR")
     [_ | new_cwd] = cwd
     build_dir_struct(instructions, new_cwd, root)
   end
 
+  def build_dir_struct([{:cd, dir_name} | instructions], _cwd, root) when dir_name == "/" do
+    #IO.inspect("CHANGE TO ROOT")
+
+    new_cwd = ["/"]
+    build_dir_struct(instructions, new_cwd, root)
+  end
+
   def build_dir_struct([{:cd, dir_name} | instructions], cwd, root) do
+    #IO.inspect("CHANGE TO #{dir_name}")
     new_cwd = [dir_name | cwd]
     build_dir_struct(instructions, new_cwd, root)
   end
@@ -73,15 +82,27 @@ defmodule Day07 do
   end
 
   def dir_size(dir_struct) do
-    IO.inspect(Map.get(dir_struct, :name))
+    my_filesize = dir_struct[:files]
+      |> Map.values()
+      |> Enum.sum()
 
-    my_filesize = dir_struct |> Map.get(:files) |> Map.values() |> Enum.sum()
+    list_of_subdir_sizes = dir_struct[:sub_dirs]
+      |> Map.values()
+      |> Enum.map(&dir_size/1)
 
-    sub_dirs = dir_struct |> Map.get(:sub_dirs) |> Map.values() |> Enum.map(&dir_size/1) |> List.flatten()
+    my_subdir_size = list_of_subdir_sizes
+      |> Enum.map(fn {_, size, _} -> size end)
+      |> Enum.sum()
 
-    sub_dir_size = Enum.map(sub_dirs, fn {_dir, size} -> size end) |> Enum.sum()
+    {dir_struct[:name], my_filesize + my_subdir_size, list_of_subdir_sizes}
+  end
 
-    List.flatten([{Map.get(dir_struct, :name), my_filesize + sub_dir_size} | sub_dirs])
+  def flatten_dir_size({dir_name, size, []}) do
+    [{dir_name, size}]
+  end
+
+  def flatten_dir_size({dir_name, size, subdirs}) do
+    [{dir_name, size}] ++ (for subdir <- subdirs, do: flatten_dir_size(subdir), into: [])
   end
 
   def part1() do
@@ -90,16 +111,61 @@ defmodule Day07 do
       |> Enum.map(fn line ->
          line |> String.split(" ", trim: true) |> line_to_instruction()
         end)
+      #|> IO.inspect(limit: :infinity)
       |> build_dir_struct()
 
     #IO.inspect(dir_struct)
 
+    # 1571315 is too low
+
     dir_size(dir_struct)
+      |> flatten_dir_size()
+      |> List.flatten()
       |> Enum.filter(fn {_name, size} -> size <= 100000 end)
       |> Enum.map(fn {_name, size} -> size end)
       |> Enum.sum()
   end
 
+
+  def fuck() do
+    shit = "$ cd /
+    $ ls
+    dir a
+    14848514 b.txt
+    8504156 c.dat
+    dir d
+    $ cd a
+    $ ls
+    dir e
+    29116 f
+    2557 g
+    62596 h.lst
+    $ cd e
+    $ ls
+    584 i
+    $ cd ..
+    $ cd ..
+    $ cd d
+    $ ls
+    4060174 j
+    8033020 d.log
+    5626152 d.ext
+    7214296 k"
+
+    dir_struct = shit
+      |> String.split("\n", trim: true)
+      |> Enum.map(fn line ->
+         line |> String.split(" ", trim: true) |> line_to_instruction()
+        end)
+      |> build_dir_struct()
+
+
+    dir_size(dir_struct)
+      |> IO.inspect()
+      |> Enum.filter(fn {_name, size} -> size <= 100000 end)
+      |> Enum.map(fn {_name, size} -> size end)
+      |> Enum.sum()
+  end
 
   def part2() do
 
