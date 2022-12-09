@@ -72,15 +72,32 @@ defmodule Day07 do
     {:file, String.to_integer(filesize), filename}
   end
 
+  def dir_size(dir_struct) do
+    IO.inspect(Map.get(dir_struct, :name))
+
+    my_filesize = dir_struct |> Map.get(:files) |> Map.values() |> Enum.sum()
+
+    sub_dirs = dir_struct |> Map.get(:sub_dirs) |> Map.values() |> Enum.map(&dir_size/1) |> List.flatten()
+
+    sub_dir_size = Enum.map(sub_dirs, fn {_dir, size} -> size end) |> Enum.sum()
+
+    List.flatten([{Map.get(dir_struct, :name), my_filesize + sub_dir_size} | sub_dirs])
+  end
+
   def part1() do
-    instructions = File.read!("input/input_07")
+    dir_struct = File.read!("input/input_07")
       |> String.split("\n", trim: true)
       |> Enum.map(fn line ->
          line |> String.split(" ", trim: true) |> line_to_instruction()
         end)
-      |> IO.inspect()
+      |> build_dir_struct()
 
-    build_dir_struct(instructions)
+    #IO.inspect(dir_struct)
+
+    dir_size(dir_struct)
+      |> Enum.filter(fn {_name, size} -> size <= 100000 end)
+      |> Enum.map(fn {_name, size} -> size end)
+      |> Enum.sum()
   end
 
 
