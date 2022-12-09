@@ -111,12 +111,7 @@ defmodule Day07 do
       |> Enum.map(fn line ->
          line |> String.split(" ", trim: true) |> line_to_instruction()
         end)
-      #|> IO.inspect(limit: :infinity)
       |> build_dir_struct()
-
-    #IO.inspect(dir_struct)
-
-    # 1571315 is too low
 
     dir_size(dir_struct)
       |> flatten_dir_size()
@@ -127,8 +122,8 @@ defmodule Day07 do
   end
 
 
-  def fuck() do
-    shit = "$ cd /
+  def example1() do
+    input = "$ cd /
     $ ls
     dir a
     14848514 b.txt
@@ -152,7 +147,7 @@ defmodule Day07 do
     5626152 d.ext
     7214296 k"
 
-    dir_struct = shit
+    dir_struct = input
       |> String.split("\n", trim: true)
       |> Enum.map(fn line ->
          line |> String.split(" ", trim: true) |> line_to_instruction()
@@ -167,7 +162,36 @@ defmodule Day07 do
       |> Enum.sum()
   end
 
-  def part2() do
+  def root_size([{dir_name, size} | _rest]) when dir_name == "/" do
+    size
+  end
 
+  def root_size([_first | rest]) do
+    root_size(rest)
+  end
+
+
+  def part2() do
+    disk_space = 70000000
+    required_empty = 30000000
+
+    dir_struct = File.read!("input/input_07")
+      |> String.split("\n", trim: true)
+      |> Enum.map(fn line ->
+         line |> String.split(" ", trim: true) |> line_to_instruction()
+        end)
+      |> build_dir_struct()
+
+    dir_sizes = dir_size(dir_struct)
+      |> flatten_dir_size()
+      |> List.flatten()
+
+    space_available = disk_space - root_size(dir_sizes)
+
+    [{_, answer} | _rest] = dir_sizes
+      |> Enum.filter(fn {_dir_name, size} -> (size + space_available) > required_empty end)
+      |> Enum.sort_by(fn {_dir_name, size} -> size end)
+
+    answer
   end
 end
