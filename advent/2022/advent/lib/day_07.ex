@@ -1,50 +1,59 @@
 defmodule Day07 do
 
-  def build_dir_struct([], cwd) do
-    cwd
-  end
-
-  def build_dir_struct([{:ls} | instructions], cwd) do
-    #IO.inspect("ls")
-    #IO.inspect(parent)
-    build_dir_struct(instructions, cwd)
-  end
-
-  def build_dir_struct([{:cd, dir_name} | instructions], cwd) when dir_name == ".." do
-    build_dir_struct(instructions, Map.get(cwd, :parent))
-  end
-
-  def build_dir_struct([{:cd, dir_name} | instructions], cwd) do
-    #new_dest = cwd |> Map.get(:sub_dirs) |> Map.get(dir_name)
-    #new_dest = Map.put(new_dest, :parent, cwd)
-    #build_dir_struct(instructions, new_dest)
-    cwd
-  end
-
-  def build_dir_struct([{:dir, dir_name} | instructions], cwd) do
-    new_dir = %{
+  def new_dir(dir_name) do
+    %{
       :name => dir_name,
       :sub_dirs => %{},
       :files => %{},
-      :parent => nil,
     }
-    cwd = put_in(cwd, [:sub_dirs, dir_name], new_dir)
-    build_dir_struct(instructions, cwd)
   end
 
-  def build_dir_struct([{:file, size, filename} | instructions], cwd) do
-    cwd = put_in(cwd, [:files, filename], size)
-    build_dir_struct(instructions, cwd)
+  def new_dir(dir_name, cwd, root) do
+    [_ | put_spec] = cwd |> Enum.reverse() |> Enum.intersperse(:sub_dirs)
+
+    put_spec = put_spec ++ [:sub_dirs, dir_name]
+
+    put_in(root, put_spec, new_dir(dir_name))
   end
 
-  def build_dir_struct([{:cd, dir} | instructions]) when dir == "/" do
-    root = %{
-      :name => dir,
-      :sub_dirs => %{},
-      :files => %{},
-      :parent => nil,
-    }
-    build_dir_struct(instructions, root)
+  def new_file(filesize, filename, cwd, root) do
+    [_ | put_spec] = cwd |> Enum.reverse() |> Enum.intersperse(:sub_dirs)
+    put_spec = put_spec ++ [:files, filename]
+
+    put_in(root, put_spec, filesize)
+  end
+
+  def build_dir_struct([], _cwd, root) do
+    root
+  end
+
+  def build_dir_struct([{:ls} | instructions], cwd, root) do
+    build_dir_struct(instructions, cwd, root)
+  end
+
+  def build_dir_struct([{:cd, dir_name} | instructions], cwd, root) when dir_name == ".." do
+    [_ | new_cwd] = cwd
+    build_dir_struct(instructions, new_cwd, root)
+  end
+
+  def build_dir_struct([{:cd, dir_name} | instructions], cwd, root) do
+    new_cwd = [dir_name | cwd]
+    build_dir_struct(instructions, new_cwd, root)
+  end
+
+  def build_dir_struct([{:dir, dir_name} | instructions], cwd, root) do
+    new_root = new_dir(dir_name, cwd, root)
+
+    build_dir_struct(instructions, cwd, new_root)
+  end
+
+  def build_dir_struct([{:file, size, filename} | instructions], cwd, root) do
+    new_root = new_file(size, filename, cwd, root)
+    build_dir_struct(instructions, cwd, new_root)
+  end
+
+  def build_dir_struct([{:cd, dir_name} | instructions]) when dir_name == "/" do
+    build_dir_struct(instructions, ["/"], new_dir(dir_name))
   end
 
   def line_to_instruction([prompt, cd, dir_name]) when prompt == "$" and cd == "cd" do
@@ -60,7 +69,7 @@ defmodule Day07 do
   end
 
   def line_to_instruction([filesize, filename]) do
-    {:file, filesize, filename}
+    {:file, String.to_integer(filesize), filename}
   end
 
   def part1() do
