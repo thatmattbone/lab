@@ -43,8 +43,14 @@ defmodule Day10 do
       |> Enum.map(fn line -> line |> String.split(" ") |> parse_line() end)
       |> run_cpu()
 
+    #cycle_record
+    #  |> Map.to_list()
+    #  |> Enum.sort()
+    #  |> IO.inspect(limit: :infinity)
+
+
       #20th, 60th, 100th, 140th, 180th, and 220th cycles
-      20 * cycle_record[20] + 60 * cycle_record[60] + 100 * cycle_record[100] + 140 * cycle_record[140] + 180 * cycle_record[180] + 200 * cycle_record[200]
+      20 * cycle_record[20] + 60 * cycle_record[60] + 100 * cycle_record[100] + 140 * cycle_record[140] + 180 * cycle_record[180] + 220 * cycle_record[220]
   end
 
   def part2() do
