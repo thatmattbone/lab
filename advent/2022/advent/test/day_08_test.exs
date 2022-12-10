@@ -6,11 +6,11 @@ defmodule Day08Test do
   end
 
   test "day 08, part 2" do
-    assert Day08.part2() == nil
+    assert Day08.part2() == 496650
   end
 
-  test "view_to_score" do
-    assert Day08.view_to_score([3])
-  end
+#  test "view_to_score" do
+#    assert Day08.view_to_score([3])
+#  end
 
 end

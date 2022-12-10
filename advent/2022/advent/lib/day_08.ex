@@ -75,7 +75,7 @@ defmodule Day08 do
   end
 
   def view_to_score([first | _rest], item, count) when item == first do
-    count
+    count + 1
   end
 
   def view_to_score([first | rest], item, count) when item > first do
@@ -83,17 +83,32 @@ defmodule Day08 do
   end
 
   def view_to_score([first | _rest], item, count) when item < first do
-    count
+    count + 1
   end
 
   def scenic_score(grid, i, j) do
     # looking left and up need the lists reversed
     [value] = Nx.to_flat_list(grid[i][j])
 
-    left_score = Nx.to_flat_list(view_left(grid, i, j)) |> Enum.reverse() |> IO.inspect(label: "left") |> view_to_score(value, 1)
-    up_score = Nx.to_flat_list(view_up(grid, i, j)) |> Enum.reverse() |> IO.inspect(label: "up")|> view_to_score(value, 1)
-    right_score = Nx.to_flat_list(view_right(grid, i, j)) |> IO.inspect(label: "right") |> view_to_score(value, 1)
-    down_score = Nx.to_flat_list(view_down(grid, i, j)) |> IO.inspect(label: "down") |> view_to_score(value, 1)
+    # IO.inspect(value, label: "value")
+
+    left_score = Nx.to_flat_list(view_left(grid, i, j))
+      |> Enum.reverse()
+      #|> IO.inspect(label: "left")
+      |> view_to_score(value, 0)
+
+    up_score = Nx.to_flat_list(view_up(grid, i, j))
+      |> Enum.reverse()
+      #|> IO.inspect(label: "up")
+      |> view_to_score(value, 0)
+
+    right_score = Nx.to_flat_list(view_right(grid, i, j))
+     #|> IO.inspect(label: "right")
+     |> view_to_score(value, 0)
+
+    down_score = Nx.to_flat_list(view_down(grid, i, j))
+      #|> IO.inspect(label: "down")
+      |> view_to_score(value, 0)
 
     left_score * up_score * right_score * down_score
   end
@@ -116,7 +131,7 @@ defmodule Day08 do
 
     scenic_scores
       |> List.flatten()
-      |> IO.inspect()
+      # |> IO.inspect()
       |> Enum.max()
   end
 
