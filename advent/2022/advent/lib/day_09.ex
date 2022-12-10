@@ -141,6 +141,26 @@ defmodule Day09 do
     {tx + 1, ty + 1}
   end
 
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 2 and ty == hy + 2 do
+    # two below, two left
+    {tx - 1, ty - 1}
+  end
+
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 2 and ty == hy + 2 do
+    # two below, two right
+    {tx + 1, ty - 1}
+  end
+
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 2 and ty == hy - 2 do
+    # two above, two right
+    {tx + 1, ty + 1}
+  end
+
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 2 and ty == hy - 2 do
+    # two above, two left
+    {tx - 1, ty + 1}
+  end
+
   def tail_list([], _tail_pos) do
     []
   end
@@ -170,6 +190,25 @@ defmodule Day09 do
 
 
   def part2() do
+    moves = File.read!("input/input_09")
+      |> String.split("\n", trim: true)
+      |> Enum.map(fn line ->
+        [d, magnitude] = String.split(line, " ")
+        {parse_direction(d), String.to_integer(magnitude)}
+      end)
 
+    head_move_list = move_list(moves) # |> IO.inspect(limit: :infinity)
+
+    one_move_list = tail_list(head_move_list, {100, 100})
+    two_move_list = tail_list(one_move_list, {100, 100})
+    three_move_list = tail_list(two_move_list, {100, 100})
+    four_move_list = tail_list(three_move_list, {100, 100})
+    five_move_list = tail_list(four_move_list, {100, 100})
+    six_move_list = tail_list(five_move_list, {100, 100})
+    seven_move_list = tail_list(six_move_list, {100, 100})
+    eight_move_list = tail_list(seven_move_list, {100, 100})
+    nine_move_list = tail_list(eight_move_list, {100, 100})
+
+    MapSet.new(nine_move_list) |> MapSet.size()
   end
 end
