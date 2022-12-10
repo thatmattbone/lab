@@ -24,12 +24,12 @@ defmodule Day03 do
   end
 
   def find_intersection(map1, map2) do
-    for {key, value} <- map1, Map.has_key?(map2, key), into: [], do: key
+    for {key, _value} <- map1, Map.has_key?(map2, key), into: [], do: key
   end
 
   def find_dupes_from_map(count_map) do
     dupes = Enum.filter(count_map, fn {_key, value} -> length(value) > 1 end)
-    for {key, value} <- dupes, do: key
+    for {key, _value} <- dupes, do: key
   end
 
   def part1() do
@@ -49,7 +49,7 @@ defmodule Day03 do
   end
 
   def find_intersection(map1, map2, map3) do
-    for {key, value} <- map1, Map.has_key?(map2, key) and Map.has_key?(map3, key), into: [], do: key
+    for {key, _value} <- map1, Map.has_key?(map2, key) and Map.has_key?(map3, key), into: [], do: key
   end
 
   def part2_iter([], sum) do
@@ -70,8 +70,6 @@ defmodule Day03 do
   end
 
   def part2() do
-    priority_map = build_priority_map()
-
     split_lines = File.read!("input/input_03")
       |> String.split("\n", trim: true)
 

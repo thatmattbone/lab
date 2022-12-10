@@ -30,7 +30,7 @@ defmodule Day05 do
       |> Map.put(to, new_stack)
   end
 
-  def move(stack, from, to, count) when count == 0 do
+  def move(stack, _from, _to, count) when count == 0 do
     stack
   end
 
@@ -59,7 +59,7 @@ defmodule Day05 do
   end
 
   def parse_instructions() do
-    instructions = read_instructions()
+    read_instructions()
       |> Enum.map(fn line ->
         [_, count, _, from, _, to] = String.split(line, " ", trim: true)
         {String.to_integer(count), String.to_integer(from), String.to_integer(to)}
@@ -68,7 +68,7 @@ defmodule Day05 do
 
   def top_of_stack(final_stack) do
     Enum.map(1..9, fn x ->
-      [head | rest] = Map.get(final_stack, x)
+      [head | _rest] = Map.get(final_stack, x)
       head
     end) |> Enum.join("")
   end

@@ -16,7 +16,7 @@ defmodule Day06 do
     if uniq == 14 do
       count
     else
-      [first | rest] = input
+      [_first | rest] = input
       find_start_14(rest, count + 1)
     end
   end

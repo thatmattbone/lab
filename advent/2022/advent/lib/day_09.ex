@@ -16,6 +16,6 @@ defmodule Day09 do
 
 
   def part2() do
-
+    
   end
 end

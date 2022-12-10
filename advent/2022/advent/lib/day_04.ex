@@ -19,7 +19,7 @@ defmodule Day04 do
     true
   end
 
-  def is_total_overlap({{e1_start, e1_end}, {e2_start, e2_end}}) do
+  def is_total_overlap({{_e1_start, _e1_end}, {_e2_start, _e2_end}}) do
     false
   end
 
