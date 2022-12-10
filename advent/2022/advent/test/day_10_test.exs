@@ -6,7 +6,7 @@ defmodule Day10Test do
   end
 
   test "day 10, part 2" do
-    assert Day10.part2() == nil
+    assert Day10.part2() == "ZRARLFZ"
   end
 
 end
