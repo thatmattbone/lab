@@ -9,4 +9,8 @@ defmodule Day08Test do
     assert Day08.part2() == nil
   end
 
+  test "view_to_score" do
+    assert Day08.view_to_score([3])
+  end
+
 end
