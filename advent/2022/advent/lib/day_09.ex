@@ -146,8 +146,8 @@ defmodule Day09 do
   end
 
   def tail_list([head_pos={_hx, _hy} | rest], tail_pos={_tx, _ty}) do
-    IO.inspect(head_pos, label: "head")
-    IO.inspect(tail_pos, label: "tail")
+    #IO.inspect(head_pos, label: "head")
+    #IO.inspect(tail_pos, label: "tail")
 
     n = next_tail_pos(tail_pos, head_pos)
     [n | tail_list(rest, n)]
@@ -161,9 +161,11 @@ defmodule Day09 do
         {parse_direction(d), String.to_integer(magnitude)}
       end)
 
-    head_move_list = move_list(moves) |> IO.inspect(limit: :infinity)
+    head_move_list = move_list(moves) # |> IO.inspect(limit: :infinity)
 
-    tail_list(head_move_list, {100, 100})
+    tail_move_list = tail_list(head_move_list, {100, 100})
+
+    MapSet.new(tail_move_list) |> MapSet.size()
   end
 
 
