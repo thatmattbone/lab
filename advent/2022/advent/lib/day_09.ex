@@ -33,7 +33,7 @@ defmodule Day09 do
   end
 
   def move_list(moves) do
-    [{0, 0}] ++ move_list(moves, {0, 0})
+    [{100, 100}] ++ move_list(moves, {100, 100})
   end
 
   def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx and ty == hy do
@@ -81,46 +81,77 @@ defmodule Day09 do
     {tx, ty}
   end
 
-  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 2 and ty == hy do
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 2 and ty == hy do
     # two to right
     {tx + 1, ty}
   end
 
-  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 2 and ty == hy do
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 2 and ty == hy do
     # two to left
     {tx - 1, ty}
   end
 
-  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx and ty == hy + 2 do
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx and ty == hy - 2 do
     # two up
     {tx, ty + 1}
   end
 
-  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx and ty == hy - 2 do
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx and ty == hy + 2 do
     # two down
     {tx, ty - 1}
   end
 
-  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 1 and ty == hy + 2 do
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 1 and ty == hy - 2 do
     # right one, up two
     {tx + 1, ty + 1}
   end
 
-  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 1 and ty == hy + 2 do
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 1 and ty == hy - 2 do
     # left one, up two
     {tx - 1, ty + 1}
   end
 
-  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 1 and ty == hy - 2 do
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 1 and ty == hy + 2 do
     # right one, down two
     {tx + 1, ty - 1}
   end
 
-  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 1 and ty == hy - 2 do
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 1 and ty == hy + 2 do
     # left one, down two
     {tx - 1, ty - 1}
   end
 
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 2 and ty == hy + 1 do
+    # left two, down one
+    {tx - 1, ty - 1}
+  end
+
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 2 and ty == hy + 1 do
+    # right two, down one
+    {tx + 1, ty - 1}
+  end
+
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx + 2 and ty == hy - 1 do
+    # left two, up one
+    {tx - 1, ty + 1}
+  end
+
+  def next_tail_pos(_cur_pos={tx, ty}, _head_pos={hx, hy}) when tx == hx - 2 and ty == hy - 1 do
+    # right two, up one
+    {tx + 1, ty + 1}
+  end
+
+  def tail_list([], _tail_pos) do
+    []
+  end
+
+  def tail_list([head_pos={_hx, _hy} | rest], tail_pos={_tx, _ty}) do
+    IO.inspect(head_pos, label: "head")
+    IO.inspect(tail_pos, label: "tail")
+
+    n = next_tail_pos(tail_pos, head_pos)
+    [n | tail_list(rest, n)]
+  end
 
   def part1() do
     moves = File.read!("input/input_09")
@@ -130,8 +161,9 @@ defmodule Day09 do
         {parse_direction(d), String.to_integer(magnitude)}
       end)
 
-    moves |>
-      move_list()
+    head_move_list = move_list(moves) |> IO.inspect(limit: :infinity)
+
+    tail_list(head_move_list, {100, 100})
   end
 
 
