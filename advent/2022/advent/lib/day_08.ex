@@ -1,19 +1,27 @@
 defmodule Day08 do
 
+  def visible(tensor, val) do
+    Nx.reduce_max(tensor) < val
+  end
+
   def visible_left(grid, i, j) do
-    true
+    left_index = j - 1
+    visible(grid[i: i][0..left_index], grid[i][j])
   end
 
   def visible_right(grid, i, j) do
-    true
+    right_index = j + 1
+    visible(grid[i: i][right_index..98], grid[i][j])
   end
 
   def visible_down(grid, i, j) do
-    true
+    down_index = i + 1
+    visible(grid[j: j][down_index..98], grid[i][j])
   end
 
   def visible_up(grid, i, j) do
-    true
+    up_index = i - 1
+    visible(grid[j: j][0..up_index], grid[i][j])
   end
 
   def part1() do
@@ -24,14 +32,12 @@ defmodule Day08 do
           |> Enum.map(&String.to_integer/1)
         end)
 
-    grid = Nx.tensor(lines, type: {:u, 8})
-
+    grid = Nx.tensor(lines, names: [:i, :j], type: {:u, 8})
 
     outside_tree_count = 99 * 4 - 4
 
     visibles = for i <- 1..97 do
       for j <- 1..97 do
-        #IO.inspect(grid[i][j])
         if visible_left(grid, i, j) or visible_right(grid, i, j) or visible_down(grid, i, j) or visible_up(grid, i, j) do
           1
         else
@@ -40,11 +46,9 @@ defmodule Day08 do
       end
     end
 
-    visible_trees = visibles |> List.flatten() |> Enum.sum()
+    visible_tree_count = visibles |> List.flatten() |> Enum.sum()
 
-    IO.inspect(visible_trees + outside_tree_count)
-
-    grid
+    visible_tree_count + outside_tree_count
   end
 
   def part2() do
