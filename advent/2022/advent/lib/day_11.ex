@@ -13,13 +13,6 @@ defmodule Day11 do
             1
           end
         end,
-        :unworry => fn item ->
-          if rem(item, 7) == 0 do
-            floor(item / 7)
-          else
-            item
-          end
-        end
       },
       1 => %{
         :items => [89, 51, 80, 66],
@@ -32,13 +25,6 @@ defmodule Day11 do
             7
           end
         end,
-        :unworry => fn item ->
-          if rem(item, 19) == 0 do
-            floor(item / 19)
-          else
-            item
-          end
-        end
       },
       2 => %{
         :items => [90, 92, 63, 91, 96, 63, 64],
@@ -51,13 +37,6 @@ defmodule Day11 do
             3
           end
         end,
-        :unworry => fn item ->
-          if rem(item, 13) == 0 do
-            floor(item / 13)
-          else
-            item
-          end
-        end
       },
       3 => %{
         :items => [65, 77],
@@ -70,13 +49,6 @@ defmodule Day11 do
             6
           end
         end,
-        :unworry => fn item ->
-          if rem(item, 3) == 0 do
-            floor(item / 3)
-          else
-            item
-          end
-        end
       },
       4 => %{
         :items => [76, 68, 94],
@@ -89,13 +61,6 @@ defmodule Day11 do
             6
           end
         end,
-        :unworry => fn item ->
-          if rem(item, 2) == 0 do
-            floor(item / 2)
-          else
-            item
-          end
-        end
       },
       5 => %{
         :items => [86, 65, 66, 97, 73, 83],
@@ -108,13 +73,6 @@ defmodule Day11 do
             3
           end
         end,
-        :unworry => fn item ->
-          if rem(item, 11) == 0 do
-            floor(item / 11)
-          else
-            item
-          end
-        end
       },
       6 => %{
         :items => [78],
@@ -127,13 +85,6 @@ defmodule Day11 do
             1
           end
         end,
-        :unworry => fn item ->
-          if rem(item, 17) == 0 do
-            floor(item / 17)
-          else
-            item
-          end
-        end
       },
       7 => %{
         :items => [89, 57, 59, 61, 87, 55, 55, 88],
@@ -146,22 +97,19 @@ defmodule Day11 do
             5
           end
         end,
-        :unworry => fn item ->
-          if rem(item, 5) == 0 do
-            floor(item / 5)
-          else
-            item
-          end
-        end
         },
     }
   end
 
-  def new_worry_level(level) do
-      floor(level/3)
+  def new_worry_level(level, div) do
+      if div == 3 do
+        floor(level/div)
+      else
+        rem(level, div)
+      end
   end
 
-  def run_turn(monkey_map, monkey_num) do
+  def run_turn(monkey_map, monkey_num, div) do
     %{
       :items => items,
       :op => op,
@@ -169,7 +117,7 @@ defmodule Day11 do
     } = monkey_map[monkey_num]
 
     Enum.reduce(items, monkey_map, fn(item, monkey_map) ->
-      worry_level = op.(item) |> new_worry_level()
+      worry_level = op.(item) |> new_worry_level(div)
       throw_to_monkey = throw_to.(worry_level)
       inspected = monkey_map[monkey_num].inspected + 1
 
@@ -182,52 +130,25 @@ defmodule Day11 do
     end)
   end
 
-  def run_round(monkey_map) do
+  def run_round(monkey_map, div) do
     Enum.reduce(0..7, monkey_map, fn(item, monkey_map) ->
-      run_turn(monkey_map, item)
+      run_turn(monkey_map, item, div)
     end)
   end
 
   def part1() do
-    monkey_map = Enum.reduce(1..20, build_initial_monkeys(), fn(_item, monkey_map) -> run_round(monkey_map) end)
+    monkey_map = Enum.reduce(1..20, build_initial_monkeys(), fn(_item, monkey_map) -> run_round(monkey_map, 3) end)
 
     [biggest, second_biggest | _rest] = Enum.map(0..7, fn x -> monkey_map[x].inspected end) |> Enum.sort(:desc)
 
     biggest * second_biggest
   end
 
-  def run_turn2(monkey_map, monkey_num) do
-    %{
-      :items => items,
-      :op => op,
-      :throw_to => throw_to,
-      :unworry => unworry,
-    } = monkey_map[monkey_num]
-
-    Enum.reduce(items, monkey_map, fn(item, monkey_map) ->
-      worry_level = op.(item)
-      throw_to_monkey = throw_to.(worry_level)
-      inspected = monkey_map[monkey_num].inspected + 1
-
-      worry_level = unworry.(worry_level)
-
-      new_item_list = monkey_map[throw_to_monkey].items ++ [worry_level]
-
-      monkey_map
-        |> put_in([monkey_num, :items], [])
-        |> put_in([monkey_num, :inspected], inspected)
-        |> put_in([throw_to_monkey, :items], new_item_list)
-    end)
-  end
-
-  def run_round2(monkey_map) do
-    Enum.reduce(0..7, monkey_map, fn(item, monkey_map) ->
-      run_turn2(monkey_map, item)
-    end)
-  end
 
   def part2() do
-    monkey_map = Enum.reduce(1..10000, build_initial_monkeys(), fn(_item, monkey_map) -> run_round2(monkey_map) end)
+    # cheated on this 9699690 number, it's the product of all the numbers in the "divisible" by tests
+    # I knew it was something like this but was annoyed and looked it up...
+    monkey_map = Enum.reduce(1..10000, build_initial_monkeys(), fn(_item, monkey_map) -> run_round(monkey_map, 9699690) end)
 
     [biggest, second_biggest | _rest] = Enum.map(0..7, fn x -> monkey_map[x].inspected end) |> Enum.sort(:desc)
 

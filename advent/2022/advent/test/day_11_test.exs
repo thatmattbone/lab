@@ -6,6 +6,6 @@ defmodule Day11Test do
   end
 
   test "day 11, part 2" do
-    assert Day11.part2() == nil
+    assert Day11.part2() == 20151213744
   end
 end
