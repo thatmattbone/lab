@@ -21,4 +21,16 @@ defmodule HangmanGameImplTest do
     assert game.used == MapSet.new()
   end
 
+  test "new game returns only a list of lower case letters" do
+    game = Game.new_game()
+
+    game.letters
+      |> Enum.map(fn (letter) ->
+        [letter_int_val] = String.to_charlist(letter)
+
+        assert letter_int_val >= 97  # 'z'
+        assert letter_int_val <= 122 # 'z'
+      end)
+  end
+
 end
