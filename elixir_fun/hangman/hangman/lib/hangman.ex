@@ -4,7 +4,6 @@ defmodule Hangman do
 
   @opaque game :: Game.t()
 
-
   @spec new_game() :: game
   defdelegate new_game, to: Game
 

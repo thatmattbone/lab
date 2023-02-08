@@ -53,7 +53,7 @@ defmodule Hangman.Impl.Game do
   end
 
   defp score_guess(game = %{turns_left: 1}, _good_guess = false) do
-    %{game | game_state: :lost}
+    %{game | game_state: :lost, turns_left: 0}
   end
 
   defp score_guess(game, _good_guess = false) do

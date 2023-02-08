@@ -111,6 +111,24 @@ defmodule HangmanGameImplTest do
       ["y", :bad_guess,    4, ["_", "e", "l", "l", "o"], ["a", "e", "l", "o", "x", "y"]],
       ["h", :won,          4, ["h", "e", "l", "l", "o"], ["a", "e", "h", "l", "o", "x", "y"]],
     ]
+
+    run_test_sequence(word, test_sequence)
+  end
+
+  test "can handle a losing game" do
+    word = "hello"
+    test_sequence =[
+      ["a", :bad_guess,    6, ["_", "_", "_", "_", "_"], ["a"]],
+      ["b", :bad_guess,    5, ["_", "_", "_", "_", "_"], ["a", "b"]],
+      ["c", :bad_guess,    4, ["_", "_", "_", "_", "_"], ["a", "b", "c"]],
+      ["d", :bad_guess,    3, ["_", "_", "_", "_", "_"], ["a", "b", "c", "d"]],
+      ["e", :good_guess,   3, ["_", "e", "_", "_", "_"], ["a", "b", "c", "d", "e"]],
+      ["f", :bad_guess,    2, ["_", "e", "_", "_", "_"], ["a", "b", "c", "d", "e", "f"]],
+      ["g", :bad_guess,    1, ["_", "e", "_", "_", "_"], ["a", "b", "c", "d", "e", "f", "g"]],
+      ["h", :good_guess,   1, ["h", "e", "_", "_", "_"], ["a", "b", "c", "d", "e", "f", "g", "h"]],
+      ["i", :lost,         0, ["h", "e", "_", "_", "_"], ["a", "b", "c", "d", "e", "f", "g", "h", "i"]],
+    ]
+
     run_test_sequence(word, test_sequence)
   end
 
