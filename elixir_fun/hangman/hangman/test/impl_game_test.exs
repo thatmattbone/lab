@@ -87,4 +87,15 @@ defmodule HangmanGameImplTest do
     assert tally.game_state == :good_guess
   end
 
+  test "can handle a sequence of moves" do
+    # hello
+    [
+      ["a", :bad_guess,     6, ["_", "_", "_", "_", "_"], ["a"]],
+      ["a", :already_useed, 6, ["_", "_", "_", "_", "_"], ["a"]],
+      ["e", :good_guess,    6, ["_", "e", "_", "_", "_"], ["a", "h"]],
+      ["x", :bad_guess,     5, ["_", "e", "_", "_", "_"], ["a", "h", "x"]],
+    ]
+
+  end
+
 end
