@@ -91,9 +91,9 @@ defmodule HangmanGameImplTest do
     word = "hello"
     test_sequence = [
       ["a", :bad_guess,     6, ["_", "_", "_", "_", "_"], ["a"]],
-      ["a", :already_useed, 6, ["_", "_", "_", "_", "_"], ["a"]],
-      ["e", :good_guess,    6, ["_", "e", "_", "_", "_"], ["a", "h"]],
-      ["x", :bad_guess,     5, ["_", "e", "_", "_", "_"], ["a", "h", "x"]],
+      ["a", :already_used,  6, ["_", "_", "_", "_", "_"], ["a"]],
+      ["e", :good_guess,    6, ["_", "e", "_", "_", "_"], ["a", "e"]],
+      ["x", :bad_guess,     5, ["_", "e", "_", "_", "_"], ["a", "e", "x"]],
     ]
 
     run_test_sequence(word, test_sequence)

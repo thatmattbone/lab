@@ -71,8 +71,21 @@ defmodule Hangman.Impl.Game do
     %{
       turns_left: game.turns_left,
       game_state: game.game_state,
-      letters: [],
+      letters: reveal_guessed_letters(game),
       used: game.used |> MapSet.to_list()
     }
   end
+
+  defp reveal_guessed_letters(game) do
+    game.letters |> Enum.map(fn letter -> MapSet.member?(game.used, letter) |> maybe_reveal(letter) end)
+  end
+
+  defp maybe_reveal(reveal=true, letter) do
+    letter
+  end
+
+  defp maybe_reveal(reveal, letter) do
+    "_"
+  end
+
 end
