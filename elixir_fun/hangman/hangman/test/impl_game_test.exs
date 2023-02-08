@@ -99,6 +99,21 @@ defmodule HangmanGameImplTest do
     run_test_sequence(word, test_sequence)
   end
 
+  test "can handle a winning game" do
+    word = "hello"
+    test_sequence = [
+      ["a", :bad_guess,    6, ["_", "_", "_", "_", "_"], ["a"]],
+      ["a", :already_used, 6, ["_", "_", "_", "_", "_"], ["a"]],
+      ["e", :good_guess,   6, ["_", "e", "_", "_", "_"], ["a", "e"]],
+      ["x", :bad_guess,    5, ["_", "e", "_", "_", "_"], ["a", "e", "x"]],
+      ["l", :good_guess,   5, ["_", "e", "l", "l", "_"], ["a", "e", "l", "x"]],
+      ["o", :good_guess,   5, ["_", "e", "l", "l", "o"], ["a", "e", "l", "o", "x"]],
+      ["y", :bad_guess,    4, ["_", "e", "l", "l", "o"], ["a", "e", "l", "o", "x", "y"]],
+      ["h", :won,          4, ["h", "e", "l", "l", "o"], ["a", "e", "h", "l", "o", "x", "y"]],
+    ]
+    run_test_sequence(word, test_sequence)
+  end
+
   def run_test_sequence(word, sequence) do
     game = Game.new_game(word)
 
