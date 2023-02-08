@@ -88,14 +88,36 @@ defmodule HangmanGameImplTest do
   end
 
   test "can handle a sequence of moves" do
-    # hello
-    [
+    word = "hello"
+    test_sequence = [
       ["a", :bad_guess,     6, ["_", "_", "_", "_", "_"], ["a"]],
       ["a", :already_useed, 6, ["_", "_", "_", "_", "_"], ["a"]],
       ["e", :good_guess,    6, ["_", "e", "_", "_", "_"], ["a", "h"]],
       ["x", :bad_guess,     5, ["_", "e", "_", "_", "_"], ["a", "h", "x"]],
     ]
 
+    run_test_sequence(word, test_sequence)
+  end
+
+  def run_test_sequence(word, sequence) do
+    game = Game.new_game(word)
+
+    step_test_sequence(game, sequence)
+  end
+
+  def step_test_sequence(game, []) do
+    game
+  end
+
+  def step_test_sequence(game, [[guess, expected_state, expected_turns_left, expected_letters, expected_used] | rest]) do
+    {game, tally} = Game.make_move(game, guess)
+
+    assert tally.game_state == expected_state
+    assert tally.turns_left == expected_turns_left
+    assert tally.letters == expected_letters
+    assert tally.used == expected_used
+
+    step_test_sequence(game, rest)
   end
 
 end
