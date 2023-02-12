@@ -23,6 +23,7 @@ defmodule TextClient.Impl.Player do
 
   def interact({_game, tally}) do
     IO.puts(feedback_for(tally))
+    IO.puts(current_word_prompt(tally))
 
     #interact()
   end
@@ -41,5 +42,13 @@ defmodule TextClient.Impl.Player do
 
   def feedback_for(_tally = %{game_state: :already_used}) do
     "That letter was already used."
+  end
+
+  def current_word_prompt(tally) do
+    [
+      "Word so far: ", tally.letters |> Enum.join(" "),
+      "    turns left: ", tally.turns_left |> to_string(),
+      "    used turns so far: ", tally.used |> Enum.join(", ")
+    ]
   end
 end
