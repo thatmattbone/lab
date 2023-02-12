@@ -24,7 +24,7 @@ defmodule MyLists do
     [first**2 | square_list(rest)]
   end
 
-  def map([], func) do
+  def map([], _func) do
     []
   end
 
@@ -41,15 +41,15 @@ defmodule MyLists do
   end
 
 
-  def even_len([a | []]) do
+  def even_len([_a | []]) do
     false
   end
 
-  def even_len([a, b | []]) do
+  def even_len([_a, _b | []]) do
     true
   end
 
-  def even_len([a, b | rest]) do
+  def even_len([_a, _b | rest]) do
     even_len(rest)
   end
 end
