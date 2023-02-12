@@ -24,11 +24,9 @@ defmodule TextClient.Impl.Player do
   def interact({game, tally}) do
     IO.puts(feedback_for(tally))
     IO.puts(current_word_prompt(tally))
-    guess = get_guess()
 
-    {updated_game, updated_tally} = Hangman.make_move(game, guess)
-
-    interact({updated_game, updated_tally})
+    Hangman.make_move(game, get_guess())
+      |> interact()
   end
 
   def feedback_for(tally = %{game_state: :initializing}) do
