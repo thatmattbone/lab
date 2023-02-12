@@ -28,7 +28,7 @@ defmodule Hangman.Impl.Game do
   end
 
   @spec make_move(t(), String.t()) :: {t(), Type.tally}
-  def make_move(game = %{game_state: state}, guess) when state in [:won, :lost] do
+  def make_move(game = %{game_state: state}, _guess) when state in [:won, :lost] do
     game
       |> return_with_tally()
   end
@@ -38,7 +38,7 @@ defmodule Hangman.Impl.Game do
       |> return_with_tally()
   end
 
-  defp accept_guess(game, guess, _already_used=true) do
+  defp accept_guess(game, _guess, _already_used=true) do
     %{game | game_state: :already_used}
   end
 
@@ -80,11 +80,11 @@ defmodule Hangman.Impl.Game do
     game.letters |> Enum.map(fn letter -> MapSet.member?(game.used, letter) |> maybe_reveal(letter) end)
   end
 
-  defp maybe_reveal(reveal=true, letter) do
+  defp maybe_reveal(_reveal=true, letter) do
     letter
   end
 
-  defp maybe_reveal(reveal, letter) do
+  defp maybe_reveal(_reveal, _letter) do
     "_"
   end
 

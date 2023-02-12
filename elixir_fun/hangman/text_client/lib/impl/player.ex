@@ -21,7 +21,7 @@ defmodule TextClient.Impl.Player do
     IO.puts("Sorry, you lost. The word was: #{tally.letters |> Enum.join()}")
   end
 
-  def interact({game, tally}) do
+  def interact({_game, tally}) do
     IO.puts(feedback_for(tally))
 
     #interact()
@@ -31,15 +31,15 @@ defmodule TextClient.Impl.Player do
     "Welcome, I'm thinking of a word with #{tally.letters |> length()} letters."
   end
 
-  def feedback_for(tally = %{game_state: :good_guess}) do
+  def feedback_for(_tally = %{game_state: :good_guess}) do
     "Good guess."
   end
 
-  def feedback_for(tally = %{game_state: :bad_guess}) do
+  def feedback_for(_tally = %{game_state: :bad_guess}) do
     "Bad guess."
   end
 
-  def feedback_for(tally = %{game_state: :already_used}) do
+  def feedback_for(_tally = %{game_state: :already_used}) do
     "That letter was already used."
   end
 end

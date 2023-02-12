@@ -6,7 +6,7 @@ defmodule HangmanGameImplTest do
     game = Game.new_game()
 
     assert game.turns_left == 7
-    assert game.game_state == :initialized
+    assert game.game_state == :initializing
     assert length(game.letters) > 0
     assert game.used == MapSet.new()
   end
@@ -16,7 +16,7 @@ defmodule HangmanGameImplTest do
     game = Game.new_game("ponies")
 
     assert game.turns_left == 7
-    assert game.game_state == :initialized
+    assert game.game_state == :initializing
     assert game.letters == ["p", "o", "n", "i", "e", "s"]
     assert game.used == MapSet.new()
   end
@@ -73,7 +73,7 @@ defmodule HangmanGameImplTest do
     {game, tally} = Game.make_move(game, "n")
     assert tally.game_state == :good_guess
 
-    {game, tally} = Game.make_move(game, "o")
+    {_game, tally} = Game.make_move(game, "o")
     assert tally.game_state == :good_guess
   end
 
@@ -83,7 +83,7 @@ defmodule HangmanGameImplTest do
     {game, tally} = Game.make_move(game, "x")
     assert tally.game_state == :bad_guess
 
-    {game, tally} = Game.make_move(game, "o")
+    {_game, tally} = Game.make_move(game, "o")
     assert tally.game_state == :good_guess
   end
 
