@@ -10,7 +10,7 @@ defmodule Hangman.Impl.Game do
 
   defstruct(
     turns_left: 7,
-    game_state: :initialized,
+    game_state: :initializing,
     letters: [],
     used: MapSet.new()
   )
@@ -67,7 +67,7 @@ defmodule Hangman.Impl.Game do
     {game, tally(game)}
   end
 
-  defp tally(game) do
+  def tally(game) do
     %{
       turns_left: game.turns_left,
       game_state: game.game_state,
