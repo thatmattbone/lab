@@ -1,4 +1,11 @@
 defmodule Dictionary do
-  defdelegate start, to: Dictionary.Impl.MyDictionary
-  defdelegate random_word(worl_list), to: Dictionary.Impl.MyDictionary
+  alias Dictionary.Impl.MyDictionary
+
+  @opaque t :: MyDictionary.t()
+
+  @spec start() :: t()
+  defdelegate start, to: MyDictionary, as: :word_list
+
+  @spec random_word(t()) :: String.t()
+  defdelegate random_word(word_list), to: MyDictionary
 end
