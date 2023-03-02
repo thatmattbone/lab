@@ -1,6 +1,8 @@
 defmodule Dictionary.Runtime.Server do
   alias Dictionary.Impl.MyDictionary
 
+  @type t :: pid()
+
   def start_link() do
     Agent.start_link(&MyDictionary.word_list/0)
   end
