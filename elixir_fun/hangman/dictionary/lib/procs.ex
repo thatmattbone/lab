@@ -1,11 +1,11 @@
 defmodule Procs do
 
-  def hello() do
+  def hello(greeting) do
     receive do
       msg ->
-        IO.puts("Hello #{msg}")
+        IO.puts("#{greeting} #{msg}")
     end
-    hello()
+    hello(greeting)
   end
 
 end
