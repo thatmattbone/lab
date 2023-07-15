@@ -5,8 +5,7 @@ defmodule TextClient.Impl.Player do
   @typep state :: {game, tally}
 
 
-  def start() do
-    game = Hangman.new_game()
+  def start(game) do
     tally = Hangman.tally(game)
     interact({game, tally})
   end
