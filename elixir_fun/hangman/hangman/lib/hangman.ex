@@ -3,6 +3,7 @@ defmodule Hangman do
   alias Hangman.Type
 
   @opaque game :: Server.t()
+  @type tally :: Type.tally
 
   @spec new_game() :: game
   def new_game() do
@@ -11,7 +12,7 @@ defmodule Hangman do
     pid
   end
 
-  @spec make_move(game, String.t()) :: Type.tally
+  @spec make_move(game, String.t()) :: tally
   def make_move(game, guess) do
     GenServer.call(game, {:make_move, guess})
   end
