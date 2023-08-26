@@ -10,7 +10,7 @@ defmodule TextClient.MixProject do
       deps: deps()
     ]
   end
-
+  
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
