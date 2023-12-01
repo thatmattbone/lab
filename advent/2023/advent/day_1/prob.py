@@ -15,6 +15,27 @@ def day_1_part_1(input_lines):
     return sum([int(f'{line[0]}{line[-1]}') for line in number_lines])
 
 
+def day_1_part_2(input_lines):
+    replacements = [('one',   '1'),
+                    ('two',   '2'),
+                    ('three', '3'),
+                    ('four',  '4'),
+                    ('five',  '5'),
+                    ('six',   '6'),
+                    ('seven', '7'),
+                    ('eight', '8'),
+                    ('nine', '9')]
+
+    fixed_lines = []
+    for line in input_lines:
+        updated_line = line
+        for word, replacement in replacements:
+            updated_line = updated_line.replace(word, replacement)
+        fixed_lines.append(updated_line)
+
+    return day_1_part_1(fixed_lines)
+
+
 if __name__ == '__main__':
     input_lines = []
     with open(input_path(__file__)) as lines:
@@ -26,4 +47,12 @@ if __name__ == '__main__':
                         'a1b2c3d4e5f',
                         'treb7uchet']))
     print(day_1_part_1(input_lines))
+
+    print(day_1_part_2(['two1nine',
+                        'eightwothree',
+                        'abcone2threexyz',
+                        'xtwone3four',
+                        '4nineeightseven2',
+                        'zoneight234',
+                        '7pqrstsixteen']))
     
