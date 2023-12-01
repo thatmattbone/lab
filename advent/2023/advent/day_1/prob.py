@@ -1,4 +1,5 @@
 import os
+import re
 
 
 def input_path(script_path, input_filename='input'):
@@ -15,25 +16,42 @@ def day_1_part_1(input_lines):
     return sum([int(f'{line[0]}{line[-1]}') for line in number_lines])
 
 
+WORDS = {'one': '1',
+         'two': '2',
+         'three': '3',
+         'four': '4',
+         'five': '5',
+         'six': '6',
+         'seven': '7',
+         'eight': '8',
+         'nine': '9'}
+
+
+def fix_line(line: str) -> str:
+    matches = []
+    for word in WORDS.keys():
+        re_matches = list(re.finditer(word, line))
+
+        if len(re_matches) >= 0:        
+            matches.extend([(word, m.start()) for m in re_matches])
+
+    if len(matches) == 0:
+        return line
+    else:
+        matches.sort(key=lambda x: x[1])
+
+        line_list = list(line)
+        for i, (word, location) in enumerate(matches):
+            line_list.insert(i + location, WORDS[word])
+            
+        
+        return ''.join(line_list)
+        
+
+    
 def day_1_part_2(input_lines):
-    replacements = [('one',   '1'),
-                    ('two',   '2'),
-                    ('three', '3'),
-                    ('four',  '4'),
-                    ('five',  '5'),
-                    ('six',   '6'),
-                    ('seven', '7'),
-                    ('eight', '8'),
-                    ('nine', '9')]
-
-    fixed_lines = []
-    for line in input_lines:
-        updated_line = line
-        for word, replacement in replacements:
-            updated_line = updated_line.replace(word, replacement)
-        fixed_lines.append(updated_line)
-
-    return day_1_part_1(fixed_lines)
+    # print([fix_line(line) for line in input_lines])
+    return day_1_part_1([fix_line(line) for line in input_lines])
 
 
 if __name__ == '__main__':
@@ -48,6 +66,7 @@ if __name__ == '__main__':
                         'treb7uchet']))
     print(day_1_part_1(input_lines))
 
+    
     print(day_1_part_2(['two1nine',
                         'eightwothree',
                         'abcone2threexyz',
@@ -55,4 +74,6 @@ if __name__ == '__main__':
                         '4nineeightseven2',
                         'zoneight234',
                         '7pqrstsixteen']))
+    print(day_1_part_2(['tdmjfourfour8fiveseveneight']))
+    print(day_1_part_2(input_lines))
     
