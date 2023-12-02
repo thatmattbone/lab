@@ -58,9 +58,9 @@ def test_{day_dir}_part_2():
 """
         test_file.write(contents)
 
-    with open(os.path.join(full_path, 'input'), 'w') as test_file:
-        contents = f"""\
-hello
-world
-"""
-        test_file.write(contents)
+#     with open(os.path.join(full_path, 'input'), 'w') as test_file:
+#         contents = f"""\
+# hello
+# world
+# """
+#         test_file.write(contents)
