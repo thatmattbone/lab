@@ -28,19 +28,27 @@ from typing import List
 
 from advent.util import input_path, input_lines
 
+InputType = List[str]
 
-def {day_dir}_part_1(input_lines: List[str]) -> int:
+
+def build_input_type(lines: List[str]) -> InputType:
+    pass
+
+
+def {day_dir}_part_1(input: InputType, debug: bool = False) -> int:
     return -1    
 
 
-def {day_dir}_part_2(input_lines: List[str], debug: bool = False) -> int:
+def {day_dir}_part_2(input: InputType, debug: bool = False) -> int:
     return -1
 
 
 if __name__ == '__main__':
     input_list = input_lines(__file__)
-    print({day_dir}_part_1(input_list))
-    print({day_dir}_part_2(input_list))
+    input = build_input_type(input_list)
+
+    print({day_dir}_part_1(input))
+    print({day_dir}_part_2(input))
 """
         prob_file.write(contents)
 
@@ -58,9 +66,9 @@ def test_{day_dir}_part_2():
 """
         test_file.write(contents)
 
-#     with open(os.path.join(full_path, 'input'), 'w') as test_file:
-#         contents = f"""\
-# hello
-# world
-# """
-#         test_file.write(contents)
+    with open(os.path.join(full_path, 'input'), 'w') as test_file:
+        contents = f"""\
+hello
+world
+"""
+        test_file.write(contents)
