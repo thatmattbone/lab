@@ -72,4 +72,3 @@ if __name__ == '__main__':
                         '7pqrstsixteen'], debug=True))
     print(day_1_part_2(['tdmjfourfour8fiveseveneight'], debug=True))
     print(day_1_part_2(input_lines))
-    
