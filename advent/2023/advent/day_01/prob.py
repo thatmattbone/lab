@@ -1,7 +1,7 @@
 import re
 from typing import List
 
-from advent.util import input_path
+from advent.util import input_lines
 
 
 WORDS = {'one': '1',
@@ -60,7 +60,7 @@ if __name__ == '__main__':
                         'pqr3stu8vwx',
                         'a1b2c3d4e5f',
                         'treb7uchet']))
-    print(day_1_part_1(input_lines))
+    print(day_1_part_1(input_lines(__file__)))
 
     
     print(day_1_part_2(['two1nine',
@@ -71,4 +71,4 @@ if __name__ == '__main__':
                         'zoneight234',
                         '7pqrstsixteen'], debug=True))
     print(day_1_part_2(['tdmjfourfour8fiveseveneight'], debug=True))
-    print(day_1_part_2(input_lines))
+    print(day_1_part_2(input_lines(__file__)))
