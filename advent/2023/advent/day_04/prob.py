@@ -1,8 +1,8 @@
-from typing import List, Tuple
+from typing import List, Tuple, Set
 
 from advent.util import input_path, input_lines
 
-InputType = List[Tuple[List[int], List[int]]]
+InputType = List[Tuple[Set[int], List[int]]]
 
 
 def build_input_type(lines: List[str]) -> InputType:
@@ -14,7 +14,7 @@ def build_input_type(lines: List[str]) -> InputType:
         card_info, rest = line.split(':')
         win_list_str, my_list_str = rest.split('|')
 
-        win_list = [int(int_str.strip()) for int_str in win_list_str.split()]
+        win_list = set([int(int_str.strip()) for int_str in win_list_str.split()])
         my_list = [int(int_str.strip()) for int_str in my_list_str.split()]
     
         parsed.append((win_list, my_list))
@@ -22,10 +22,18 @@ def build_input_type(lines: List[str]) -> InputType:
 
 
 def day_04_part_1(input: InputType, debug: bool = False) -> int:
-    if debug:
-        print(input)
+    #if debug:
+    #    print(input)
 
-        return -1    
+    points = 0
+    for win_set, my_list in input:
+        wins = [i for i in my_list if i in win_set]
+        if len(wins) == 0:
+            continue
+        else:
+            points += (2**(len(wins) - 1))
+
+    return points
 
 
 def day_04_part_2(input: InputType, debug: bool = False) -> int:
