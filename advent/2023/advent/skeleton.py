@@ -32,7 +32,7 @@ InputType = List[str]
 
 
 def build_input_type(lines: List[str]) -> InputType:
-    pass
+    return lines
 
 
 def {day_dir}_part_1(input: InputType, debug: bool = False) -> int:
