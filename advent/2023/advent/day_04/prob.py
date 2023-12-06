@@ -57,7 +57,7 @@ def day_04_part_2(my_input: InputType, debug: bool = False) -> int:
         wins = [i for i in my_list if i in win_set]
         
         for i in range(1, 1 + len(wins)):
-            card_stack.append(copy(my_input[card_num + i]))
+            card_stack.append(my_input[card_num + i])
 
         if debug:
             print(card_count)

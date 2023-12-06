@@ -43,26 +43,44 @@ def {day_dir}_part_2(input: InputType, debug: bool = False) -> int:
     return -1
 
 
-if __name__ == '__main__':
+def main():
     input_list = input_lines(__file__)
-    input = build_input_type(input_list)
+    my_input = build_input_type(input_list)
 
-    print({day_dir}_part_1(input))
-    print({day_dir}_part_2(input))
+    test_input = build_input_type('''\
+Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
+Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
+Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
+Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
+Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
+Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11'''.split('\n'))
+
+    print({day_dir}_part_1(test_input, debug=True))
+    print({day_dir}_part_1(my_input))
+
+    print({day_dir}_part_2(test_input, debug=True))
+    print({day_dir}_part_2(my_input))
+
+        
+if __name__ == '__main__':
+    main()
 """
         prob_file.write(contents)
 
     with open(os.path.join(full_path, 'test_prob.py'), 'w') as test_file:
         contents = f"""\
 from advent.util import input_lines
-from .prob import {day_dir}_part_1, {day_dir}_part_2
+from .prob import {day_dir}_part_1, {day_dir}_part_2, build_input_type
 
 
 def test_{day_dir}_part_1():
-    assert {day_dir}_part_1(input_lines(__file__)) == -1
+    my_input = build_input_type(input_lines(__file__)
+    assert {day_dir}_part_1(my_input) == -1
+
 
 def test_{day_dir}_part_2():
-    assert {day_dir}_part_2(input_lines(__file__)) == -1
+    my_input = build_input_type(input_lines(__file__)
+    assert {day_dir}_part_2(my_input) == -1
 """
         test_file.write(contents)
 
