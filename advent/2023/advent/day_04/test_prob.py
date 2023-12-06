@@ -1,5 +1,5 @@
 from advent.util import input_lines
-from .prob import day_04_part_1, day_04_part_2, build_input_type
+from .prob import day_04_part_1, day_04_part_2_faster as day_04_part_2, build_input_type
 
 
 def test_day_04_part_1():

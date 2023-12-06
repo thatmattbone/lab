@@ -70,6 +70,44 @@ def day_04_part_2(my_input: InputType, debug: bool = False) -> int:
     return card_count
 
 
+def day_04_part_2_faster(my_input: InputType, debug: bool = False) -> int:
+    # if debug:
+    #    print(my_input)
+
+    # breakpoint()
+
+    counts = [1 for _ in range(len(my_input))]
+
+    for card_num, win_set, my_list in input.values():
+        
+    
+    # card_count = 0
+    # card_stack = list(my_input.values())
+    # card_stack.reverse()
+
+    # if debug:
+    #     pp(card_stack)
+    #     print('==' * 25)
+    
+    while len(card_stack) > 0:
+        card_count += 1
+        card_num, win_set, my_list = card_stack.pop()
+        wins = [i for i in my_list if i in win_set]
+        
+        for i in range(1, 1 + len(wins)):
+            card_stack.append(my_input[card_num + i])
+
+        if debug:
+            print(card_count)
+            pp(card_stack)
+            print(f'{card_num}: {win_set} | {my_list} -> {len(wins)})')
+            print('==' * 25)
+            breakpoint()
+
+            
+    return sum(counts)
+
+
 def main():
     input_list = input_lines(__file__)
     my_input = build_input_type(input_list)
