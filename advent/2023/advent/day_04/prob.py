@@ -78,32 +78,18 @@ def day_04_part_2_faster(my_input: InputType, debug: bool = False) -> int:
 
     counts = [1 for _ in range(len(my_input))]
 
-    for card_num, win_set, my_list in input.values():
-        
-    
-    # card_count = 0
-    # card_stack = list(my_input.values())
-    # card_stack.reverse()
-
-    # if debug:
-    #     pp(card_stack)
-    #     print('==' * 25)
-    
-    while len(card_stack) > 0:
-        card_count += 1
-        card_num, win_set, my_list = card_stack.pop()
+    for card_num, win_set, my_list in my_input.values():
         wins = [i for i in my_list if i in win_set]
-        
-        for i in range(1, 1 + len(wins)):
-            card_stack.append(my_input[card_num + i])
+
+        my_card_count = counts[card_num - 1]
+        for i in range(0, len(wins)):            
+            counts[card_num + i] += my_card_count
 
         if debug:
-            print(card_count)
-            pp(card_stack)
             print(f'{card_num}: {win_set} | {my_list} -> {len(wins)})')
+            pp(counts)
             print('==' * 25)
             breakpoint()
-
             
     return sum(counts)
 
@@ -123,9 +109,9 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11""".split('\n'))
     print(day_04_part_1(test_input))
     print(day_04_part_1(my_input))
 
-    # print(day_04_part_2(test_input, debug=False))
-    print(day_04_part_2(my_input))
-    
+    print(day_04_part_2_faster(test_input, debug=False))
+    print(day_04_part_2_faster(my_input))
+
 
 if __name__ == '__main__':
     main()

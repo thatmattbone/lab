@@ -70,12 +70,12 @@ from .prob import {day_dir}_part_1, {day_dir}_part_2, build_input_type
 
 
 def test_{day_dir}_part_1():
-    my_input = build_input_type(input_lines(__file__)
+    my_input = build_input_type(input_lines(__file__))
     assert {day_dir}_part_1(my_input) == -1
 
 
 def test_{day_dir}_part_2():
-    my_input = build_input_type(input_lines(__file__)
+    my_input = build_input_type(input_lines(__file__))
     assert {day_dir}_part_2(my_input) == -1
 """
         test_file.write(contents)
