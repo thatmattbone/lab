@@ -35,11 +35,11 @@ def build_input_type(lines: List[str]) -> InputType:
     return lines
 
 
-def {day_dir}_part_1(input: InputType, debug: bool = False) -> int:
+def {day_dir}_part_1(my_input: InputType, debug: bool = False) -> int:
     return -1    
 
 
-def {day_dir}_part_2(input: InputType, debug: bool = False) -> int:
+def {day_dir}_part_2(my_input: InputType, debug: bool = False) -> int:
     return -1
 
 

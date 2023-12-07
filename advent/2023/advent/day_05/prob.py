@@ -1,12 +1,7 @@
 from typing import List
 
 from advent.util import input_path, input_lines
-
-InputType = List[str]
-
-
-def build_input_type(lines: List[str]) -> InputType:
-    return lines
+from 
 
 
 def day_05_part_1(input: InputType, debug: bool = False) -> int:
@@ -18,12 +13,6 @@ def day_05_part_2(input: InputType, debug: bool = False) -> int:
 
 
 def main():
-    input_list = input_lines(__file__)
-    my_input = build_input_type(input_list)
-
-    test_input = build_input_type("""\
-line 1
-line 2""".split('\n'))
 
     print(day_05_part_1(test_input, debug=True))
     print(day_05_part_1(my_input))
