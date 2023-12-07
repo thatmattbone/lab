@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from .convert import convert_map
 
 SEEDS = [
     629551616,
@@ -22,15 +22,6 @@ SEEDS = [
     1224711373,
     133647424,
 ]
-
-
-def convert_map(map_str: str) -> List[Tuple[int, int, int]]:
-    my_map = []
-    for line in map_str.split('\n'):
-        i, j, k = line.split()
-        my_map.append((int(i), int(j), int(k)))
-    return my_map
-                      
 
                       
 SEED_TO_SOIL = convert_map("""\
