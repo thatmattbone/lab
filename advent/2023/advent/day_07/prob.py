@@ -2,8 +2,25 @@ from collections import Counter
 from pprint import pp
 from typing import List, Tuple
 from enum import Enum
+from functools import total_ordering
 
 from advent.util import input_path, input_lines
+
+CARD_VALS = {
+    'A': 14,
+    'K': 13,
+    'Q': 12,
+    'J': 11,
+    'T': 10,
+    '9': 9,
+    '8': 8,
+    '7': 7, 
+    '6': 6,
+    '5': 5
+    '4': 4,
+    '3': 3;
+    '2': 2,
+}
 
 
 class HandType(Enum):
@@ -15,7 +32,8 @@ class HandType(Enum):
     ONE_PAIR = 200
     HIGH_CARD = 100
 
-
+    
+@total_ordering
 class Hand:
     def __init__(self, hand_str: str):
         self.hand_str = hand_str
@@ -54,8 +72,28 @@ class Hand:
     def __repr__(self):
         return str(self)
 
-    def __eq__(self)
-    
+    def __eq__(self, other):
+        if self.hand_str == other.hand_str:
+            return True
+        return False
+
+    def __lt__(self, other):
+        if self.hand_type == other.hand_type:
+            different_cards = [(i, j) for i, j in zip(self.hand_str, other.hand_str) if i != j]
+
+            my_card, their_card = different_cards[0]
+
+            if CARD_VALS[my_card] < CARD_VALS[their_card]:
+                return True
+            else:
+                return False
+        else:
+            if self.hand_type.value < other.hand_type.value:
+                return True
+            else:
+                return False
+
+
 InputType = List[Tuple[Hand, int]]
     
 
