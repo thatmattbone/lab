@@ -17,17 +17,17 @@ CARD_VALS = {
     '8': 8,
     '7': 7, 
     '6': 6,
-    '5': 5
+    '5': 5,
     '4': 4,
-    '3': 3;
+    '3': 3,
     '2': 2,
 }
 
 
 class HandType(Enum):
     FIVE_OF_KIND = 700
-    FOUR_OF_KIND = 500
-    FULL_HOUSE = 600
+    FOUR_OF_KIND = 600
+    FULL_HOUSE = 500
     THREE_OF_KIND = 400
     TWO_PAIR = 300
     ONE_PAIR = 200
@@ -108,16 +108,22 @@ def build_input_type(lines: List[str]) -> InputType:
 
 
 def day_07_part_1(my_input: InputType, debug: bool = False) -> int:
-    if debug:
-        pp(my_input)
+    #if debug:
+    #    pp(my_input)
 
-    for five_hands in batched(my_input, n=5):
-        five_hands.sort(lambda x: x[0])
+    answer = 0
+    #for five_hands in batched(my_input, n=5):
+    #    five_hands = list(five_hands)
 
+    my_input.sort(key=lambda x: x[0])
+
+    for rank, (hand, bid) in enumerate(my_input, start=1):
         if debug:
-            for hand, bid in five_hands:
-                print(f'{hand}: {bid}')
-    return -1    
+            print(f'{rank} -- {hand}: {bid}')
+
+        answer += (rank * bid)
+
+    return answer
 
 
 def day_07_part_2(my_input: InputType, debug: bool = False) -> int:
