@@ -3,6 +3,7 @@ from pprint import pp
 from typing import List, Tuple
 from enum import Enum
 from functools import total_ordering
+from itertools import batched
 
 from advent.util import input_path, input_lines
 
@@ -109,6 +110,13 @@ def build_input_type(lines: List[str]) -> InputType:
 def day_07_part_1(my_input: InputType, debug: bool = False) -> int:
     if debug:
         pp(my_input)
+
+    for five_hands in batched(my_input, n=5):
+        five_hands.sort(lambda x: x[0])
+
+        if debug:
+            for hand, bid in five_hands:
+                print(f'{hand}: {bid}')
     return -1    
 
 
@@ -128,7 +136,7 @@ KTJJT 220
 QQQJA 483""".split('\n'))
 
     print(day_07_part_1(test_input, debug=True))
-    print(day_07_part_1(my_input, debug=True))
+    print(day_07_part_1(my_input))
 
     print(day_07_part_2(test_input, debug=True))
     print(day_07_part_2(my_input))
