@@ -67,6 +67,50 @@ class Hand:
 
         raise ValueError(hand_str)
 
+    def jokerfy(self) -> HandType:
+        if 'J' not in self.hand_str:
+            return self.hand_type
+        elif 'JJJJJ' == self.hand_str:
+            return self.hand_str
+
+        j_count = len([j for j in self.hand_str if j == 'J'])
+
+        if self.hand_type == HandType.FOUR_OF_KIND:
+            return HandType.FIVE_OF_KIND
+
+        elif self.hand_type == HandType.FULL_HOUSE:
+            if j_count == 2:
+                return HandType.FIVE_OF_KIND
+            else:
+                return HandType.FOUR_OF_KIND
+
+        elif self.hand_type == HandType.THREE_OF_KIND:
+            if j_count == 1:
+                return HandType.FOUR_OF_KIND
+            elif j_count == 3:
+                return HandType.THREE_OF_KIND
+            else:
+                breakpoint()
+
+        elif self.hand_type == HandType.TWO_PAIR:
+            if j_count == 1:
+                return HandType.FULL_HOUSE
+            elif j_count == 2:
+                return HandType.FOUR_OF_KIND
+            else:
+                print(self.hand_str)
+                breakpoint()
+
+                      
+        elif self.hand_type == HandType.ONE_PAIR:
+            return HandType.TWO_PAIR
+
+        elif self.hand_type == HandType.HIGH_CARD:
+            return HandType.ONE_PAIR
+
+        print(self.hand_type)
+        print(self.hand_str)
+
     def __str__(self):
         return f'{self.hand_type.name}: {self.hand_str}'
 
@@ -127,7 +171,8 @@ def day_07_part_1(my_input: InputType, debug: bool = False) -> int:
 
 
 def day_07_part_2(my_input: InputType, debug: bool = False) -> int:
-    return -1
+    my_new_input = [(hand.jokerfy(), bid) for hand, bid in my_input]
+    return -1 #day_07_part_1(my_new_input, debug=debug)
 
 
 def main():
@@ -141,10 +186,10 @@ KK677 28
 KTJJT 220
 QQQJA 483""".split('\n'))
 
-    print(day_07_part_1(test_input, debug=True))
-    print(day_07_part_1(my_input))
+    #print(day_07_part_1(test_input, debug=True))
+    #print(day_07_part_1(my_input))
 
-    print(day_07_part_2(test_input, debug=True))
+    # print(day_07_part_2(test_input, debug=True))
     print(day_07_part_2(my_input))
 
         
