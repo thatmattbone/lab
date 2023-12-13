@@ -24,6 +24,23 @@ CARD_VALS = {
 }
 
 
+JOKER_CARD_VALS = {
+    'A': 14,
+    'K': 13,
+    'Q': 12,
+    'T': 10,
+    '9': 9,
+    '8': 8,
+    '7': 7, 
+    '6': 6,
+    '5': 5,
+    '4': 4,
+    '3': 3,
+    '2': 2,
+    'J': 1,    
+}
+
+
 class HandType(Enum):
     FIVE_OF_KIND = 700
     FOUR_OF_KIND = 600
@@ -40,6 +57,8 @@ class Hand:
         self.hand_str = hand_str
         self._hand_type = self.find_type(hand_str)
 
+        self.is_jokerfied = jokerfy
+        
         self.joker_hand_type = None
         if jokerfy:
             self.joker_hand_type = self.jokerfy()
@@ -80,7 +99,6 @@ class Hand:
         j_count = len([j for j in self.hand_str if j == 'J'])
 
         if self._hand_type == HandType.FOUR_OF_KIND:
-            # print(self.hand_str)
             return HandType.FIVE_OF_KIND
 
         elif self._hand_type == HandType.FULL_HOUSE:
@@ -93,29 +111,27 @@ class Hand:
 
         elif self._hand_type == HandType.THREE_OF_KIND:
             if j_count == 1:
-                #print(self.hand_str)
+                # print(self.hand_str)
                 return HandType.FOUR_OF_KIND
             elif j_count == 3:
-                #print(self.hand_str)
                 return HandType.FOUR_OF_KIND
             else:
                 raise ValueError(self.hand_str)
 
         elif self._hand_type == HandType.TWO_PAIR:
             if j_count == 1:
-                print(self.hand_str)
                 return HandType.THREE_OF_KIND
-            elif j_count == 2:
-                print(self.hand_str)
+            elif j_count == 2:                
                 return HandType.FOUR_OF_KIND
             else:
                 raise ValueError(self.hand_str)
    
         elif self._hand_type == HandType.ONE_PAIR:
             if j_count == 1:
-                return HandType.THREE_OF_KIND
+                return HandType.FULL_HOUSE
             elif j_count == 2:
-                return HandType.THREE_OF_KIND
+                print(self.hand_str)
+                return HandType.FULL_HOUSE
             else:
                 raise ValueError(self.hand_str)
 
@@ -124,8 +140,6 @@ class Hand:
                 return HandType.ONE_PAIR
             else:
                 raise ValueError(self.hand_str)
-                #print(self.hand_type)
-                #print(self.hand_str)
 
         raise ValueError(self.hand_str)
 
@@ -152,10 +166,18 @@ class Hand:
 
             my_card, their_card = different_cards[0]
 
-            if CARD_VALS[my_card] < CARD_VALS[their_card]:
-                return True
+            if self.is_jokerfied:
+                if JOKER_CARD_VALS[my_card] < JOKER_CARD_VALS[their_card]:
+                    return True
+                else:
+                    return False
             else:
-                return False
+                if CARD_VALS[my_card] < CARD_VALS[their_card]:
+                    return True
+                else:
+                    return False
+
+
         else:
             if self.hand_type.value < other.hand_type.value:
                 return True
