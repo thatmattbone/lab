@@ -111,7 +111,6 @@ class Hand:
 
         elif self._hand_type == HandType.THREE_OF_KIND:
             if j_count == 1:
-                # print(self.hand_str)
                 return HandType.FOUR_OF_KIND
             elif j_count == 3:
                 return HandType.FOUR_OF_KIND
@@ -120,18 +119,17 @@ class Hand:
 
         elif self._hand_type == HandType.TWO_PAIR:
             if j_count == 1:
-                return HandType.THREE_OF_KIND
-            elif j_count == 2:                
+                return HandType.FULL_HOUSE
+            elif j_count == 2:
                 return HandType.FOUR_OF_KIND
             else:
                 raise ValueError(self.hand_str)
    
         elif self._hand_type == HandType.ONE_PAIR:
             if j_count == 1:
-                return HandType.FULL_HOUSE
-            elif j_count == 2:
-                print(self.hand_str)
-                return HandType.FULL_HOUSE
+                return HandType.THREE_OF_KIND
+            elif j_count == 2:                
+                return HandType.THREE_OF_KIND
             else:
                 raise ValueError(self.hand_str)
 
