@@ -36,9 +36,13 @@ class HandType(Enum):
     
 @total_ordering
 class Hand:
-    def __init__(self, hand_str: str):
+    def __init__(self, hand_str: str, jokerfy: bool = False):
         self.hand_str = hand_str
-        self.hand_type = self.find_type(hand_str)
+        self._hand_type = self.find_type(hand_str)
+
+        self.joker_hand_type = None
+        if jokerfy:
+            self.joker_hand_type = self.jokerfy()
 
     def find_type(self, hand_str: str) -> HandType:
         counter = Counter(hand_str)
@@ -71,20 +75,20 @@ class Hand:
         if 'J' not in self.hand_str:
             return self.hand_type
         elif 'JJJJJ' == self.hand_str:
-            return self.hand_str
+            return self.hand_type
 
         j_count = len([j for j in self.hand_str if j == 'J'])
 
-        if self.hand_type == HandType.FOUR_OF_KIND:
+        if self._hand_type == HandType.FOUR_OF_KIND:
             return HandType.FIVE_OF_KIND
 
-        elif self.hand_type == HandType.FULL_HOUSE:
+        elif self._hand_type == HandType.FULL_HOUSE:
             if j_count == 2:
                 return HandType.FIVE_OF_KIND
             else:
                 return HandType.FOUR_OF_KIND
 
-        elif self.hand_type == HandType.THREE_OF_KIND:
+        elif self._hand_type == HandType.THREE_OF_KIND:
             if j_count == 1:
                 return HandType.FOUR_OF_KIND
             elif j_count == 3:
@@ -92,7 +96,7 @@ class Hand:
             else:
                 breakpoint()
 
-        elif self.hand_type == HandType.TWO_PAIR:
+        elif self._hand_type == HandType.TWO_PAIR:
             if j_count == 1:
                 return HandType.FULL_HOUSE
             elif j_count == 2:
@@ -100,16 +104,21 @@ class Hand:
             else:
                 print(self.hand_str)
                 breakpoint()
-
-                      
-        elif self.hand_type == HandType.ONE_PAIR:
+   
+        elif self._hand_type == HandType.ONE_PAIR:
             return HandType.TWO_PAIR
 
-        elif self.hand_type == HandType.HIGH_CARD:
+        elif self._hand_type == HandType.HIGH_CARD:
             return HandType.ONE_PAIR
 
         print(self.hand_type)
         print(self.hand_str)
+
+    @property
+    def hand_type(self):
+        if self.joker_hand_type:
+            return self.joker_hand_type
+        return self._hand_type
 
     def __str__(self):
         return f'{self.hand_type.name}: {self.hand_str}'
@@ -142,23 +151,18 @@ class Hand:
 InputType = List[Tuple[Hand, int]]
     
 
-def build_input_type(lines: List[str]) -> InputType:
+def build_input_type(lines: List[str], jokerfy: bool = False) -> InputType:
     fixed_lines = []
     for line in lines:
         hand, bid = line.split()
         bid = int(bid)
-        fixed_lines.append((Hand(hand), bid))
+        fixed_lines.append((Hand(hand, jokerfy=jokerfy), bid))
     return fixed_lines
 
 
 def day_07_part_1(my_input: InputType, debug: bool = False) -> int:
-    #if debug:
-    #    pp(my_input)
-
     answer = 0
-    #for five_hands in batched(my_input, n=5):
-    #    five_hands = list(five_hands)
-
+    
     my_input.sort(key=lambda x: x[0])
 
     for rank, (hand, bid) in enumerate(my_input, start=1):
@@ -171,26 +175,24 @@ def day_07_part_1(my_input: InputType, debug: bool = False) -> int:
 
 
 def day_07_part_2(my_input: InputType, debug: bool = False) -> int:
-    my_new_input = [(hand.jokerfy(), bid) for hand, bid in my_input]
-    return -1 #day_07_part_1(my_new_input, debug=debug)
+    return day_07_part_1(my_input, debug=debug)
 
 
 def main():
-    input_list = input_lines(__file__)
-    my_input = build_input_type(input_list)
-
-    test_input = build_input_type("""\
+    test_input_lines = """\
 32T3K 765
 T55J5 684
 KK677 28
 KTJJT 220
-QQQJA 483""".split('\n'))
+QQQJA 483""".split('\n')
 
-    #print(day_07_part_1(test_input, debug=True))
-    #print(day_07_part_1(my_input))
-
-    # print(day_07_part_2(test_input, debug=True))
-    print(day_07_part_2(my_input))
+    input_list = input_lines(__file__)
+    
+    print(day_07_part_1(build_input_type(test_input_lines), debug=True))
+    print(day_07_part_1(build_input_type(input_list)))
+    
+    print(day_07_part_2(build_input_type(test_input_lines, jokerfy=True), debug=True))
+    print(day_07_part_2(build_input_type(input_list, jokerfy=True)))
 
         
 if __name__ == '__main__':
