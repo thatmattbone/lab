@@ -80,39 +80,54 @@ class Hand:
         j_count = len([j for j in self.hand_str if j == 'J'])
 
         if self._hand_type == HandType.FOUR_OF_KIND:
+            # print(self.hand_str)
             return HandType.FIVE_OF_KIND
 
         elif self._hand_type == HandType.FULL_HOUSE:
             if j_count == 2:
                 return HandType.FIVE_OF_KIND
+            elif j_count == 3:
+                return HandType.FIVE_OF_KIND
             else:
-                return HandType.FOUR_OF_KIND
+                raise ValueError(self.hand_str)
 
         elif self._hand_type == HandType.THREE_OF_KIND:
             if j_count == 1:
+                #print(self.hand_str)
                 return HandType.FOUR_OF_KIND
             elif j_count == 3:
-                return HandType.THREE_OF_KIND
+                #print(self.hand_str)
+                return HandType.FOUR_OF_KIND
             else:
-                breakpoint()
+                raise ValueError(self.hand_str)
 
         elif self._hand_type == HandType.TWO_PAIR:
             if j_count == 1:
-                return HandType.FULL_HOUSE
+                print(self.hand_str)
+                return HandType.THREE_OF_KIND
             elif j_count == 2:
+                print(self.hand_str)
                 return HandType.FOUR_OF_KIND
             else:
-                print(self.hand_str)
-                breakpoint()
+                raise ValueError(self.hand_str)
    
         elif self._hand_type == HandType.ONE_PAIR:
-            return HandType.TWO_PAIR
+            if j_count == 1:
+                return HandType.THREE_OF_KIND
+            elif j_count == 2:
+                return HandType.THREE_OF_KIND
+            else:
+                raise ValueError(self.hand_str)
 
         elif self._hand_type == HandType.HIGH_CARD:
-            return HandType.ONE_PAIR
+            if j_count == 1:
+                return HandType.ONE_PAIR
+            else:
+                raise ValueError(self.hand_str)
+                #print(self.hand_type)
+                #print(self.hand_str)
 
-        print(self.hand_type)
-        print(self.hand_str)
+        raise ValueError(self.hand_str)
 
     @property
     def hand_type(self):
