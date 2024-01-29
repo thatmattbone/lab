@@ -50,7 +50,42 @@ def day_08_part_1(my_input: InputType, debug: bool = False) -> int:
 
 
 def day_08_part_2(my_input: InputType, debug: bool = False) -> int:
-    return -1
+    instructions, map_struct = my_input
+
+    start_nodes = [key for key in map_struct.keys() if key.endswith('A')]
+    end_nodes = [key for key in map_struct.keys() if key.endswith('Z')]
+
+    def _all_dest(current_nodes):
+        return all([node.endswith('Z') for node in current_nodes])
+
+    if debug:
+        print(start_nodes)
+        print(end_nodes)
+
+    steps = 1
+    current_nodes = start_nodes
+    for instruction in cycle(instructions):
+        if debug:
+            print(f'current: {current_nodes} going {instruction}')
+
+        new_current_nodes = []
+        for node in current_nodes:
+            if instruction == 'L':
+                next_node = map_struct[node][0]
+            elif instruction == 'R':
+                next_node = map_struct[node][1]
+            else:
+                raise ValueError()
+
+            new_current_nodes.append(next_node)
+
+        if _all_dest(new_current_nodes):
+            break
+
+        steps += 1
+        current_nodes = new_current_nodes
+
+    return steps
 
 
 def main():
@@ -68,8 +103,6 @@ EEE = (EEE, EEE)
 GGG = (GGG, GGG)
 ZZZ = (ZZZ, ZZZ)""".split('\n'))
 
-    print(day_08_part_1(test_input, debug=True))
-
     test_input2 = build_input_type("""\
 LLR
 
@@ -78,12 +111,24 @@ BBB = (AAA, ZZZ)
 ZZZ = (ZZZ, ZZZ)
 """.split('\n'))
 
-    print(day_08_part_1(test_input2, debug=True))
+    test_input3 = build_input_type("""\
+LR
 
-    print(day_08_part_1(my_input))
+11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)""".split('\n'))
 
-    # print(day_08_part_2(test_input, debug=True))
-    # print(day_08_part_2(my_input))
+    # print(day_08_part_1(test_input, debug=True))
+    # print(day_08_part_1(test_input2, debug=True))
+    # print(day_08_part_1(my_input))
+
+    print(day_08_part_2(test_input3, debug=True))
+    print(day_08_part_2(my_input))
 
         
 if __name__ == '__main__':
