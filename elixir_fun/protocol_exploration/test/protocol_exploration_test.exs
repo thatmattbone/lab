@@ -1,8 +1,8 @@
 defmodule ProtocolExplorationTest do
   use ExUnit.Case
-  doctest ProtocolExploration
+  doctest ProtocolExploration.StaticSquare
 
-  test "greets the world" do
-    assert ProtocolExploration.hello() == :world
+  test "static square description" do
+    assert ProtocolExploration.StaticSquare.description() == "I am a static, 100 by 100 square."
   end
 end
