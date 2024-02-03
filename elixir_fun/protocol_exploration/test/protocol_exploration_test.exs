@@ -1,24 +1,34 @@
 defmodule ProtocolExplorationTest do
   use ExUnit.Case
-  doctest ProtocolExploration.StaticSquare
+
+  alias ProtocolExploration.StaticSquare
+  alias ProtocolExploration.Dimensions
+  alias ProtocolExploration.Square
+  alias ProtocolExploration.Rectangle
 
   test "static square description" do
-    assert ProtocolExploration.StaticSquare.description() == "I am a static, 100 by 100 square."
+    assert StaticSquare.description() == "I am a static, 100 by 100 square."
   end
 
   test "static square height" do
-    assert ProtocolExploration.Dimensions.height(%ProtocolExploration.StaticSquare{}) == 100
+    assert Dimensions.height(%StaticSquare{}) == 100
   end
 
   test "static square width" do
-    assert ProtocolExploration.Dimensions.width(%ProtocolExploration.StaticSquare{}) == 100
+    assert Dimensions.width(%StaticSquare{}) == 100
   end
 
   test "square height & width" do
-    square = %ProtocolExploration.Square{size: 555}
+    square = %Square{size: 555}
 
-    assert ProtocolExploration.Dimensions.height(square) == 555
-    assert ProtocolExploration.Dimensions.width(square) == 555
+    assert Dimensions.height(square) == 555
+    assert Dimensions.width(square) == 555
   end
 
+  test "rectangle height & width" do
+    rect = %Rectangle{height: 250, width: 750}
+
+    assert Dimensions.height(rect) == 250
+    assert Dimensions.width(rect) == 750
+  end
 end
