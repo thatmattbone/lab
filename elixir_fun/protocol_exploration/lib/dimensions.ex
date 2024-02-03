@@ -1,4 +1,4 @@
-defprotocol ProtocolExporation.Dimensions do
+defprotocol ProtocolExploration.Dimensions do
     @spec height(t()) :: integer()
     def height(value)
 

@@ -1,17 +1,18 @@
 defmodule ProtocolExploration.StaticSquare do
+  defstruct []
+
   def description() do
     "I am a static, 100 by 100 square."
   end
+end
 
-  @doc """
-  Height of this static 100 x 100 square.
-  ## Examples
 
-      iex> ProtocolExploration.StaticSquare.height()
-      100
+defimpl ProtocolExploration.Dimensions, for: ProtocolExploration.StaticSquare do
+  def height(_value) do
+    100
+  end
 
-  """
-  def height do
+  def width(_value) do
     100
   end
 end
