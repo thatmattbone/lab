@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :heads_up, HeadsUp.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "heads_up",
+  password: "1234",
   hostname: "localhost",
-  database: "heads_up_dev",
+  database: "heads_up",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
