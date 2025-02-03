@@ -3,7 +3,9 @@
   <ol>
     <%= for tip <- @tips do %>
     <li>
-      {tip.text}
+      <a href={~p"/tip/#{tip.id}"}>
+        {tip.text}
+      </a>
     </li>
     <% end %>
   </ol>

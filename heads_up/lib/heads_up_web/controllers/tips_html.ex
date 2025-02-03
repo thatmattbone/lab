@@ -5,8 +5,10 @@ defmodule HeadsUpWeb.TipsHTML do
 
   def detail(assigns) do
     ~H"""
-      <h1>Tip Detail for tip id: {@tip.id}</h1>
-      <p>{@tip.text}</p>
+      <div class="tips">
+        <h1>Tip Detail for tip id: {@tip.id}</h1>
+        <p>{@tip.text}</p>
+      </div>
     """
   end
 end
