@@ -2,10 +2,8 @@ defmodule HeadsUp.Incident do
   defstruct [:id, :name, :description, :priority, :status, :image_path]
 
   def list_incidents do
-    # try %__MODULE__{}
-
     [
-      %HeadsUp.Incident{
+      %__MODULE__{  # syntax to separate the construction of this struct from this module's name.
         id: 1,
         name: "Lost Dog",
         description: "A friendly dog is wandering around the neighborhood. 🐶",
