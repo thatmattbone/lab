@@ -21,13 +21,19 @@ defmodule HeadsUpWeb.IncidentLive.Index do
         <img src={@incident.image_path}} />
         <h2><%= @incident.name %></h2>
         <div class="details">
-          <div class="badge">
-            <%= @incident.status %>
-          </div>
+          <.badge status={@incident.status}/>
           <div class="priority">
             <%= @incident.priority %>
           </div>
         </div>
+      </div>
+    """
+  end
+
+  def badge(assigns) do
+    ~H"""
+      <div class="badge">
+        <%= @status %>
       </div>
     """
   end
