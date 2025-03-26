@@ -9,17 +9,23 @@ defmodule HeadsUpWeb.IncidentLive.Index do
     ~H"""
       <div class="incident-index">
         <div class="incidents">
-          <div :for={incident <- @incidents} class="card">
-            <img src={incident.image_path}} />
-            <h2><%= incident.name %></h2>
-            <div class="details">
-              <div class="badge">
-                <%= incident.status %>
-              </div>
-              <div class="priority">
-                <%= incident.priority %>
-              </div>
-            </div>
+          <.card :for={incident <- @incidents} incident={incident} />
+        </div>
+      </div>
+    """
+  end
+
+  def card(assigns) do
+    ~H"""
+      <div class="card">
+        <img src={@incident.image_path}} />
+        <h2><%= @incident.name %></h2>
+        <div class="details">
+          <div class="badge">
+            <%= @incident.status %>
+          </div>
+          <div class="priority">
+            <%= @incident.priority %>
           </div>
         </div>
       </div>
