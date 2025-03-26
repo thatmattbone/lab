@@ -9,15 +9,15 @@ defmodule HeadsUpWeb.IncidentLive.Index do
     ~H"""
       <div class="incident-index">
         <div class="incidents">
-          <div class="card">
-            <img src="/images/bear-in-trash.jpg" />
-            <h2>Bear In The Trash</h2>
+          <div :for={incident <- @incidents} class="card">
+            <img src={incident.image_path}} />
+            <h2><%= incident.name %></h2>
             <div class="details">
               <div class="badge">
-                canceled
+                <%= incident.status %>
               </div>
               <div class="priority">
-                1
+                <%= incident.priority %>
               </div>
             </div>
           </div>
