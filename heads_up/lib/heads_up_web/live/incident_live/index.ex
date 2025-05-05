@@ -5,6 +5,7 @@ defmodule HeadsUpWeb.IncidentLive.Index do
     {:ok, assign(socket, incidents: HeadsUp.Incident.list_incidents())}
   end
 
+
   def render(assigns) do
     ~H"""
       <div class="incident-index">
@@ -15,6 +16,7 @@ defmodule HeadsUpWeb.IncidentLive.Index do
     """
   end
 
+  attr :incident, HeadsUp.Incident, required: true
   def card(assigns) do
     ~H"""
       <div class="card">
@@ -30,6 +32,8 @@ defmodule HeadsUpWeb.IncidentLive.Index do
     """
   end
 
+
+  attr :status, :atom, required: true
   def badge(assigns) do
     ~H"""
       <div class="badge">
