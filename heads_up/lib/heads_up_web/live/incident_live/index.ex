@@ -7,8 +7,17 @@ defmodule HeadsUpWeb.IncidentLive.Index do
   end
 
 
+#<:tagline :let={vibe}>
+#  Thanks for pitching in. <%= vibe %>
+#</:tagline>
+
   def render(assigns) do
     ~H"""
+      <.headline>
+        <.icon name="hero-trophy-mini" />
+        25 Incidents Resolved This Month!
+      </.headline>
+
       <div class="incident-index">
         <div class="incidents">
           <.card :for={incident <- @incidents} incident={incident} />
@@ -16,6 +25,7 @@ defmodule HeadsUpWeb.IncidentLive.Index do
       </div>
     """
   end
+
 
   attr :incident, HeadsUp.Incident, required: true
   def card(assigns) do

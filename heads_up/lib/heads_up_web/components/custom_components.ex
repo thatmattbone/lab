@@ -15,4 +15,18 @@ defmodule HeadsUpWeb.CustomComponents do
       </div>
     """
   end
+
+  slot :inner_block, required: true
+  def headline(assigns) do
+    ~H"""
+    <div class="headline">
+      <h1>
+        {render_slot(@inner_block)}
+      </h1>
+      <div class="tagline">
+        <%!-- render this div for every tagline slot --%>
+      </div>
+    </div>
+    """
+  end
 end
