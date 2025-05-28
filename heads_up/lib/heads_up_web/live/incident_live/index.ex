@@ -22,6 +22,18 @@ defmodule HeadsUpWeb.IncidentLive.Index do
         </:tagline>
       </.headline>
 
+      <.headline>
+        My Headline
+
+        <:tagline>
+          Thanks for pitching in.
+        </:tagline>
+
+        <:tagline>
+          It really means a lot.
+        </:tagline>
+        </.headline>
+
       <div class="incident-index">
         <div class="incidents">
           <.card :for={incident <- @incidents} incident={incident} />
