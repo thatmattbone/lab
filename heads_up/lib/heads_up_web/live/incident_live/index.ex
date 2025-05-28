@@ -16,6 +16,10 @@ defmodule HeadsUpWeb.IncidentLive.Index do
       <.headline>
         <.icon name="hero-trophy-mini" />
         25 Incidents Resolved This Month!
+
+        <:tagline :let={vibe}>
+          Thanks for pitching in. <%= vibe %>
+        </:tagline>
       </.headline>
 
       <div class="incident-index">

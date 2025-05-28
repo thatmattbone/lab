@@ -17,14 +17,17 @@ defmodule HeadsUpWeb.CustomComponents do
   end
 
   slot :inner_block, required: true
+  slot :tagline, required: false
   def headline(assigns) do
+    assigns = assign(assigns, :emoji, ~w(😎 🤩 🥳) |> Enum.random())
+
     ~H"""
     <div class="headline">
       <h1>
         {render_slot(@inner_block)}
       </h1>
       <div class="tagline">
-        <%!-- render this div for every tagline slot --%>
+        {render_slot(@tagline, @emoji)}
       </div>
     </div>
     """
