@@ -1,7 +1,9 @@
-import maplibregl from 'maplibre-gl';
+import maplibregl, {type LngLatLike} from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 // import './style.css'
 
+const INITIAL_ZOOM = 5;
+const ZOCALO: LngLatLike = [-99.1357763, 19.4326207];
 
 function build_map() {
     console.log("Hello from build_map in main.ts.");
@@ -9,8 +11,8 @@ function build_map() {
     return new maplibregl.Map({
         container: 'map', // container id
         style: 'https://demotiles.maplibre.org/style.json', // style URL
-        center: [0, 0], // starting position [lng, lat]
-        zoom: 1 // starting zoom
+        center: ZOCALO,
+        zoom: INITIAL_ZOOM,
     });
 }
 
